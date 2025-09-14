@@ -1,0 +1,29 @@
+/*
+  Use the following to include this css file
+  <link rel="stylesheet" href="styles1.css" />
+*/
+
+
+.banner_home { 
+  font-size: 12px;
+  color:white; /*cor da fonte */
+  text-align: center;
+  background-color: darkred; /*cor do objeto*/
+  border-style: solid;
+  border-radius: 10px; /* para arredondar as bordas*/
+  transition: transform 0.3s ease;
+  height:500px;
+ 
+}
+
+.banner_home:hover{
+  transform: scale(1.1);
+}
+
+.opcoes {
+  
+  display:grid;   /* isso aqui faz a div principal se auto proporcionar uma ao lado da outra*/ 
+  grid-template-columns: 25% 25% 25% 25%;
+ 
+  
+}
