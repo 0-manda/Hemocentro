@@ -25,5 +25,38 @@
   display:grid;   /* isso aqui faz a div principal se auto proporcionar uma ao lado da outra*/ 
   grid-template-columns: 25% 25% 25% 25%;
  
+}
+
+.menu {
   
+  height:38px;
+  width:100%;
+  background-color: darkred;
+  color:white;
+  
+}
+
+.botao_menu{
+  background-color: white;
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.botao_menu:hover {
+  background-color: red; 
+  color: white; 
+  
+}
+
+.botao_menu {
+  background-color:darkred;
+  color: white;
 }
