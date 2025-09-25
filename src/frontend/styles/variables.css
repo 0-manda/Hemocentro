@@ -1,1 +1,10 @@
 /* cores, fontes, espaçamento */
+:root {
+  /*backgrounds e outros detalhes*/
+  --main-color: #8d1715;
+  --back-color: #a24c4a;
+
+  /*fontes de texto*/
+  --main-font: "Roboto", system-ui, -apple-system, Segoe UI, Helvetica, Arial,
+    sans-serif;
+}

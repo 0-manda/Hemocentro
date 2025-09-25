@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Página para a criação de login." />
+    <title>HemoCamp - Cadastro</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/variables.css" />
+  </head>
+  <body>
+    <section class="lado_imagem">
+      <img src="../styles/imagens/maos_com_coracao.png" alt="" />
+    </section>
+    <section class="lado_login">
+      <button class="upper_button_login">Voltar</button>
+      <h1>Cadastro</h1>
+      <fieldset>
+        <legend><h2>Dados do Doador</h2></legend>
+        <label for="nome">Nome:</label>
+        <input
+          type="text"
+          id="nome"
+          name="nome"
+          required
+          placeholder="Insira seu nome"
+        />
+
+        <label for="sobrenome">Sobrenome:</label>
+        <input
+          type="text"
+          id="sobrenome"
+          name="sobrenome"
+          required
+          placeholder="Insira seu sobrenome"
+        />
+
+        <label for="data_nascimento">Data de Nascimento:</label>
+        <input
+          type="date"
+          id="data_nascimento"
+          name="data_nascimento"
+          required
+          placeholder="Insira sua data de nascimento"
+        />
+
+        <label for="cpf">CPF:</label>
+        <input
+          type="tel"
+          id="cpf"
+          name="cpf"
+          required
+          placeholder="000.000.000-00"
+        />
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          required
+          placeholder="Insira seu email"
+        />
+        <label for="senha">Senha:</label>
+        <input
+          type="password"
+          id="senha"
+          required
+          minlength="8"
+          placeholder="Insira sua senha"
+        />
+        <label for="senha">Confirmar senha:</label>
+        <input
+          type="password"
+          id="senha"
+          required
+          placeholder="Insira sua senha novamente"
+        />
+        <label>
+          <input type="checkbox" id="termos_de_uso" required />Termos de uso
+          sobre seus dados
+        </label>
+        <label>
+          <input type="checkbox" id="termos_de_uso" required />Fique sempre por
+          cima de possíveis atualizações sobre hemocentros!
+        </label>
+        <div><button type="submit">Registrar-se</button></div>
+      </fieldset>
+    </section>
+  </body>
+</html>
