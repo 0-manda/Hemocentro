@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Página para o login de hemocentros." />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/variables.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>HemoCamp - Área de Login de Hemocentro</title>
+  </head>
+  <body>
+    <section class="lado_login">
+      <div>
+        <form>
+          <fieldset>
+            <legend><h2>Área do Hemocentro</h2></legend>
+            <label for="idUsuario">Usuário, E-mail ou CNPJ</label>
+            <input
+              type="text"
+              id="idUsuario"
+              name="idUsuario"
+              placeholder="Usuário, E-mail ou CNPJ"
+              required
+            />
+            <p>
+              <strong><a href="">Esqueceu seu acesso?</a></strong>
+            </p>
+            <label for="senha">Senha:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Insira sua senha"
+              required
+              minlength="10"
+              maxlength="30"
+            />
+            <div><button class="button" type="submit">Entrar</button></div>
+          </fieldset>
+        </form>
+      </div>
+    </section>
+    <section class="lado_imagem">
+      <img
+        src="../styles/imagens/colleagues-working-together-using-documents-debating.jpg"
+        alt="Pessoas trabalahando juntas e discutindo documentos"
+        srcset
+      />
+    </section>
+  </body>
+</html>

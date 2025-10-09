@@ -28,6 +28,7 @@
           name="nome"
           required
           placeholder="Insira seu nome"
+          maxlength="50"
         />
 
         <label for="sobrenome">Sobrenome:</label>
@@ -37,6 +38,7 @@
           name="sobrenome"
           required
           placeholder="Insira seu sobrenome"
+          maxlength="50"
         />
 
         <label for="data_nascimento">Data de Nascimento:</label>
@@ -68,7 +70,8 @@
           type="password"
           id="senha"
           required
-          minlength="8"
+          minlength="10"
+          maxlength="30"
           placeholder="Insira sua senha"
         />
         <label for="senha">Confirmar senha:</label>
@@ -77,6 +80,8 @@
           id="senha"
           required
           placeholder="Insira sua senha novamente"
+          minlength="10"
+          maxlength="30"
         />
         <label>
           <input type="checkbox" id="termos_de_uso" required />Termos de uso
