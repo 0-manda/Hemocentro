@@ -13,12 +13,14 @@
     <title>HemoCamp - Área de Login de Hemocentro</title>
   </head>
   <body>
-    <section class="lado_login">
+    <section class="lado_login_hemocentro">
       <div>
+        <h1>HEMOCAMP</h1>
         <form>
-          <fieldset>
-            <legend><h2>Área do Hemocentro</h2></legend>
-            <label for="idUsuario">Usuário, E-mail ou CNPJ</label>
+          <fieldset class="fieldset_login_hemocentro">
+            <legend class="legend_hemocentro">
+              <h2>Área do Hemocentro</h2>
+            </legend>
             <input
               type="text"
               id="idUsuario"
@@ -29,7 +31,6 @@
             <p>
               <strong><a href="">Esqueceu seu acesso?</a></strong>
             </p>
-            <label for="senha">Senha:</label>
             <input
               type="password"
               id="password"
@@ -40,6 +41,8 @@
               maxlength="30"
             />
             <div><button class="button" type="submit">Entrar</button></div>
+            <p class="divisor"><span>ou</span></p>
+            <div><button class="" type="submit">Cadastrar-se</button></div>
           </fieldset>
         </form>
       </div>

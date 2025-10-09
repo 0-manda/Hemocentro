@@ -62,14 +62,26 @@ input[type="date"] {
 }
 /*--> class login*/
 .lado_login,
-.lado_imagem {
-  background: linear-gradient(135deg, var(--main-color), var(--back-color));
+.lado_imagem,
+.lado_login_hemocentro {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
   text-align: center;
   position: relative;
+}
+
+.lado_login_hemocentro {
+  background: #ffff;
+}
+
+.lado_login_hemocentro h1 {
+  color: var(--main-color); /* Branco para melhor contraste */
+  text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.3); /* Sombra mais sutil */
+  font-size: 3.5rem;
+  margin-bottom: 0.5rem; /* Menos espaço abaixo do H1 */
+  margin-top: 0;
 }
 
 /*alterei as imagens para que fiquem estáticas*/
@@ -81,6 +93,7 @@ input[type="date"] {
 }
 
 .lado_login {
+  background: linear-gradient(135deg, var(--main-color), var(--back-color));
   text-align: center;
   padding: 40px;
 }
@@ -99,6 +112,45 @@ input[type="date"] {
   font-size: 2rem;
   font-weight: 400; /* Fonte mais leve para o subtítulo */
   margin-bottom: 2rem; /* Mais espaço antes do formulário */
+}
+
+/*fieldset*/
+
+.fieldset_login_hemocentro {
+  border: 2px solid var(--main-color);
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.legend_hemocentro {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--main-color);
+  padding: 0 10px;
+}
+
+.fieldset_login_hemocentro label {
+  color: var(--main-color);
+  margin-bottom: 8px;
+}
+
+.fieldset_login_hemocentro input {
+  border-radius: 1rem;
+  border: 2px solid black;
+  transition: 1s;
+}
+
+.fieldset_login_hemocentro input:focus {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 0px;
+  transition: 1s;
+}
+
+.fieldset_login_hemocentro input:focus::placeholder {
+  color: #ffff; /* Torna o placeholder invisível */
+  transition: color 0.3s ease; /* Transição suave para o desaparecimento */
 }
 
 /*inputs*/
