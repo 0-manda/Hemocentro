@@ -1,0 +1,83 @@
+
+.title {
+	color: #5C6AC4;
+}
+
+body{
+  
+ margin:0;
+ backgroud-color: #bb9469;
+}
+
+.container{
+  display:flex;
+}
+
+
+.div_imagem{
+
+padding: 30px;
+background-color: BurlyWood;
+align-items:center;
+ 
+}
+
+
+.block {
+  background-color: darkred;
+  width: 70vw;
+  height: 100vh;
+  color:white;
+  text-align: center;
+  align-items:center;
+}
+
+.texto p{
+
+width: 80%; /* Exemplo: defina uma largura menor que 100% */
+margin: 0 auto; /* Isso centraliza o bloco na horizontal */
+text-align: center; /* Isso centraliza o texto dentro do bloco */
+padding: 40px; /* Adiciona um preenchimento interno para o texto não colar nas bordas */
+color: white; /* Cor do texto padrão para branco */
+font-family: Arial, sans-serif; /* Exemplo de fonte */
+font-size: 1.6em; /* Tamanho do texto um pouco maior */
+   
+line-height: 1.6; /* Espaçamento entre as linhas para maior legibilidade */
+ 
+ text-align: left;
+}
+.titulo{
+  
+  font-size: 70px;
+  
+}
+.menu{
+  display:flex;
+  justify-content: center; 
+  background-color: darkred;
+  text-align: center;
+  color:black;
+  padding: px 10px;
+  font-size:20px;
+  gap: 10px
+  
+}
+.noticias, 
+.hemocentro ,
+.noticias,
+.home ,
+.contato ,
+.sobre{
+  text-decoration: none;
+  color:white;
+  display: inline-block;
+  padding: 15px 10px;
+  background-color: darkred;
+  margin:;
+  transition: background 0.3s;
+}
+
+.menu a:hover {
+  
+  background-color: red;
+}

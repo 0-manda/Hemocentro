@@ -1,0 +1,109 @@
+body {
+  margin: 0;
+  font-family: Arial;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.bloco {
+  background-color: red;
+  width: 50vw;
+  height: 100vh;
+}
+
+.cadastro {
+  width: 50vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cadastro-content {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  width: 80%;
+  max-width: 400px;
+}
+
+.cadastro form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.cadastro input[type="email"],
+.cadastro input[type="text"],
+.cadastro input[type="password"],
+.cadastro input[type="submit"] {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.cadastro input[type="submit"] {
+  background-color: darkred;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.cadastro input[type="submit"]:hover {
+  background-color: red;
+}
+
+.extras {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+
+.iten_1{
+  text-align: center;
+  margin-top: 30px;
+}
+
+.logoslinks {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.logoslinks {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.titulo_cadastro{
+    margin-bottom: 20px; 
+    text-align: center;
+    font-size: 50px;
+}
+
+
+.voltar {
+  position: absolute;      
+  top: 20px;               
+  right: 20px;             
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.voltar:hover {
+  background-color: darkred;
+}
