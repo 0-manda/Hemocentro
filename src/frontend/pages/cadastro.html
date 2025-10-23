@@ -1,98 +1,62 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Página para a criação de login." />
-    <title>HemoCamp - Cadastro</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../styles/main.css" />
-    <link rel="stylesheet" href="../styles/variables.css" />
-  </head>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="styles\styles_cadastro.css" />
+  <title>Hemocentro - Cadastro</title>
+</head>
+<html>
   <body>
-    <section class="lado_imagem">
-      <img src="../styles/imagens/maos_com_coracao.png" alt="" />
-    </section>
-    <section class="lado_login">
-      <button class="upper_button_login">Voltar</button>
-      <h1>Cadastro</h1>
-      <fieldset>
-        <legend><h2>Dados do Doador</h2></legend>
-        <label for="nome">Nome:</label>
-        <input
-          type="text"
-          id="nome"
-          name="nome"
-          required
-          placeholder="Insira seu nome"
-          maxlength="50"
-        />
+      <a href="index.html" class="voltar">VOLTAR</a>
 
-        <label for="sobrenome">Sobrenome:</label>
-        <input
-          type="text"
-          id="sobrenome"
-          name="sobrenome"
-          required
-          placeholder="Insira seu sobrenome"
-          maxlength="50"
-        />
+  
+  </div>
+  <div class="container">
+    
+    <div class="bloco"></div>
+    
+      
+    <div class="cadastro">
+      
+      <div class="cadastro-content"> <!-- Agrupa tudo no lado direito -->
+        <h1 class="titulo_cadastro"> CADASTRO </h1>
+        <form action="/pagina-processa-dados" method="post">
+          <label for="email">Email:</label> 
+          <input type="email" id="email" name="email_usuario" required>
+          <label for="senha">Nome:</label>
+          <input type="text" id="nome" name="nome_usuario" required>
+          <label for="senha">Senha:</label>
+          <input type="password" id="senha" name="senha_usuario" required>
+          <br>
+          <input type="submit" value="CRIAR">
+        </form>
 
-        <label for="data_nascimento">Data de Nascimento:</label>
-        <input
-          type="date"
-          id="data_nascimento"
-          name="data_nascimento"
-          required
-          placeholder="Insira sua data de nascimento"
-        />
 
-        <label for="cpf">CPF:</label>
-        <input
-          type="tel"
-          id="cpf"
-          name="cpf"
-          required
-          placeholder="000.000.000-00"
-        />
-        <label for="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          required
-          placeholder="Insira seu email"
-        />
-        <label for="senha">Senha:</label>
-        <input
-          type="password"
-          id="senha"
-          required
-          minlength="10"
-          maxlength="30"
-          placeholder="Insira sua senha"
-        />
-        <label for="senha">Confirmar senha:</label>
-        <input
-          type="password"
-          id="senha"
-          required
-          placeholder="Insira sua senha novamente"
-          minlength="10"
-          maxlength="30"
-        />
-        <label>
-          <input type="checkbox" id="termos_de_uso" required />Termos de uso
-          sobre seus dados
-        </label>
-        <label>
-          <input type="checkbox" id="termos_de_uso" required />Fique sempre por
-          cima de possíveis atualizações sobre hemocentros!
-        </label>
-        <div><button type="submit">Registrar-se</button></div>
-      </fieldset>
-    </section>
+        <div class="iten_1">
+          <label>--------- ou ---------</label>
+        </div>
+        <br>
+        <div class="logoslinks">
+          <!--google-->
+          <a href="nao_definido_ainda" id="Google"><!--definir oque vai ser usado de link -->
+            <img src="styles\imagens\google.png" alt="logo Google" width="50" height="50">
+          </a>
+          <!--facebook-->
+          <a href="nao_definido_ainda" id="Facebook"><!--definir oque vai ser usado de link -->
+            <img src="styles\imagens\facebook.png" alt="logo Facebook" width="50" height="50">
+          </a>
+          <!--apple_id-->
+          <a href="nao_definido_ainda" id="Apple"> <!--definir oque vai ser usado de link -->
+            <img src="styles\imagens\apple.png" alt="logo Apple" width="50" height="50">
+          </a>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
   </body>
 </html>

@@ -1,75 +1,64 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Tela de login. Acesse sua conta da HemoCamp!"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../styles/main.css" />
-    <link rel="stylesheet" href="../styles/variables.css" />
-    <title>HemoCamp - Login</title>
-  </head>
-  <body>
-    <section class="lado_imagem">
-      <img
-        src="../styles/imagens/man-giving-red-ornament-heart-woman.jpg"
-        alt="Uma paciente deitada numa maca fazendo transfusão de sangue ao lado de uma médica."
-      />
-    </section>
-    <section class="lado_login">
-      <header><button class="upper_button_login">Voltar</button></header>
-      <h1>HEMOCAMP</h1>
-      <form action="#" method="post">
-        <fieldset>
-          <legend><h2>Área do Doador</h2></legend>
-          <label for="email">E-mail:</label>
-          <!-- Não sei se botamos "email" ou outra coisa aqui -->
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="exemplo@gmail.com ou CPF"
-            required
-          />
-          <label for="senha">Senha:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Insira sua senha"
-            required
-          />
-          <label>
-            <input
-              type="checkbox"
-              id="guardar_login"
-              name="guardar_login"
-            />Lembrar-se de mim
-          </label>
-          <p><a href="#">Esqueceu sua senha?</a></p>
-          <div><button type="submit">Entrar</button></div>
-          <p>
-            Ainda não tem uma conta HemoCamp?
-            <a href="cadastro.html">Crie Aqui!</a>
-          </p>
-          <p class="divisor"><span>ou</span></p>
-          <p>Entrar com:</p>
 
-          <a href="#">
-            <img
-              class="logo"
-              src="../styles/imagens/logo-google.png"
-              alt="logo da google"
-            />
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="styles\styles_login.css" />
+  <title>Hemocentro - Login</title>
+</head>
+
+<body>
+
+  
+  <div class="container">
+    <div class="bloco"></div>
+
+    <div class="login">
+      <div class="login-content"> <!-- Agrupa tudo no lado direito -->
+        <h1 class="titulo_login"> LOGIN </h1>
+        <form action="/pagina-processa-dados" method="post">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email_usuario" required>
+          
+          <label for="senha">Senha:</label>
+          <input type="password" id="senha" name="senha_usuario" required>
+
+          <div class="extras">
+            <div>
+              <input type="checkbox" id="lembrar">
+              <label for="lembrar">Lembrar-me</label>
+            </div>
+            <a href="esquecersenha.html">Esqueceu a senha?</a>
+          </div>
+
+          <input type="submit" value="ENTRAR">
+        </form>
+
+        <div class="iten_1">
+          <label>
+            Não tem uma conta no Hemocentro?
+            <a href="Cadastro.html">Clique aqui</a>
+          </label>
+        </div>
+
+        <div class="iten_2">
+          <label>--------- ou ---------</label>
+        </div>
+        <br><br>
+        <div class="logoslinks">
+          <a href="nao_definido_ainda" id="Google">
+            <img src="styles\imagens\google.png" alt="logo Google" width="50" height="50">
           </a>
-        </fieldset>
-      </form>
-    </section>
-  </body>
+          <a href="nao_definido_ainda" id="Facebook">
+            <img src="styles\imagens\facebook.png" alt="logo Facebook" width="50" height="50">
+          </a>
+          <a href="nao_definido_ainda" id="Apple">
+            <img src="styles\imagens\apple.png" alt="logo Apple" width="50" height="50">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
 </html>
