@@ -1,0 +1,99 @@
+
+
+* RESET + TOKENS */ * {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Roboto", system-ui, -apple-system, Segoe UI, Helvetica, Arial,
+    sans-serif;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+h1 {
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+
+.banner_home {
+  font-size: 12px;
+  color: white; /*cor da fonte */
+  text-align: center;
+  background-color: var(--cor-principal); /*cor do objeto*/
+  border-style: solid;
+  border-color: black;
+  border-radius: 15px; /* para arredondar as bordas*/
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.banner_home img {
+  width: 80%;
+  height: auto;
+  margin-top: 30px;
+}
+
+.banner_home p {
+  font-size: 18px;
+}
+
+.banner_home a {
+  color: var(--cor-fonte-main-page);
+  text-decoration: none;
+}
+
+.banner_home:hover {
+  transform: scale(1.1);
+}
+
+.opcoes {
+  justify-content: center; /*pra por as divs no centro da pag*/
+  display: grid; /* isso aqui faz a div principal se auto proporcionar uma ao lado da outra*/
+  grid-template-columns: 22% 22% 22% 22%;
+  gap: 20px;
+}
+
+.menu {
+  height: 65px;
+  width: 100%;
+  background-color: var(--cor-principal);
+  color: white;
+}
+
+.botao_menu {
+  background-color: white;
+  border: hidden;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 15px 25px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.botao_menu:hover {
+  background-color: red;
+  color: white;
+  border-radius: 5px;
+  border-bottom-color: black;
+  border-right-color: black;
+}
+
+.botao_menu {
+  background-color: var(--cor-principal);
+  color: white;
+}
+
+:root {
+  --cor-principal: darkred;
+}

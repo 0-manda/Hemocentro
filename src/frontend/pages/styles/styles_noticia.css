@@ -75,7 +75,7 @@ body{
 .container{
  display:flex;
 }
-.noticia_principal{
+.noticia_principal, .img_noticia_princ{
   background-color:blue;
   height: 50vh;
   width:70vw;
@@ -86,14 +86,14 @@ body{
   display:flex;
 }
 
-.noticia_1{
+.noticia_1 , .img_noticia1{
   background-color:purple;
   height: 50vh;
   width:35vw;
   margin:0;
 }
 
-.noticia_2{
+.noticia_2, .img_noticia2{
   background-color:yellow;
   height:50vh;
   width:35vw;
