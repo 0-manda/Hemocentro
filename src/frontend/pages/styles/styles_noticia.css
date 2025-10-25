@@ -75,32 +75,35 @@ body{
 .container{
  display:flex;
 }
-.noticia_principal, .img_noticia_princ{
+.noticia_principal , .img_noticia_princ{
   background-color:blue;
   height: 50vh;
   width:70vw;
   margin:0;
+  position: relative;
 }
 .noticias_secundarias{
-  
   display:flex;
 }
 
 .noticia_1 , .img_noticia1{
-  background-color:purple;
   height: 50vh;
   width:35vw;
   margin:0;
+  position: relative;
 }
 
-.noticia_2, .img_noticia2{
-  background-color:yellow;
+.noticia_2 ,.img_noticia2{
+  
   height:50vh;
   width:35vw;
   margin:0;
+  position: relative;
 }
   
 .btn_ler{
+  position: absolute; /* CRUCIAL: Permite sobrepor a imagem */
+  z-index: 10;
   padding: 10px 20px;
   background-color: darkred;
   border-color:white;
@@ -111,21 +114,45 @@ body{
   display:inline-block;
 }
 
-.noticia_1 a{
-  margin-left: 40%;
-  margin-bottom:20%;
-  margin-top: 200px;
+.noticia_principal a{
+  position: absolute;
+  bottom: 20px;         /* distância da parte inferior */
+  left: 85%;            /* centraliza horizontalmente */
+  transform: translateX(-50%); /* ajuste para centralização */
+  background-color: rgba(139); /* darkred com transparência */
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background 0.3s;
+
 }
 
-.noticia_2 a{
-  margin-left: 40%;
-  margin-bottom:20%;
-  margin-top: 200px;
+.noticia_1 a,
+.noticia_2 a {
+  position: absolute;
+  bottom: 50px;         /* distância da parte inferior */
+  left: 70%;            /* centraliza horizontalmente */
+  transform: translateX(-50%); /* ajuste para centralização */
+  background-color: rgba(139); /* darkred com transparência */
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background 0.3s;
 }
 
-.noticia_principal a {
-    margin-left: 70%;
-  margin-bottom:20%;
-  margin-top: 200px;
+.noticia_principal a:hover,
+.noticia_1 a:hover,
+.noticia_2 a:hover {
+  background-color: red;
 }
-
+.noticia_principal img,
+.noticia_1 img,
+.noticia_2 img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
