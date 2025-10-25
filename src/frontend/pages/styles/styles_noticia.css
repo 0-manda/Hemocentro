@@ -23,7 +23,7 @@ body{
   display: inline-block;
   padding: 15px 10px;
   background-color: darkred;
-  margin:;
+  margin:0;
   transition: background 0.3s;
 }
 
@@ -44,7 +44,7 @@ body{
   color:white;
   text-align:center;
   margin:0;
-  padding-top:250px;
+  padding-top:225px;
   font-size: 55px;
   font-family: verdana, arial;
   
@@ -63,18 +63,20 @@ body{
 
 .pesquisa input{
   width: 75%;
-  height; 20px;
+  height:20px;
   margin-right: 10%;
   margin-left: 10%;
   border-radius: 3px;
 }
 
 .campo_noticia{
- 
+  width: auto;
+  height: auto;
 }
 .container{
  display:flex;
 }
+
 .noticia_principal , .img_noticia_princ{
   background-color:blue;
   height: 50vh;
@@ -82,6 +84,7 @@ body{
   margin:0;
   position: relative;
 }
+
 .noticias_secundarias{
   display:flex;
 }
@@ -102,7 +105,7 @@ body{
 }
   
 .btn_ler{
-  position: absolute; /* CRUCIAL: Permite sobrepor a imagem */
+  position: absolute; 
   z-index: 10;
   padding: 10px 20px;
   background-color: darkred;
@@ -112,21 +115,21 @@ body{
   color:white;
   border: 3px;
   display:inline-block;
+  cursor:grab;
 }
 
 .noticia_principal a{
   position: absolute;
-  bottom: 20px;         /* distância da parte inferior */
-  left: 85%;            /* centraliza horizontalmente */
-  transform: translateX(-50%); /* ajuste para centralização */
-  background-color: rgba(139); /* darkred com transparência */
+  bottom: 20px;         
+  left: 85%;           
+  transform: translateX(-50%); 
+  background-color: rgba(139); 
   color: white;
   padding: 10px 20px;
   border-radius: 8px;
   font-size: 16px;
   text-decoration: none;
   transition: background 0.3s;
-
 }
 
 .noticia_1 a,

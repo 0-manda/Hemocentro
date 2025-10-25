@@ -1,0 +1,53 @@
+body{
+  background-color:darkred;
+  margin:0;
+}
+.menu{
+  
+  display:flex;
+  justify-content: center; 
+  background-color: darkred;
+  text-align: center;
+  padding: 10px;
+  font-size:20px;
+  gap: 0px 
+
+  
+}
+.menu a{
+  text-decoration: none;
+  color:white;
+  display: inline-block;
+  padding: 15px 10px;
+  background-color: darkred;
+  margin:0;
+  transition: background 0.3s;
+}
+
+.menu a:hover {
+  
+  background-color: red;
+}
+
+.cor_primaria{
+  display:flex;
+  background-color: darkred;
+  margin:0;
+  height: 30vh;
+  width: 100vw;
+
+}
+
+.telefone,
+.email,
+.email{
+
+}
+
+.cor_secundaria{
+  display:flex;
+  background-color: darksalmon;
+  margin:0;
+  height: 58.80vh;
+  width: 100vw;
+}
