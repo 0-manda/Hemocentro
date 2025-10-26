@@ -91,10 +91,10 @@ body{
   left: 800px;
   font-size: 20px;
   font-family: verdana, arial;
-  margin: 0;
+  margin-left: 20%;
+  margin-top:5%;
 }
 .informativo{
-
   background-color: blue;
 }
 .forms input{
@@ -131,7 +131,7 @@ body{
 
 .cor_secundaria a {
   position: absolute;
-  bottom: -55px;        
+  bottom: 50%;        
   left: 40%;            
   transform: translateX(-50%); 
   background-color: rgba(139); 
