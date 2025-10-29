@@ -5,7 +5,7 @@
 }
 
 html {
-  font-family: "Roboto", system-ui, -apple-system, Segoe UI, Helvetica, Arial,
+  font-family: verdana, system-ui, -apple-system, Segoe UI, Helvetica, Arial,
     sans-serif;
 }
 html,
@@ -16,8 +16,9 @@ body {
 }
 
 h1 {
-  margin-top: 20px;
-  margin-bottom: 25px;
+  margin-top: 15%;
+  margin-bottom: 15%;
+  
 }
 
 .banner_home {
@@ -26,26 +27,26 @@ h1 {
   text-align: center;
   background-color: var(--cor-principal); /*cor do objeto*/
   border-style: solid;
-  border-color: black;
-  border-radius: 15px; /* para arredondar as bordas*/
   transition: transform 0.3s ease;
   cursor: pointer;
   position: relative;
 }
 
-.banner_home img {
-  width: 80%;
-  height: auto;
+img{
+  width: 60%;
+  height: 50%;
   margin-top: 30px;
+
 }
 
 .banner_home p {
-  font-size: 18px;
+  font-size: 15px;
 }
 
 .banner_home a {
   color: var(--cor-fonte-main-page);
   text-decoration: none;
+  border: none;
 }
 
 .banner_home:hover {
@@ -57,7 +58,9 @@ h1 {
   display: grid; /* isso aqui faz a div principal se auto proporcionar uma ao lado da outra*/
   grid-template-columns: 22% 22% 22% 22%;
   gap: 20px;
+  border: none;
 }
+
 
 .menu {
   height: 65px;
@@ -67,31 +70,32 @@ h1 {
 }
 
 .botao_menu {
-  background-color: white;
-  border: hidden;
+  border: none;
   color: white;
-  padding: 10px 20px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 15px;
-  margin: 15px 25px;
   transition-duration: 0.4s;
   cursor: pointer;
-  border-radius: 5px;
+  margin: 0;
+  background-color: var(--cor-principal);
+  padding:1.47% 30px;
+  font-size: 20px;
+  font-family: verdana, arial;
 }
 
 .botao_menu:hover {
   background-color: red;
   color: white;
-  border-radius: 5px;
-  border-bottom-color: black;
-  border-right-color: black;
 }
 
-.botao_menu {
-  background-color: var(--cor-principal);
-  color: white;
+.rodape p{
+   
+   font-size: 8px;
+   margin-top: 10%;
+   margin-bottom:0%;
+   text-align: center;
+
 }
 
 :root {
