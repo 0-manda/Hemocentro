@@ -1,6 +1,7 @@
 // Dados FALSOS de hemocentros 
 const hemocentrosData = [
   {
+    map_html:'<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8741.167625691707!2d-47.07764876421763!3d-22.905688070253873!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c8c8ba62ad2081%3A0x8aa377b2aaaa82c1!2sHospital%20Vera%20Cruz!5e0!3m2!1spt-BR!2sbr!4v1761777499971!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>' ,
     nome: "HOSPITAL VERA CRUZ",
     localizacao: "Avenida Guilherme Campos, 500, Jd. Sta. Genebra, Campinas, SP, Brasil",
     estoque: {
@@ -15,6 +16,7 @@ const hemocentrosData = [
     }
   },
   {
+    map_html:'<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3677.3381426000074!2d-47.067064588266504!3d-22.826975929225156!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c8c6a5cf964eab%3A0x7537896ba851b164!2sHospital%20de%20Cl%C3%ADnicas%20da%20UNICAMP%20-%20Fonoaudiologia!5e0!3m2!1spt-BR!2sbr!4v1761774848560!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>',
     nome: "HOSPITAL UNICAMP",
     localizacao: "Rua Vital Brasil, 251 - Cidade Universitária, Campinas, SP, Brasil",
     estoque: {
@@ -29,7 +31,9 @@ const hemocentrosData = [
     }
   },
   {
+    map_html:'<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d919.7152021420259!2d-47.15087616985404!3d-22.770546281895285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c8bfe3b66efc1b%3A0x7b55b1389d6f9cec!2sHospital%20Municipal%20de%20Paul%C3%ADnia!5e0!3m2!1spt-BR!2sbr!4v1761777454254!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>',
     nome: "HOSPITAL PAULÍNIA",
+
     localizacao: "Avenida José Paulino, 100, Paulínia, SP",
     estoque: {
       "O+": { bolsas: 95, meta: 100 },
@@ -90,6 +94,10 @@ function mostrarDetalhes(index) {
 
   document.getElementById('detalhe-nome').textContent = hemocentro.nome;
   document.getElementById('detalhe-localizacao').textContent = hemocentro.localizacao;
+  const mapaContainer = document.getElementById('mapa-container-js'); 
+  mapaContainer.innerHTML = hemocentro.map_html || '<p>Mapa não disponível.</p>';
+ 
+  
 
   renderizarEstoque(hemocentro.estoque);
 
