@@ -1,11 +1,11 @@
-// Dados FALSOS de hemocentros (serão substituídos pelo banco de dados)
+// Dados FALSOS de hemocentros (sem alteração)
 const hemocentrosData = [
   {
     nome: "HOSPITAL VERA CRUZ",
     localizacao: "Avenida Guilherme Campos, 500, Jd. Sta. Genebra, Campinas, SP, Brasil",
     estoque: {
       "O+": { bolsas: 85, meta: 100 },
-      "O-": { bolsas: 45, meta: 80 }, // Baixo
+      "O-": { bolsas: 45, meta: 80 }, 
       "A+": { bolsas: 85, meta: 100 },
       "A-": { bolsas: 85, meta: 100 },
       "AB+": { bolsas: 85, meta: 100 },
@@ -18,8 +18,8 @@ const hemocentrosData = [
     nome: "HOSPITAL UNICAMP",
     localizacao: "Rua Vital Brasil, 251 - Cidade Universitária, Campinas, SP, Brasil",
     estoque: {
-      "O+": { bolsas: 60, meta: 100 }, // Baixo
-      "O-": { bolsas: 30, meta: 80 }, // Baixo
+      "O+": { bolsas: 60, meta: 100 }, 
+      "O-": { bolsas: 30, meta: 80 }, 
       "A+": { bolsas: 90, meta: 100 },
       "A-": { bolsas: 50, meta: 100 },
       "AB+": { bolsas: 70, meta: 100 },
@@ -34,8 +34,8 @@ const hemocentrosData = [
     estoque: {
       "O+": { bolsas: 95, meta: 100 },
       "O-": { bolsas: 75, meta: 80 },
-      "A+": { bolsas: 40, meta: 100 }, // Baixo
-      "A-": { bolsas: 50, meta: 100 }, // Baixo
+      "A+": { bolsas: 40, meta: 100 }, 
+      "A-": { bolsas: 50, meta: 100 }, 
       "AB+": { bolsas: 80, meta: 100 },
       "AB-": { bolsas: 70, meta: 100 },
       "B+": { bolsas: 90, meta: 100 },
@@ -44,12 +44,11 @@ const hemocentrosData = [
   }
 ];
 
-// Função para calcular o status do estoque
+// Funções de lógica (sem alteração)
 function calcularStatus(bolsas, meta) {
   const porcentagem = (bolsas / meta) * 100;
   let statusTexto, statusClasse;
   
-  // Define o limite como 70% para 'satisfatório'
   if (porcentagem >= 70) { 
     statusTexto = "ADEQUADO - Estoque satisfatório";
     statusClasse = "status-adequado";
@@ -61,10 +60,9 @@ function calcularStatus(bolsas, meta) {
   return { porcentagem, statusTexto, statusClasse };
 }
 
-// Função para renderizar os cartões de estoque
 function renderizarEstoque(estoqueData) {
   const grid = document.getElementById('estoque-grid');
-  grid.innerHTML = ''; // Limpa o conteúdo anterior
+  grid.innerHTML = ''; 
 
   for (const tipo in estoqueData) {
     const data = estoqueData[tipo];
@@ -88,28 +86,46 @@ function renderizarEstoque(estoqueData) {
   }
 }
 
-// Função para mostrar a tela de detalhes
 function mostrarDetalhes(index) {
   const hemocentro = hemocentrosData[index];
 
-  // 1. Atualiza as informações do hemocentro na coluna esquerda
   document.getElementById('detalhe-nome').textContent = hemocentro.nome;
   document.getElementById('detalhe-localizacao').textContent = hemocentro.localizacao;
 
-  // 2. Renderiza os cartões de estoque na coluna direita
   renderizarEstoque(hemocentro.estoque);
 
-  // 3. Altera a visibilidade das telas
   document.getElementById('lista-view').style.display = 'none';
   document.getElementById('detalhe-view').classList.add('ativo');
   
-  // Rola para o topo da página
   window.scrollTo(0, 0); 
 }
 
-// Função para mostrar a lista (Botão "Voltar")
 function mostrarLista() {
   document.getElementById('lista-view').style.display = 'flex';
   document.getElementById('detalhe-view').classList.remove('ativo');
   window.scrollTo(0, 0); 
 }
+
+
+// --------------------------------------------------------
+// NOVO BLOCO: ADICIONANDO LISTENERS AO CARREGAR A PÁGINA
+// --------------------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Ouvintes para os botões "Visitar"
+    const botoesVisitar = document.querySelectorAll('.btn-visitar');
+
+    botoesVisitar.forEach(botao => {
+        botao.addEventListener('click', (evento) => {
+            // Pega o índice do atributo 'data-index' definido no HTML
+            const index = evento.target.getAttribute('data-index');
+            // Converte para número e chama a função
+            mostrarDetalhes(Number(index)); 
+        });
+    });
+
+    // 2. Ouvinte para o botão "Voltar"
+    const botaoVoltar = document.getElementById('btn-voltar');
+    if (botaoVoltar) {
+        botaoVoltar.addEventListener('click', mostrarLista);
+    }
+});

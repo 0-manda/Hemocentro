@@ -23,7 +23,7 @@
           <p><strong>Administração:</strong> ALLOS</p>
           <p><strong>Área construída:</strong> 185.000 m²</p>
           <p><strong>Localização:</strong> Avenida Guilherme Campos, 500, Jd. Sta. Genebra, Campinas, SP, Brasil</p>
-          <button class="btn" onclick="mostrarDetalhes(0)">Visitar</button>
+          <button class="btn btn-visitar" data-index="0">Visitar</button>
         </div>
       </div>
 
@@ -33,7 +33,7 @@
           <p><strong>Administração:</strong> ALLOS</p>
           <p><strong>Área construída:</strong> 185.000 m²</p>
           <p><strong>Localização:</strong> Avenida Guilherme Campos, 500, Jd. Sta. Genebra, Campinas, SP, Brasil</p>
-          <button class="btn" onclick="mostrarDetalhes(1)">Visitar</button>
+          <button class="btn btn-visitar" data-index="1">Visitar</button>
         </div>
       </div>
 
@@ -43,10 +43,9 @@
           <p><strong>Administração:</strong> ALLOS</p>
           <p><strong>Área construída:</strong> 185.000 m²</p>
           <p><strong>Localização:</strong> Avenida José Paulino, 100, Paulínia, SP</p>
-          <button class="btn" onclick="mostrarDetalhes(2)">Visitar</button>
+          <button class="btn btn-visitar" data-index="2">Visitar</button>
         </div>
       </div>
-
     </section>
 
     <section id="detalhe-view" class="tela-detalhe">
@@ -54,7 +53,7 @@
         <div class="coluna-mapa">
             <div class="mapa-container">
                 <img src="styles/imagens/mapa.png" alt="Mapa">
-                <button onclick="mostrarLista()">Voltar</button>
+                <button id="btn-voltar">Voltar</button>
             </div>
 
             <div class="detalhes-hemocentro">
