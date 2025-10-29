@@ -3,8 +3,6 @@ body{
   font-family:  Arial, Helvetica, sans-serif;
   background-color: burlywood;
 }
-
-/* --- MENU --- */
 .menu {
   display: flex;
   align-items: center;
@@ -29,7 +27,6 @@ body{
   background-color: #d60000;
 }
 
-/* --- LISTA DE HEMOCENTROS (Vista Padrão) --- */
 .lista-view {
   padding: 40px 10%;
   display: flex;
@@ -37,7 +34,6 @@ body{
   gap: 25px;
 }
 
-/* CARD da Lista */
 .hemocentro-card {
   background-color: #fff;
   border-radius: 12px;
@@ -77,7 +73,6 @@ body{
   background-color: #d60000;
 }
 
-/* Esconde a seção de estoque da lista (que usaremos apenas na tela de detalhes) */
 .estoque {
   display: none !important; 
 }
@@ -89,17 +84,15 @@ body{
   display: none; 
   padding: 0;
   margin: 0;
-  min-height: calc(100vh - 55px); /* Altura da tela menos o menu */
+  min-height: calc(100vh - 55px);
   box-sizing: border-box;
 }
 
-/* Para mostrar a tela de detalhes */
 .tela-detalhe.ativo {
   display: flex;
   min-height: calc(100vh - 55px);
 }
 
-/* COLUNA ESQUERDA (Mapa e Detalhes do Hemocentro) */
 .coluna-mapa {
   flex: 1.5; 
   display: flex;
@@ -190,12 +183,10 @@ body{
   background-color: #ff3333;
 }
 
-/* COLUNA DIREITA (Estoque) */
 .coluna-estoque {
   flex: 2; 
   padding: 30px;
-  background-color: burlywood; /* Fundo leve para a coluna de estoque */
-}
+  background-color: burlywood; 
 
 .coluna-estoque h2 {
   color: #a30000;
@@ -246,7 +237,7 @@ body{
 
 .barra-nivel {
   height: 100%;
-  background-color: #4a90e2; /* Azul para simular a cor da barra na imagem */
+  background-color: #4a90e2; 
 }
 
 .status-estoque {
