@@ -1,0 +1,94 @@
+body {
+  margin: 0;
+  font-family: Arial;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.bloco {
+  background-color: red;
+  width: 50vw;
+  height: 100vh;
+}
+
+.login {
+  width: 50vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-content {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  width: 80%;
+  max-width: 400px;
+}
+
+.login form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.login input[type="email"],
+.login input[type="password"],
+.login input[type="submit"] {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.login input[type="submit"] {
+  background-color: darkred;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.login input[type="submit"]:hover {
+  background-color: red;
+}
+
+.extras {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+
+.iten_1 {
+  text-align: center;
+  margin-top: 15px;
+  
+}
+.iten_2{
+  text-align: center;
+  margin-top: 30px;
+}
+
+.logoslinks {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.logoslinks {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.titulo_login{
+    margin-bottom: 20px; 
+    text-align: center;
+    font-size: 50px;
+}

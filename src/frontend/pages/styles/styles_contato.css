@@ -1,0 +1,148 @@
+body{
+  background-color:burlywood;
+  margin:0;
+}
+.menu{
+  
+  display:flex;
+  justify-content: center; 
+  background-color: darkred;
+  text-align: center;
+  padding: 10px;
+  font-size:20px;
+  gap: 0px 
+
+  
+}
+.menu a{
+  text-decoration: none;
+  color:white;
+  display: inline-block;
+  padding: 15px 10px;
+  background-color: darkred;
+  margin:0;
+  transition: background 0.3s;
+}
+
+.menu a:hover {
+  
+  background-color: red;
+}
+
+
+.cor_primaria {
+  display: grid;
+  font-size: 15px;
+  font-family: Verdana, arial;
+  grid-template-columns: 33% 33% 33%;
+  background-color: darkred;
+  margin: 0;
+  width: 100%;
+  padding: 20px 0;
+  text-align: center;
+  color: white;
+}
+
+
+.telefone,
+.email,
+.localizacao{
+ text-align: center;
+ color:white;
+ 
+}
+
+.cor_secundaria{
+ 
+  display:grid;
+   grid-template-columns: 50% 50%;
+  background-color: BurlyWood;
+  margin:0;
+  height: 48.70vh;
+  width: 100vw;
+}
+
+
+.cor_secundaria p{
+
+  color:darkred;
+  text-align:center;
+  margin:0;
+  font-size: 17px;
+  font-family: verdana, arial;
+  margin-left: 30px;
+}
+
+.informativo h1{
+  padding-top:70px;
+  color:darkred;
+  text-align:center;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin:0;
+  font-family: verdana, arial;
+  
+}
+
+.forms {
+  background-color:aquamarine;
+  color: darkred;
+  top:10;
+  left: 800px;
+  font-size: 20px;
+  font-family: verdana, arial;
+  margin-left: 20%;
+  margin-top:5%;
+}
+.informativo{
+  background-color: blue;
+}
+.forms input{
+  
+  width: 350px;
+  height: 20px;
+  margin-right: 34%;
+  margin-left: 0%;
+  border-radius: 5px;
+  border:none;
+}
+
+#mensagem {
+  height: 100px;
+  width: 350px;
+  margin-right: 10%;
+  border-radius: 5px;
+  border:none;
+}
+
+#enviar{
+  position: absolute; 
+  z-index: 10;
+  padding: 10px 40px;
+  background-color: darkred;
+  border-color:white;
+  font-size: 15px;
+  font-family: verdana , arial;
+  color:white;
+  border: 3px;
+  display:inline-block;
+  cursor:grab;
+}
+
+.cor_secundaria a {
+  position: absolute;
+  bottom: 50%;        
+  left: 40%;            
+  transform: translateX(-50%); 
+  background-color: rgba(139); 
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+#enviar:hover {
+  background-color: red;
+}

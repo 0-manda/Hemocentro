@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hemocentros Disponíveis</title>
+    <link rel="stylesheet" href="styles/style_hemocentros.css" />
+  </head>
+  <body>
+    
+    <header class="menu">
+      <a href="Home.html">HOME</a>
+      <a href="Hemocentros.html" class="active">HEMOCENTROS</a>
+      <a href="Contato.html">CONTATO</a>
+      <a href="Noticias.html">NOTÍCIAS</a>
+      <a href="Historia.html">SOBRE</a>
+    </header>
+
+    <section id="lista-view" class="lista-view">
+      <div class="hemocentro-card">
+        <div class="info">
+          <h2>HOSPITAL VERA CRUZ</h2>
+          <p><strong>Administração:</strong> ALLOS</p>
+          <p><strong>Área construída:</strong> 185.000 m²</p>
+          <p><strong>Localização:</strong> Avenida Guilherme Campos, 500, Jd. Sta. Genebra, Campinas, SP, Brasil</p>
+          <button class="btn" onclick="mostrarDetalhes(0)">Visitar</button>
+        </div>
+      </div>
+
+      <div class="hemocentro-card">
+        <div class="info">
+          <h2>HOSPITAL UNICAMP</h2>
+          <p><strong>Administração:</strong> ALLOS</p>
+          <p><strong>Área construída:</strong> 185.000 m²</p>
+          <p><strong>Localização:</strong> Avenida Guilherme Campos, 500, Jd. Sta. Genebra, Campinas, SP, Brasil</p>
+          <button class="btn" onclick="mostrarDetalhes(1)">Visitar</button>
+        </div>
+      </div>
+
+      <div class="hemocentro-card">
+        <div class="info">
+          <h2>HOSPITAL PAULÍNIA</h2>
+          <p><strong>Administração:</strong> ALLOS</p>
+          <p><strong>Área construída:</strong> 185.000 m²</p>
+          <p><strong>Localização:</strong> Avenida José Paulino, 100, Paulínia, SP</p>
+          <button class="btn" onclick="mostrarDetalhes(2)">Visitar</button>
+        </div>
+      </div>
+
+    </section>
+
+    <section id="detalhe-view" class="tela-detalhe">
+        
+        <div class="coluna-mapa">
+            <div class="mapa-container">
+                <img src="styles/imagens/mapa.png" alt="Mapa">
+                <button onclick="mostrarLista()">Voltar</button>
+            </div>
+
+            <div class="detalhes-hemocentro">
+                <h2 id="detalhe-nome"></h2>
+                <p>Localização:</p>
+                <p><strong id="detalhe-localizacao"></strong></p>
+
+                <div class="botoes-acao">
+                    <button class="btn-detalhe">História</button>
+                    <button class="btn-detalhe">Contato</button>
+                    <button class="btn-detalhe participar">Participar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="coluna-estoque">
+            <h2>Estoque por Tipo Sanguíneo</h2>
+
+            <div id="estoque-grid" class="estoque-grid">
+                </div>
+        </div>
+    </section>
+    
+    <script src="scripts/script_hemocentro.js"></script>
+  </body>
+</html>
