@@ -10,15 +10,16 @@ html {
 }
 html,
 body {
+  background-color: burlywood;
   margin: 0;
   padding: 0;
   line-height: 1.5;
+  font-family: verdana, arial;
 }
 
 h1 {
-  margin-top: 15%;
-  margin-bottom: 15%;
-  
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
 
 .banner_home {
