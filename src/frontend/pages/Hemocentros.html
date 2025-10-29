@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hemocentros Disponíveis</title>
+    <link rel="stylesheet" href="styles/style_hemocentros.css" />
+  </head>
+  <body>
+    
+    <header class="menu">
+      <a href="Home.html">HOME</a>
+      <a href="Hemocentros.html" class="active">HEMOCENTROS</a>
+      <a href="Contato.html">CONTATO</a>
+      <a href="Noticias.html">NOTÍCIAS</a>
+      <a href="Historia.html">SOBRE</a>
+    </header>
+
+    <section class="faixa">
+      <div class="overlay">
+        <h1>Hemocentros disponíveis</h1>
+      </div>
+    </section>
+
+    <section class="lista-hemocentros">
+      <!-- CARD 1 - HOSPITAL VERA CRUZ -->
+      <div class="hemocentro-card" onclick="toggleEstoque(0)">
+        <div class="info">
+          <h2>HOSPITAL VERA CRUZ</h2>
+          <p><strong>Administração:</strong> ALLOS</p>
+          <p><strong>Área construída:</strong> 185.000 m²</p>
+          <p><strong>Localização:</strong> Avenida Guilherme Campos, 500, Jd. Sta. Genebra, Campinas, SP, Brasil</p>
+          <button class="btn">Visitar</button>
+        </div>
+      </div>
+
+      <div class="estoque" id="estoque-0">
+        <h3>Estoque por Tipo Sanguíneo</h3>
+        <div class="tipos">
+          <div>
+            <span>O+</span>
+            <div class="tipo-info">
+              <span>Estoque: <strong>85 bolsas</strong></span>
+              <span>Meta: <strong>100</strong></span>
+            </div>
+            <div class="barra">
+              <div class="nivel" style="width: 85%"></div>
+            </div>
+            <div class="status-estoque">85% da meta atingida</div>
+          </div>
+          
+          <div>
+            <span>O-</span>
+            <div class="tipo-info">
+              <span>Estoque: <strong>45 bolsas</strong></span>
+              <span>Meta: <strong>80</strong></span>
+            </div>
+            <div class="barra">
+              <div class="nivel" style="width: 56%"></div>
+            </div>
+            <div class="status-estoque">56% da meta atingida</div>
+          </div>
+
+          <div>
+            <span>A+</span>
+            <div class="tipo-info">
+              <span>Estoque: <strong>85 bolsas</strong></span>
+              <span>Meta: <strong>100</strong></span>
+            </div>
+            <div class="barra">
+              <div class="nivel" style="width: 85%"></div>
+            </div>
+            <div class="status-estoque">85% da meta atingida</div>
+          </div>
+
+          <div>
+            <span>A-</span>
+            <div class="tipo-info">
+              <span>Estoque: <strong>85 bolsas</strong></span>
+              <span>Meta: <strong>100</strong></span>
+            </div>
+            <div class="barra">
+              <div class="nivel" style="width: 85%"></div>
+            </div>
+            <div class="status-estoque">85% da meta atingida</div>
+          </div>
+
+          <div>
+            <span>AB+</span>
+            <div class="tipo-info">
+              <span>Estoque: <strong>85 bolsas</strong></span>
+              <span>Meta: <strong>100</strong></span>
+            </div>
+            <div class="barra">
+              <div class="nivel" style="width: 85%"></div>
+            </div>
+            <div class="status-estoque">85% da meta atingida</div>
+          </div>
+
+          <div>
+            <span>AB-</span>
+            <div class="tipo-info">
+              <span>Estoque: <strong>85 bolsas</strong></span>
+              <span>Meta: <strong>100</strong></span>
+            </div>
+            <div class="barra">
+              <div class="nivel" style="width: 85%"></div>
+            </div>
+            <div class="status-estoque">85% da meta atingida</div>
+          </div>
+
+          <div>
+            <span>B+</span>
+            <div class="tipo-info">
+              <span>Estoque: <strong>85 bolsas</strong></span>
+              <span>Meta: <strong>100</strong></span>
+            </div>
+            <div class="barra">
+              <div class="nivel" style="width: 85%"></div>
+            </div>
+            <div class="status-estoque">85% da meta atingida</div>
+          </div>
+
+          <div>
+            <span>B-</span>
+            <div class="tipo-info">
+              <span>Estoque: <strong>85 bolsas</strong></span>
+              <span>Meta: <strong>100</strong></span>
+            </div>
+            <div class="barra">
+              <div class="nivel" style="width: 85%"></div>
+            </div>
+            <div class="status-estoque">85% da meta atingida</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 2 - HOSPITAL UNICAMP -->
+      <div class="hemocentro-card" onclick="toggleEstoque(1)">
+        <div class="info">
+          <h2>HOSPITAL UNICAMP</h2>
+          <p><strong>Administração:</strong> ALLOS</p>
+          <p><strong>Área construída:</strong> 185.000 m²</p>
+          <p><strong>Localização:</strong> Avenida Guilherme Campos, 500, Jd. Sta. Genebra, Campinas, SP, Brasil</p>
+          <button class="btn">Visitar</button>
+        </div>
+      </div>
+
+      <div class="estoque" id="estoque-1">
+        <h3>Estoque por Tipo Sanguíneo</h3>
+        <div class="tipos">
+          <div>
+            <span>O+</span>
+            <div class="tipo-info">
+              <span>Estoque: <strong>85 bolsas</strong></span>
+              <span>Meta: <strong>100</strong></span>
+            </div>
+            <div class="barra">
+              <div class="nivel" style="width: 85%"></div>
+            </div>
+            <div class="status-estoque">85% da meta atingida</div>
+          </div>
+          
+          <div>
+            <span>O-</span>
+            <div class="tipo-info">
+              <span>Estoque: <strong>45 bolsas</strong></span>
+              <span>Meta: <strong>80</strong></span>
+            </div>
+            <div class="barra">
+              <div class="nivel" style="width: 56%"></div>
+            </div>
+            <div class="status-estoque">56% da meta atingida</div>
+          </div>
+
+          <div>
+            <span>A+</span>
+            <div class="tipo-info">
+              <span>Estoque: <strong>85 bolsas</strong></span>
+              <span>Meta: <strong>100</strong></span>
+            </div>
+            <div class="barra">
+              <div class="nivel" style="width: 85%"></div>
+            </div>
+            <div class="status-estoque">85% da meta atingida</div>
+          </div>
+
+          <div>
+            <span>A-</span>
+            <div class="tipo-info">
+              <span>Estoque: <strong>85 bolsas</strong></span>
+              <span>Meta: <strong>100</strong></span>
+            </div>
+            <div class="barra">
+              <div class="nivel" style="width: 85%"></div>
+            </div>
+            <div class="status-estoque">85% da meta atingida</div>
+          </div>
+
+          <div>
+            <span>AB+</span>
+            <div class="tipo-info">
+              <span>Estoque: <strong>85 bolsas</strong></span>
+              <span>Meta: <strong>100</strong></span>
+            </div>
+            <div class="barra">
+              <div class="nivel" style="width: 85%"></div>
+            </div>
+            <div class="status-estoque">85% da meta atingida</div>
+          </div>
+
+          <div>
+            <span>AB-</span>
+            <div class="tipo-info">
+              <span>Estoque: <strong>85 bolsas</strong></span>
+              <span>Meta: <strong>100</strong></span>
+            </div>
+            <div class="barra">
+              <div class="nivel" style="width: 85%"></div>
+            </div>
+            <div class="status-estoque">85% da meta atingida</div>
+          </div>
+
+          <div>
+            <span>B+</span>
+            <div class="tipo-info">
+              <span>Estoque: <strong>85 bolsas</strong></span>
+              <span>Meta: <strong>100</strong></span>
+            </div>
+            <div class="barra">
+              <div class="nivel" style="width: 85%"></div>
+            </div>
+            <div class="status-estoque">85% da meta atingida</div>
+          </div>
+
+          <div>
+            <span>B-</span>
+            <div class="tipo-info">
+              <span>Estoque: <strong>85 bolsas</strong></span>
+              <span>Meta: <strong>100</strong></span>
+            </div>
+            <div class="barra">
+              <div class="nivel" style="width: 85%"></div>
+            </div>
+            <div class="status-estoque">85% da meta atingida</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 3 - HOSPITAL PAULÍNIA -->
+      <div class="hemocentro-card" onclick="toggleEstoque(2)">
+        <div class="info">
+          <h2>HOSPITAL PAULÍNIA</h2>
+          <p><strong>Administração:</strong> ALLOS</p>
+          <p><strong>Área construída:</strong> 185.000 m²</p>
+          <p><strong>Localização:</strong> Avenida José Paulino, 100, Paulínia, SP</p>
+          <button class="btn">Visitar</button>
+        </div>
+      </div>
+
+      <div class="estoque" id="estoque-2">
+        <h3>Estoque por Tipo Sanguíneo</h3>
+        <div class="tipos">
+          <div>
+            <span>O+</span>
+            <div class="tipo-info">
+              <span>Estoque: <strong>65 bolsas</strong></span>
+              <span>Meta: <strong>100</strong></span>
+            </div>
+            <div class="barra">
+              <div class="nivel" style="width: 65%"></div>
+            </div>
+            <div class="status-estoque">65% da meta atingida</div>
+          </div>
+          
+          <div>
+            <span>O-</span>
+            <div class="tipo-info">
+              <span>Estoque: <strong>30 bolsas</strong></span>
+              <span>Meta: <strong>80</strong></span>
+            </div>
+            <div class="barra">
+              <div class="nivel" style="width: 37%"></div>
+            </div>
+            <div class="status-estoque">37% da meta atingida</div>
+          </div>
+
+          <div>
+            <span>A+</span>
+            <div class="tipo-info">
+              <span>Estoque: <strong>40 bolsas</strong></span>
+              <span>Meta: <strong>100</strong></span>
+            </div>
+            <div class="barra">
+              <div class="nivel" style="width: 40%"></div>
+            </div>
+            <div class="status-estoque">40% da meta atingida</div>
+          </div>
+
+          <div>
+            <span>A-</span>
+            <div class="tipo-info">
+              <span>Estoque: <strong>50 bolsas</strong></span>
+              <span>Meta: <strong>100</strong></span>
+            </div>
+            <div class="barra">
+              <div class="nivel" style="width: 50%"></div>
+            </div>
+            <div class="status-estoque">50% da meta atingida</div>
+          </div>
+
+          <div>
+            <span>AB+</span>
+            <div class="tipo-info">
+              <span>Estoque: <strong>80 bolsas</strong></span>
+              <span>Meta: <strong>100</strong></span>
+            </div>
+            <div class="barra">
+              <div class="nivel" style="width: 80%"></div>
+            </div>
+            <div class="status-estoque">80% da meta atingida</div>
+          </div>
+
+          <div>
+            <span>AB-</span>
+            <div class="tipo-info">
+              <span>Estoque: <strong>70 bolsas</strong></span>
+              <span>Meta: <strong>100</strong></span>
+            </div>
+            <div class="barra">
+              <div class="nivel" style="width: 70%"></div>
+            </div>
+            <div class="status-estoque">70% da meta atingida</div>
+          </div>
+
+          <div>
+            <span>B+</span>
+            <div class="tipo-info">
+              <span>Estoque: <strong>90 bolsas</strong></span>
+              <span>Meta: <strong>100</strong></span>
+            </div>
+            <div class="barra">
+              <div class="nivel" style="width: 90%"></div>
+            </div>
+            <div class="status-estoque">90% da meta atingida</div>
+          </div>
+
+          <div>
+            <span>B-</span>
+            <div class="tipo-info">
+              <span>Estoque: <strong>55 bolsas</strong></span>
+              <span>Meta: <strong>100</strong></span>
+            </div>
+            <div class="barra">
+              <div class="nivel" style="width: 55%"></div>
+            </div>
+            <div class="status-estoque">55% da meta atingida</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <script src="scripts/hemocentros.js"></script>
+  </body>
+</html>
