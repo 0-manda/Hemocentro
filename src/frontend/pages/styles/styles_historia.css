@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 .title {
 	color: #5C6AC4;
 }
@@ -7,15 +8,55 @@ body{
   
  margin:0;
  backgroud-color: #bb9469;
+=======
+body{
+  
+ margin:0;
+ background-color: darkred;
+}
+
+.menu {
+  font-family: Verdana , arial;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  background-color: darkred;
+  color: white;
+  font-size: 18px;
+  padding-left: 15px; 
+  padding-right: 15px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: white;
+  padding: 15px 25px;
+  transition: background 0.3s;
+}
+
+.menu a:hover,
+.menu a.active {
+  background-color: #d60000;
+}
+
+.sobraa{
+  background-color: red;
+>>>>>>> giu_html
 }
 
 .container{
   display:flex;
+<<<<<<< HEAD
+=======
+  
+>>>>>>> giu_html
 }
 
 
 .div_imagem{
 
+<<<<<<< HEAD
 padding: 30px;
 background-color: BurlyWood;
 align-items:center;
@@ -27,6 +68,18 @@ align-items:center;
   background-color: darkred;
   width: 70vw;
   height: 100vh;
+=======
+height: 100%;
+width: 100%;
+border-color: BurlyWood;
+}
+
+
+.block1 {
+  background-color: darkred;
+  width: 100%;
+  height: 100%;
+>>>>>>> giu_html
   color:white;
   text-align: center;
   align-items:center;
@@ -37,6 +90,7 @@ align-items:center;
 width: 80%; /* Exemplo: defina uma largura menor que 100% */
 margin: 0 auto; /* Isso centraliza o bloco na horizontal */
 text-align: center; /* Isso centraliza o texto dentro do bloco */
+<<<<<<< HEAD
 padding: 40px; /* Adiciona um preenchimento interno para o texto não colar nas bordas */
 color: white; /* Cor do texto padrão para branco */
 font-family: Arial, sans-serif; /* Exemplo de fonte */
@@ -45,12 +99,21 @@ font-size: 1.6em; /* Tamanho do texto um pouco maior */
 line-height: 1.6; /* Espaçamento entre as linhas para maior legibilidade */
  
  text-align: left;
+=======
+padding: 2%; /* Adiciona um preenchimento interno para o texto não colar nas bordas */
+color: white; /* Cor do texto padrão para branco */
+font-family: verdana, sans-serif; /* Exemplo de fonte */
+font-size: 1.3em; /* Tamanho do texto um pouco maior */  
+line-height: 1.2; /* Espaçamento entre as linhas para maior legibilidade */
+text-align: left;
+>>>>>>> giu_html
 }
 .titulo{
   
   font-size: 70px;
   
 }
+<<<<<<< HEAD
 .menu{
   display:flex;
   justify-content: center; 
@@ -62,6 +125,9 @@ line-height: 1.6; /* Espaçamento entre as linhas para maior legibilidade */
   gap: 10px
   
 }
+=======
+
+>>>>>>> giu_html
 .noticias, 
 .hemocentro ,
 .noticias,
@@ -73,6 +139,7 @@ line-height: 1.6; /* Espaçamento entre as linhas para maior legibilidade */
   display: inline-block;
   padding: 15px 10px;
   background-color: darkred;
+<<<<<<< HEAD
   margin:;
   transition: background 0.3s;
 }
@@ -81,3 +148,16 @@ line-height: 1.6; /* Espaçamento entre as linhas para maior legibilidade */
   
   background-color: red;
 }
+=======
+  margin:0;
+  transition: background 0.3s;
+}
+
+.block2{
+  height: 100%;
+  width: 100%;
+  
+  margin:5%;
+}
+
+>>>>>>> giu_html

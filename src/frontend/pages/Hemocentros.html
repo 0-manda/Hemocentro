@@ -16,14 +16,20 @@
       <a href="Historia.html">SOBRE</a>
     </header>
 
+<<<<<<< HEAD
     <section class="lista-hemocentros">
       <!-- CARD 1 - HOSPITAL VERA CRUZ -->
       <div class="hemocentro-card" onclick="toggleEstoque(0)">
+=======
+    <section id="lista-view" class="lista-view">
+      <div class="hemocentro-card">
+>>>>>>> giu_html
         <div class="info">
           <h2>HOSPITAL VERA CRUZ</h2>
           <p><strong>Administração:</strong> ALLOS</p>
           <p><strong>Área construída:</strong> 185.000 m²</p>
           <p><strong>Localização:</strong> Avenida Guilherme Campos, 500, Jd. Sta. Genebra, Campinas, SP, Brasil</p>
+<<<<<<< HEAD
           <button class="btn">Visitar</button>
         </div>
       </div>
@@ -131,11 +137,19 @@
 
       <!-- CARD 2 - HOSPITAL UNICAMP -->
       <div class="hemocentro-card" onclick="toggleEstoque(1)">
+=======
+          <button class="btn btn-visitar" data-index="0">Visitar</button>
+        </div>
+      </div>
+
+      <div class="hemocentro-card">
+>>>>>>> giu_html
         <div class="info">
           <h2>HOSPITAL UNICAMP</h2>
           <p><strong>Administração:</strong> ALLOS</p>
           <p><strong>Área construída:</strong> 185.000 m²</p>
           <p><strong>Localização:</strong> Avenida Guilherme Campos, 500, Jd. Sta. Genebra, Campinas, SP, Brasil</p>
+<<<<<<< HEAD
           <button class="btn">Visitar</button>
         </div>
       </div>
@@ -243,11 +257,19 @@
 
       <!-- CARD 3 - HOSPITAL PAULÍNIA -->
       <div class="hemocentro-card" onclick="toggleEstoque(2)">
+=======
+          <button class="btn btn-visitar" data-index="1">Visitar</button>
+        </div>
+      </div>
+
+      <div class="hemocentro-card">
+>>>>>>> giu_html
         <div class="info">
           <h2>HOSPITAL PAULÍNIA</h2>
           <p><strong>Administração:</strong> ALLOS</p>
           <p><strong>Área construída:</strong> 185.000 m²</p>
           <p><strong>Localização:</strong> Avenida José Paulino, 100, Paulínia, SP</p>
+<<<<<<< HEAD
           <button class="btn">Visitar</button>
         </div>
       </div>
@@ -355,5 +377,42 @@
     </section>
     
     <script src="scripts/hemocentros.js"></script>
+=======
+          <button class="btn btn-visitar" data-index="2">Visitar</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="detalhe-view" class="tela-detalhe">
+        
+        <div class="coluna-mapa">
+            <div class="mapa-container" id="mapa-container-js">
+                 <iframe id="detalhe_mapa"></iframe>
+                <button id="btn-voltar">Voltar</button>
+            </div>
+
+            <div class="detalhes-hemocentro">
+                <h2 id="detalhe-nome"></h2>
+                <p>Localização:</p>
+                <p><strong id="detalhe-localizacao"></strong></p>
+
+                <div class="botoes-acao">
+                    <button class="btn-detalhe">História</button>
+                    <button class="btn-detalhe">Contato</button>
+                    <button class="btn-detalhe participar">Participar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="coluna-estoque">
+            <h2>Estoque por Tipo Sanguíneo</h2>
+
+            <div id="estoque-grid" class="estoque-grid">
+                </div>
+        </div>
+    </section>
+    
+    <script src="scripts/script_hemocentro.js"></script>
+>>>>>>> giu_html
   </body>
 </html>
