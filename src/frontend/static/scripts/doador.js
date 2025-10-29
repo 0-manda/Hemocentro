@@ -137,3 +137,29 @@ if (cadastroUser) {
 }
 
 const loginUser = document.getElementById("login");
+
+if (loginUser) {
+  const tokenFake =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30";
+  loginBtn.addEventListener("click", () => {
+    const email = email.value;
+    const senha = senha.value;
+    if (email && senha) {
+      localStorage.setItem("token", tokenFake);
+      mensagem.textContent = "Login bem-sucedido!";
+    } else {
+      // ver depois com o bd
+      mensagem.textContent = "Preencha e-mail e senha.";
+    }
+  });
+  acessarBtn.addEventListener("click", () => {
+    const token = localStorage.getItem("token");
+    mensagem.textContent = token
+      ? "Acesso permitido! Token encontrado."
+      : "Acesso negado. Faça login.";
+  });
+  logoutBtn.addEventListener("click", () => {
+    localStorage.removeItem("token");
+    mensagem.textContent = "Logout realizado.";
+  });
+}
