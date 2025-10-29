@@ -1,4 +1,4 @@
-// Dados FALSOS de hemocentros (sem alteração)
+// Dados FALSOS de hemocentros 
 const hemocentrosData = [
   {
     nome: "HOSPITAL VERA CRUZ",
@@ -44,7 +44,6 @@ const hemocentrosData = [
   }
 ];
 
-// Funções de lógica (sem alteração)
 function calcularStatus(bolsas, meta) {
   const porcentagem = (bolsas / meta) * 100;
   let statusTexto, statusClasse;
@@ -106,12 +105,8 @@ function mostrarLista() {
   window.scrollTo(0, 0); 
 }
 
-
-// --------------------------------------------------------
-// NOVO BLOCO: ADICIONANDO LISTENERS AO CARREGAR A PÁGINA
-// --------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Ouvintes para os botões "Visitar"
+    // Ouvintes para os botões "Visitar"
     const botoesVisitar = document.querySelectorAll('.btn-visitar');
 
     botoesVisitar.forEach(botao => {
@@ -123,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 2. Ouvinte para o botão "Voltar"
+    // Ouvinte para o botão "Voltar"
     const botaoVoltar = document.getElementById('btn-voltar');
     if (botaoVoltar) {
         botaoVoltar.addEventListener('click', mostrarLista);
