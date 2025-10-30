@@ -16,12 +16,18 @@
         <div class="login-content">
           <!-- Agrupa tudo no lado direito -->
           <h1 class="titulo_login">LOGIN</h1>
-          <form action="/pagina-processa-dados" method="post">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email_usuario" required />
+          <form
+            id="login-usuario"
+            action="/pagina-processa-dados"
+            method="post"
+          >
+            <label for="email_usuario">Email:</label>
+            <input type="email" id="email" name="email_usuario" />
+            <small id="aviso-email" class="hint"></small>
 
-            <label for="senha">Senha:</label>
-            <input type="password" id="senha" name="senha_usuario" required />
+            <label for="senha_usuario">Senha:</label>
+            <input type="password" id="senha" name="senha_usuario" />
+            <small id="aviso-senha" class="hint"></small>
 
             <div class="extras">
               <div>
@@ -31,7 +37,8 @@
               <a href="esquecersenha.html">Esqueceu a senha?</a>
             </div>
 
-            <input type="submit" value="ENTRAR" />
+            <input id="loginBtn" for="entrar" type="submit" value="ENTRAR" />
+            <small name="entrar" id="aviso-geral" class="hint"></small>
           </form>
 
           <div class="iten_1">
@@ -74,5 +81,6 @@
         </div>
       </div>
     </div>
+    <script src="../static/scripts/doador.js"></script>
   </body>
 </html>

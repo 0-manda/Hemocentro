@@ -120,32 +120,36 @@ if (cadastroUser) {
       console.error(err);
       alert("Erro de conexão com o servidor.");
     }
+    window.location.href = "index.html"; // esse direcionamento eh temporario
   });
 }
 
-const loginUser = document.getElementById("login");
+const loginUser = document.getElementById("login-usuario");
 
 if (loginUser) {
   const tokenFake =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30";
 
-  // secret ==> a-string-secret-at-least-256-bits-long
-  loginBtn.addEventListener("click", () => {
-    const email = email.value;
-    const senha = senha.value;
-    if (email && senha) {
-      localStorage.setItem("token", tokenFake);
-      mensagem.textContent = "Login bem-sucedido!";
-    } else {
-      // ver depois com o bd
-      mensagem.textContent = "Preencha e-mail e senha.";
+  const email = document.getElementById("email");
+  const senha = document.getElementById("senha");
+  const avisoEmail = document.getElementById("aviso-email");
+  const avisoSenha = document.getElementById("aviso-senha");
+
+  loginUser.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const emailTeste = email.value.trim();
+    const senhaTeste = senha.value.trim();
+    if (emailTeste === "") {
+      avisoEmail.style.color = "red";
+      avisoEmail.textContent = "Email vazio.";
+      return;
+    } else if (senhaTeste === "") {
+      avisoSenha.style.color = "red";
+      avisoSenha.textContent = "Senha vazia.";
+      return;
     }
-  });
-  acessarBtn.addEventListener("click", () => {
-    const token = localStorage.getItem("token");
-    mensagem.textContent = token
-      ? "Acesso permitido! Token encontrado."
-      : "Acesso negado. Faça login.";
+    localStorage.setItem("token", tokenFake);
+    window.location.href = "../templates/index.html";
   });
 
   // essa parte tem que ficar ligada ao logout do usuario
