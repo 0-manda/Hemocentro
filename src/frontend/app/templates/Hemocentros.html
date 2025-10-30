@@ -4,11 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hemocentros Disponíveis</title>
-    <link rel="icon" type="image/png" href="styles/imagens/icon_pagina.png">
-    <link rel="stylesheet" href="styles/style_hemocentros.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="../static/styles/imagens/icon_pagina.png"
+    />
+    <link rel="stylesheet" href="../static/styles/style_hemocentros.css" />
   </head>
   <body>
-    
     <header class="menu">
       <a href="Home.html">HOME</a>
       <a href="Hemocentros.html" class="active">HEMOCENTROS</a>
@@ -23,7 +26,10 @@
           <h2>HOSPITAL VERA CRUZ</h2>
           <p><strong>Administração:</strong> ALLOS</p>
           <p><strong>Área construída:</strong> 185.000 m²</p>
-          <p><strong>Localização:</strong> Avenida Guilherme Campos, 500, Jd. Sta. Genebra, Campinas, SP, Brasil</p>
+          <p>
+            <strong>Localização:</strong> Avenida Guilherme Campos, 500, Jd.
+            Sta. Genebra, Campinas, SP, Brasil
+          </p>
           <button class="btn btn-visitar" data-index="0">Visitar</button>
         </div>
       </div>
@@ -33,7 +39,10 @@
           <h2>HOSPITAL UNICAMP</h2>
           <p><strong>Administração:</strong> ALLOS</p>
           <p><strong>Área construída:</strong> 185.000 m²</p>
-          <p><strong>Localização:</strong> Avenida Guilherme Campos, 500, Jd. Sta. Genebra, Campinas, SP, Brasil</p>
+          <p>
+            <strong>Localização:</strong> Avenida Guilherme Campos, 500, Jd.
+            Sta. Genebra, Campinas, SP, Brasil
+          </p>
           <button class="btn btn-visitar" data-index="1">Visitar</button>
         </div>
       </div>
@@ -43,41 +52,42 @@
           <h2>HOSPITAL PAULÍNIA</h2>
           <p><strong>Administração:</strong> ALLOS</p>
           <p><strong>Área construída:</strong> 185.000 m²</p>
-          <p><strong>Localização:</strong> Avenida José Paulino, 100, Paulínia, SP</p>
+          <p>
+            <strong>Localização:</strong> Avenida José Paulino, 100, Paulínia,
+            SP
+          </p>
           <button class="btn btn-visitar" data-index="2">Visitar</button>
         </div>
       </div>
     </section>
 
     <section id="detalhe-view" class="tela-detalhe">
-        
-        <div class="coluna-mapa">
-            <div class="mapa-container" id="mapa-container-js">
-                 <iframe id="detalhe_mapa"></iframe>
-                <button id="btn-voltar">Voltar</button>
-            </div>
-
-            <div class="detalhes-hemocentro">
-                <h2 id="detalhe-nome"></h2>
-                <p>Localização:</p>
-                <p><strong id="detalhe-localizacao"></strong></p>
-
-                <div class="botoes-acao">
-                    <button class="btn-detalhe">História</button>
-                    <button class="btn-detalhe">Contato</button>
-                    <button class="btn-detalhe participar">Participar</button>
-                </div>
-            </div>
+      <div class="coluna-mapa">
+        <div class="mapa-container" id="mapa-container-js">
+          <iframe id="detalhe_mapa"></iframe>
+          <button id="btn-voltar">Voltar</button>
         </div>
 
-        <div class="coluna-estoque">
-            <h2>Estoque por Tipo Sanguíneo</h2>
+        <div class="detalhes-hemocentro">
+          <h2 id="detalhe-nome"></h2>
+          <p>Localização:</p>
+          <p><strong id="detalhe-localizacao"></strong></p>
 
-            <div id="estoque-grid" class="estoque-grid">
-                </div>
+          <div class="botoes-acao">
+            <button class="btn-detalhe">História</button>
+            <button class="btn-detalhe">Contato</button>
+            <button class="btn-detalhe participar">Participar</button>
+          </div>
         </div>
+      </div>
+
+      <div class="coluna-estoque">
+        <h2>Estoque por Tipo Sanguíneo</h2>
+
+        <div id="estoque-grid" class="estoque-grid"></div>
+      </div>
     </section>
-    
+
     <script src="scripts/script_hemocentro.js"></script>
   </body>
 </html>

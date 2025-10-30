@@ -15,15 +15,16 @@ body {
 }
 
 .cadastro {
-  width: 50vw;
+  flex: 1; /* ocupa metade do espaço, sem forçar altura fixa */
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start; /* muda para topo */
+  padding-top: 40px; /* afasta do topo */
 }
 
 .cadastro-content {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   align-items: center;
   width: 80%;
   max-width: 400px;
@@ -39,7 +40,12 @@ body {
 .cadastro input[type="email"],
 .cadastro input[type="text"],
 .cadastro input[type="password"],
-.cadastro input[type="submit"] {
+.cadastro input[type="tel"],
+.cadastro input[type="date"],
+.cadastro input[type="submit"],
+#tipoUser,
+#tipoSangue,
+#sexo {
   padding: 10px;
   font-size: 16px;
   border-radius: 5px;
@@ -65,8 +71,7 @@ body {
   font-size: 14px;
 }
 
-
-.iten_1{
+.iten_1 {
   text-align: center;
   margin-top: 30px;
 }
@@ -83,17 +88,16 @@ body {
   margin-top: 10px;
 }
 
-.titulo_cadastro{
-    margin-bottom: 20px; 
-    text-align: center;
-    font-size: 50px;
+.titulo_cadastro {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 50px;
 }
 
-
 .voltar {
-  position: absolute;      
-  top: 20px;               
-  right: 20px;             
+  position: absolute;
+  top: 20px;
+  right: 20px;
   background-color: red;
   color: white;
   padding: 10px 20px;
