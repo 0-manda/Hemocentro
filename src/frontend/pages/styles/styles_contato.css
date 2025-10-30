@@ -2,35 +2,6 @@ body{
   background-color:burlywood;
   margin:0;
 }
-<<<<<<< HEAD
-.menu{
-  
-  display:flex;
-  justify-content: center; 
-  background-color: darkred;
-  text-align: center;
-  padding: 10px;
-  font-size:20px;
-  gap: 0px 
-
-  
-}
-.menu a{
-  text-decoration: none;
-  color:white;
-  display: inline-block;
-  padding: 15px 10px;
-  background-color: darkred;
-  margin:0;
-  transition: background 0.3s;
-}
-
-.menu a:hover {
-  
-  background-color: red;
-}
-
-=======
 .menu {
   font-family: Verdana , arial;
   display: flex;
@@ -60,7 +31,6 @@ body{
 
   background-color: red;
 }
->>>>>>> giu_html
 
 .cor_primaria {
   display: grid;

@@ -1,18 +1,8 @@
-<<<<<<< HEAD
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: burlywood;
-}
-
-/* MENU */
-=======
 body{
   margin: 0;
   font-family: verdana,Arial, Helvetica, sans-serif;
   background-color: burlywood;
 }
->>>>>>> giu_html
 .menu {
   display: flex;
   align-items: center;
@@ -21,11 +11,8 @@ body{
   background-color: #a30000;
   color: white;
   font-size: 18px;
-<<<<<<< HEAD
-=======
   padding-left: 15px; 
   padding-right: 15px;
->>>>>>> giu_html
 }
 
 .menu a {
@@ -40,66 +27,13 @@ body{
   background-color: #d60000;
 }
 
-<<<<<<< HEAD
-.icones {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding-right: 20px;
-}
-
-.icone {
-  width: 25px;
-  height: 25px;
-  filter: brightness(0) invert(1);
-}
-
-.faixa {
-  background-image: url("styles/imagens/corredor.jpg");
-  background-size: cover;
-  background-position: center;
-  height: 250px;
-  position: relative;
-}
-
-.overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-}
-.overlay img{
-  width: 100%;
-  height: 100%; 
-  filter: brightness(100%);
-  filter: opacity(70%)
-}
-
-.overlay h1 {
-  color: white;
-  font-size: 2.5em;
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
-}
-
-/* LISTA DE HEMOCENTROS */
-.lista-hemocentros {
-=======
 .lista-view {
->>>>>>> giu_html
   padding: 40px 10%;
   display: flex;
   flex-direction: column;
   gap: 25px;
 }
 
-<<<<<<< HEAD
-/* CARD */
-=======
->>>>>>> giu_html
 .hemocentro-card {
   background-color: #fff;
   border-radius: 12px;
@@ -115,15 +49,6 @@ body{
   transform: scale(1.02);
 }
 
-<<<<<<< HEAD
-.imagem-hemocentro {
-  width: 250px;
-  height: 180px;
-  object-fit: cover;
-}
-
-=======
->>>>>>> giu_html
 .info {
   padding: 20px;
   flex: 1;
@@ -148,60 +73,6 @@ body{
   background-color: #d60000;
 }
 
-<<<<<<< HEAD
-/* ESTOQUE */
-.estoque {
-  display: none;
-  background-color: #fff;
-  border-left: 4px solid #a30000;
-  border-radius: 0 0 10px 10px;
-  padding: 20px 40px;
-  margin: -10px 10% 20px 10%;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-  animation: abrir 0.4s ease;
-}
-
-.estoque.ativo {
-  display: block;
-}
-
-@keyframes abrir {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.estoque h3 {
-  color: #a30000;
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-
-.tipos div {
-  margin-bottom: 10px;
-}
-
-.tipos span {
-  display: inline-block;
-  width: 40px;
-  font-weight: bold;
-  color: #a30000;
-}
-
-.barra {
-  display: inline-block;
-  width: 70%;
-  height: 10px;
-  background-color: #ddd;
-  border-radius: 5px;
-  overflow: hidden;
-  vertical-align: middle;
-  margin-left: 5px;
-}
-
-.nivel {
-  height: 100%;
-  background-color: #a30000;
-=======
 .estoque {
   display: none !important; 
 }
@@ -381,5 +252,4 @@ body{
 
 .status-baixo {
   color: #D0021B; /* Vermelho */
->>>>>>> giu_html
 }
