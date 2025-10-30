@@ -1,0 +1,185 @@
+// registro de cadastro do Usuario
+const cadastroUser = document.getElementById("cadastro-usuario");
+// verifica se formUser existe na atual pagina
+if (cadastroUser) {
+  const nome = document.getElementById("nome");
+  const hintNome = document.getElementById("hintNome"); // se houver a opcao de dica
+  const cpfCnpj = document.getElementById("cpf_cnpj");
+  const hintCpfCnpj = document.getElementById("hint_cpf_cnpj");
+  const email = document.getElementById("email");
+  const hintEmail = document.getElementById("hintEmail");
+  const senha = document.getElementById("senha");
+  const hintSenha = document.getElementById("hintSenha");
+  const telefone = document.getElementById("telefone");
+  const tipoUser = document.getElementById("tipoUser");
+  const dataNascimento = document.getElementById("dataNascimento");
+  const tipoSangue = document.getElementById("tipoSangue");
+  const termos = document.getElementById("termos");
+  const hintTermos = document.getElementById("hintTermos");
+  const bar = document.getElementById("bar");
+  const sumarioErros = document.getElementById("sumarioErros");
+  const send = document.getElementById("btnEnviar");
+  let ativo = true; // por padrao eh true
+
+  // data atual do cadastro
+  const hoje = new Date();
+  const dia = String(hoje.getDate()).padStart(2, "0");
+  const mes = String(hoje.getMonth() + 1).padStart(2, "0");
+  const ano = hoje.getFullYear();
+  const dCadastro = `${ano}-${mes}-${dia}`; // formato ISO pra facilitar backend
+
+  const reMail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const reCpfCnpj =
+    /^(\d{3}\.?\d{3}\.?\d{3}-?\d{2}|\d{2}\.?\d{3}\.?\d{3}\/?\d{4}-?\d{2})$/; // aceita ou cpf ou cnpj
+
+  const vNome = (v) => v.trim().length >= 3;
+  const vMail = (v) => reMail.test(v.trim());
+  const vTerm = (v) => v === true;
+  const vCpfCnjpj = (v) => v.test(v.trim());
+
+  function scoreSenha(v) {
+    let p = 0;
+    if (v.length >= 8) p += 30;
+    if (/[A-Z]/.test(v)) p += 20;
+    if (/[a-z]/.test(v)) p += 20;
+    if (/\d/.test(v)) p += 15;
+    if (/[^A-Za-z0-9]/.test(v)) p += 15;
+    return Math.min(p, 100);
+  }
+
+  function setEstado(campo, hintElemento, ok, msgOK, msgERRO) {
+    campo.classList.toggle("ok", ok);
+    campo.classList.toggle("erro", !ok);
+    campo.setAttribute("aria-invalid", String(!ok));
+    hintElemento.textContent = ok ? msgOK : msgERRO;
+  }
+
+  function setBarra(pct) {
+    bar.style.width = pct + "%";
+    bar.className = "";
+    if (pct < 40) bar.classList.add("fraca");
+    else if (pct < 80) bar.classList.add("media");
+    else bar.classList.add("forte");
+  }
+
+  function revalidar() {
+    const okNome = vNome(nome.value);
+    const okCpfCnpj = vCpfCnjpj(cpfCnpj.value);
+    const okEmail = vMail(email.value);
+    const pts = scoreSenha(senha.value);
+    const okSenha = pts >= 40;
+    const okTermos = vTerm(termos.checked);
+
+    setEstado(nome, hintNome, okNome, "", "Mínimo 3 caracteres.");
+    setEstado(
+      cpfCnpj,
+      hintCpfCnpj,
+      okCpfCnpj,
+      "",
+      "Cpf ou cnpj recebem somente número."
+    );
+    setEstado(email, hintEmail, okEmail, "", "Ex.: exemplo@dominio.com");
+    setBarra(pts);
+    setEstado(
+      senha,
+      hintSenha,
+      okSenha,
+      "Senha adequada.",
+      "Use 8+ chars, nº e símbolos."
+    );
+    setEstado(
+      termos,
+      hintTermos,
+      okTermos,
+      "Termos aceitos.",
+      "Marque para continuar."
+    );
+
+    const erros = [];
+    if (!okNome) erros.push("Nome curto.");
+    if (!okCpfCnpj) erros.push("Cpf ou Cnpj inválido.");
+    if (!okEmail) erros.push("E-mail inválido.");
+    if (!okSenha) erros.push("Senha fraca.");
+    if (!okTermos) erros.push("Termos não aceitos.");
+    sumarioErros.textContent = erros.join(" ");
+
+    const tudoOK = okNome && okCpfCnpj && okEmail && okSenha && okTermos;
+    send.disabled = !tudoOK;
+    return tudoOK;
+  }
+
+  // Revalidação ao digitar
+  cadastroUser.addEventListener("input", revalidar);
+
+  // Envio do formulário
+  cadastroUser.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    if (!revalidar()) return;
+
+    const dados = {
+      nome: nome.value.trim(),
+
+      email: email.value.trim(),
+      senha: senha.value,
+      telefone: telefone.value.trim(),
+      tipoUser: tipoUser.value,
+      dataNascimento: dataNascimento.value,
+      tipoSangue: tipoSangue.value,
+      dCadastro: dCadastro,
+      ativo: ativo, // por padrao, o ativo eh "true"
+    };
+
+    // aqui eh pra lancar pro python/flask
+    try {
+      const resp = await fetch("/cadastroUser", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dados),
+      });
+
+      const res = await resp.json();
+      if (res.ok) {
+        alert("Usuário cadastrado com sucesso!");
+        cadastroUser.reset();
+      } else {
+        alert("Erro: " + res.msg);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Erro de conexão com o servidor.");
+    }
+  });
+}
+
+const loginUser = document.getElementById("login");
+
+if (loginUser) {
+  const tokenFake =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30";
+
+  // secret ==> a-string-secret-at-least-256-bits-long
+  loginBtn.addEventListener("click", () => {
+    const email = email.value;
+    const senha = senha.value;
+    if (email && senha) {
+      localStorage.setItem("token", tokenFake);
+      mensagem.textContent = "Login bem-sucedido!";
+    } else {
+      // ver depois com o bd
+      mensagem.textContent = "Preencha e-mail e senha.";
+    }
+  });
+  acessarBtn.addEventListener("click", () => {
+    const token = localStorage.getItem("token");
+    mensagem.textContent = token
+      ? "Acesso permitido! Token encontrado."
+      : "Acesso negado. Faça login.";
+  });
+
+  // essa parte tem que ficar ligada ao logout do usuario
+  // logoutBtn.addEventListener("click", () => {
+  //   localStorage.removeItem("token");
+  //   mensagem.textContent = "Logout realizado.";
+  // });
+}

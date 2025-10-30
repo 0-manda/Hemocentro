@@ -1,0 +1,2 @@
+pode descartar este txt depois.
+O flask precisa encontrar a pasta static (por padrão) para ter comunicação com os scripts
