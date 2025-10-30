@@ -40,6 +40,7 @@ body{
   background-color: darkred;
   margin: 0;
   width: 100%;
+  height: 100%;
   padding: 20px 0;
   text-align: center;
   color: white;
@@ -57,11 +58,11 @@ body{
 .cor_secundaria{
  
   display:grid;
-   grid-template-columns: 50% 50%;
+  grid-template-columns: 50% 50%;
   background-color: BurlyWood;
   margin:0;
-  height: 48.70vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
 }
 
 
@@ -87,17 +88,17 @@ body{
 }
 
 .forms {
-  background-color:aquamarine;
+  background-color:;
   color: darkred;
-  top:10;
-  left: 800px;
+  top:10%;
+  left: 8%;
   font-size: 20px;
   font-family: verdana, arial;
   margin-left: 20%;
   margin-top:5%;
 }
 .informativo{
-  background-color: blue;
+  background-color: ;
 }
 .forms input{
   
@@ -110,7 +111,7 @@ body{
 }
 
 #mensagem {
-  height: 100px;
+  height: 80px;
   width: 350px;
   margin-right: 10%;
   border-radius: 5px;
@@ -133,8 +134,8 @@ body{
 
 .cor_secundaria a {
   position: absolute;
-  bottom: 50%;        
-  left: 40%;            
+  bottom: 1%;        
+  right: 16%;            
   transform: translateX(-50%); 
   background-color: rgba(139); 
   color: white;
