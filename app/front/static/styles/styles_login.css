@@ -1,4 +1,3 @@
-/* Box-sizing universal para evitar overflow causado por padding/border */
 * {
   box-sizing: border-box;
 }
@@ -12,10 +11,8 @@ body {
   min-height: 100vh;
   line-height: 1.5;
   font-family: verdana, arial;
-  overflow-x: hidden; /* Previne scroll horizontal inesperado */
+  overflow-x: hidden;
 }
-
-/* ==================== HEADER ==================== */
 
 .header_topo {
   margin: 0;
@@ -52,29 +49,25 @@ nav[aria-label="Navegação Principal"] {
   background-color: darkred;
 }
 
-/* ==================== MAIN E CONTAINER ==================== */
-
 main {
   background-color: white;
-  flex-grow: 1; /* Permite que o main cresça */
-  display: flex; /* Main controla o container */
+  flex-grow: 1;
+  display: flex;
 }
 
 .container {
   display: flex;
-  min-height: 100%; /* Garante que ocupe todo o espaço do main */
+  min-height: 100%;
   margin: 0;
   background-color: white;
   flex-grow: 1;
 }
 
-/* ==================== BLOCO LATERAL VERMELHO ==================== */
-
 .bloco {
   background-color: red;
   width: 50vw;
   margin: 0;
-  min-height: 100%; /* Garante que cubra todo o container */
+  min-height: 100%;
 }
 
 #a1 {
@@ -87,13 +80,11 @@ main {
   margin: 0;
 }
 
-/* ==================== ÁREA DE LOGIN ==================== */
-
 .login {
   width: 50vw;
   display: flex;
-  justify-content: center; /* Centraliza horizontalmente */
-  align-items: center; /* Centraliza verticalmente */
+  justify-content: center;
+  align-items: center; 
   margin: 0;
   padding: 20px;
   background-color: white;
@@ -115,8 +106,6 @@ main {
   text-align: center;
   font-size: 50px;
 }
-
-/* ==================== FORMULÁRIO ==================== */
 
 .login form {
   display: flex;
@@ -146,8 +135,6 @@ main {
   background-color: red;
 }
 
-/* ==================== BOTÃO COLABORADOR ==================== */
-
 .colab {
   background-color: darkred;
   color: white;
@@ -169,8 +156,6 @@ main {
   background-color: red;
 }
 
-/* ==================== EXTRAS (LINKS AUXILIARES) ==================== */
-
 .extras {
   display: flex;
   justify-content: space-between;
@@ -178,8 +163,6 @@ main {
   font-size: 14px;
   width: 100%;
 }
-
-/* ==================== ITENS ADICIONAIS ==================== */
 
 .iten_1 {
   text-align: center;
@@ -191,8 +174,6 @@ main {
   margin-top: 30px;
 }
 
-/* ==================== LOGOS E LINKS SOCIAIS ==================== */
-
 .logoslinks {
   display: flex;
   justify-content: center;
@@ -203,8 +184,6 @@ main {
   height: 100%;
   background-color: white;
 }
-
-/* ==================== FOOTER ==================== */
 
 footer {
   background-color: red;
@@ -239,7 +218,7 @@ footer nav a:hover {
   text-decoration: underline;
 }
 
-/* ==================== RESPONSIVIDADE - TABLET (até 768px) ==================== */
+/* responsividade*/
 
 @media (max-width: 768px) {
   .container {
@@ -279,8 +258,6 @@ footer nav a:hover {
     margin-top: 30px;
   }
 }
-
-/* ==================== RESPONSIVIDADE - MOBILE (até 480px) ==================== */
 
 @media (max-width: 480px) {
   body {

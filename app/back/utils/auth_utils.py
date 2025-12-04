@@ -18,48 +18,35 @@ TOKEN_EXPIRATION_HOURS = 24
 def mascara_cnpj(cnpj: str) -> str:
     if not cnpj:
         return "N/A"
-    
     num = only_numbers(cnpj)
     if len(num) == 14:
         return f"**.***.***/0001-{num[10:]}"
     return "***"
 
 def validar_cpf_cnpj_usuario(cpf: str, cnpj: str, tipo_usuario: str):
-    """
-    Valida documentos de acordo com o tipo de usuário:
-    - Doador: CPF obrigatório, CNPJ não permitido
-    - Colaborador: CNPJ obrigatório, CPF opcional
-    """
     if tipo_usuario == 'colaborador':
         # CNPJ obrigatório
         if not cnpj:
             return False, "CNPJ é obrigatório para colaboradores"
         if not is_cnpj(cnpj):
             return False, "CNPJ inválido"
-        
         # CPF opcional - valida apenas se fornecido
         if cpf and not is_cpf(cpf):
             return False, "CPF inválido"
-        
         return True, ""
-    
     elif tipo_usuario == 'doador':
         # CPF obrigatório
         if not cpf:
             return False, "CPF é obrigatório para doadores"
         if not is_cpf(cpf):
             return False, "CPF inválido"
-        
         # CNPJ não permitido
         if cnpj:
             return False, "Doadores não podem ter CNPJ"
-        
         return True, ""
-    
     return False, "Tipo de usuário inválido"
 
 def validar_cnpj_hemocentro(cnpj: str) -> tuple[bool, str]:
-    """Valida CNPJ de hemocentro"""
     cnpj = (cnpj or '').strip()
     if not cnpj:
         return False, "CNPJ é obrigatório"
@@ -112,13 +99,11 @@ def token_required(f):
                     "success": False,
                     "message": "Formato de token inválido"
                 }), 401
-        
         if not token:
             return jsonify({
                 "success": False,
                 "message": "Token não fornecido, faça login."
             }), 401
-        
         try:
             current_user = verificar_token(token)
             if not current_user:
@@ -126,21 +111,17 @@ def token_required(f):
                     "success": False,
                     "message": "Token inválido ou expirado."
                 }), 401
-            
             usuario = UsuarioModel.buscar_por_id(current_user['id_usuario'])
-            
             if not usuario or not usuario.get('ativo', True):
                 return jsonify({
                     "success": False,
                     "message": "Usuário inválido ou inativo"
                 }), 403
-            
             g.current_user = usuario
             g.id_usuario = usuario['id_usuario']
             g.tipo_usuario = usuario['tipo_usuario']
             g.nome = usuario['nome']
             g.email = usuario['email']
-            
             if usuario['tipo_usuario'] == 'colaborador':
                 cnpj = usuario.get('cnpj')
                 if cnpj:
@@ -150,14 +131,11 @@ def token_required(f):
                         g.id_hemocentro = hemocentro['id_hemocentro']
                         g.cnpj_hemocentro = cnpj
                         g.nome_hemocentro = hemocentro['nome']
-                
-                # Adicionar CPF do colaborador se existir
+                # adicionar CPF do colaborador se existir
                 if usuario.get('cpf'):
                     g.cpf = usuario.get('cpf')
-
             elif usuario['tipo_usuario'] == 'doador':
                 g.cpf = usuario.get('cpf')
-                
         except Exception as e:
             print(f"[ERRO] token_required: {str(e)}")
             return jsonify({
@@ -199,7 +177,6 @@ def requer_doador(f):
             }), 403
         return f(current_user, *args, **kwargs)
     return decorated
-
 
 # compatibilidade (talvez tenha usado isso no codigo sem querer)
 hemocentro_required = requer_colaborador

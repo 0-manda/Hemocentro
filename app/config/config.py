@@ -23,7 +23,7 @@ def get_db_connection():
 get_db_manager = get_db_connection
 
 class Config:
-    #Api email Brevo
+    #api email Brevo
     BREVO_API_KEY = os.getenv('BREVO_API_KEY')
     EMAIL_FROM = os.getenv('EMAIL_FROM', 'Sistema Hemocentro <amolvr.piton@gmail.com>')
     EMAIL_ADMIN = os.getenv('EMAIL_ADMIN', 'amolvr.piton@gmail.com')
@@ -36,6 +36,6 @@ class Config:
     SECRET_KEY = os.getenv('SECRET_KEY', 'sua-chave-secreta-aqui')
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', 'sua-chave-jwt-aqui')
     
-    #Config geral
+    #config geral
     DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
     ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')

@@ -23,15 +23,12 @@ document.addEventListener("DOMContentLoaded", () => {
 async function carregarDadosPerfil() {
   try {
     console.log("Iniciando busca de perfil...");
-
     const token = localStorage.getItem("token");
-
     if (!token) {
       console.warn("Sem token encontrado. Redirecionando...");
       window.location.href = "/login";
       return;
     }
-
     const resp = await fetch("/api/perfil", {
       method: "GET",
       headers: {
@@ -39,9 +36,7 @@ async function carregarDadosPerfil() {
         Authorization: `Bearer ${token}`,
       },
     });
-
     console.log("Passou da primeira api");
-
     if (!resp.ok) {
       console.error("Erro na resposta do servidor:", resp.status);
       if (resp.status === 401 || resp.status === 403) {
@@ -52,35 +47,26 @@ async function carregarDadosPerfil() {
     }
 
     const json = await resp.json();
-
     if (json.success) {
       const dados = json.usuario;
       console.log("Entrou no success de coleta de dados");
-
       const nomeUser = document.getElementById("campo-nome");
       if (nomeUser) nomeUser.textContent = dados.nome;
-
       const emailUser = document.getElementById("campo-email");
       if (emailUser) emailUser.textContent = dados.email;
-
       const tipoSangue = document.getElementById("tipo-sangue");
       if (tipoSangue) {
         tipoSangue.innerHTML = `<b>${
           dados.tipo_sanguineo || "Não informado"
         }</b>`;
       }
-
       const idUser = document.getElementById("id_user");
       if (idUser) {
         idUser.textContent = `ID de Usuário: ${dados.id_usuario}`;
       }
-
-      // Renderizar histórico de doações
       if (dados.tipo_usuario === "doador" && dados.historico_doacoes) {
         renderizarEstatisticasDoacoes(dados.historico_doacoes.estatisticas);
         renderizarListaDoacoes(dados.historico_doacoes.doacoes);
-
-        // Injetar formulário de preferências para doadores
         injetarFormularioPreferencias();
       }
     } else {
@@ -91,24 +77,18 @@ async function carregarDadosPerfil() {
   }
 }
 
-// ===== FUNÇÃO PARA RENDERIZAR ESTATÍSTICAS =====
+// renderixar estatisticas
 function renderizarEstatisticasDoacoes(stats) {
-  // Container das estatísticas (você precisa criar este elemento no HTML)
   const containerStats = document.getElementById("estatisticas-doacoes");
-
   if (!containerStats) {
     console.warn("Container 'estatisticas-doacoes' não encontrado no HTML");
     return;
   }
-
-  // Formatar próxima doação
   let proximaDoacao = "Não há doações registradas";
   let statusDoacao = "";
-
   if (stats.proxima_doacao_permitida) {
     const dataProxima = new Date(stats.proxima_doacao_permitida);
     proximaDoacao = dataProxima.toLocaleDateString("pt-BR");
-
     if (stats.pode_doar_agora) {
       statusDoacao =
         '<span style="color: #c41e3a; font-weight: bold;">Você já pode doar!</span>';
@@ -116,8 +96,7 @@ function renderizarEstatisticasDoacoes(stats) {
       statusDoacao =
         '<span style="color: #999; font-weight: bold;">Aguarde até a data permitida</span>';
     }
-  }
-
+  }/**/
   containerStats.innerHTML = `
     <div class="stats-doacoes" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 20px 0;">
       
@@ -126,32 +105,27 @@ function renderizarEstatisticasDoacoes(stats) {
         <div style="font-size: 32px; font-weight: bold; margin: 10px 0;">${stats.total_doacoes}</div>
         <div style="font-size: 12px; opacity: 0.8;">Você é incrível!</div>
       </div>
-
       <div class="stat-card" style="background: #c41e3a; color: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
         <div style="font-size: 14px; opacity: 0.9;">Volume Doado</div>
         <div style="font-size: 32px; font-weight: bold; margin: 10px 0;">${stats.total_litros}L</div>
         <div style="font-size: 12px; opacity: 0.8;">${stats.total_ml}ml no total</div>
       </div>
-
       <div class="stat-card" style="background: #666; color: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
         <div style="font-size: 14px; opacity: 0.9;">Próxima Doação</div>
         <div style="font-size: 24px; font-weight: bold; margin: 10px 0;">${proximaDoacao}</div>
         <div style="font-size: 12px;">${statusDoacao}</div>
       </div>
-
     </div>
   `;
 }
 
-// ===== FUNÇÃO PARA RENDERIZAR LISTA DE DOAÇÕES =====
+// lista de doações
 function renderizarListaDoacoes(doacoes) {
   const containerLista = document.getElementById("lista-doacoes");
-
   if (!containerLista) {
     console.warn("Container 'lista-doacoes' não encontrado no HTML");
     return;
   }
-
   if (!doacoes || doacoes.length === 0) {
     containerLista.innerHTML = `
       <div style="text-align: center; padding: 40px; color: #666;">
@@ -161,8 +135,6 @@ function renderizarListaDoacoes(doacoes) {
     `;
     return;
   }
-
-  // Criar tabela ou cards
   let htmlDoacoes = `
     <div style="margin: 20px 0;">
       <h3 style="color: #c41e3a; margin-bottom: 15px;">Histórico de Doações</h3>
@@ -178,7 +150,6 @@ function renderizarListaDoacoes(doacoes) {
         </thead>
         <tbody>
   `;
-
   doacoes.forEach((doacao, index) => {
     const dataDoacao = new Date(doacao.data_doacao).toLocaleDateString("pt-BR");
     const tipoDoacao = formatarTipoDoacao(doacao.tipo_doacao);
@@ -186,10 +157,7 @@ function renderizarListaDoacoes(doacoes) {
     const local =
       doacao.nome_hemocentro || `Hemocentro ID: ${doacao.id_hemocentro}`;
     const observacoes = doacao.observacoes || "-";
-
-    // Alterna cores das linhas
     const bgColor = index % 2 === 0 ? "#f9f9f9" : "white";
-
     htmlDoacoes += `
       <tr style="background: ${bgColor}; border-bottom: 1px solid #eee;">
         <td style="padding: 12px;">${dataDoacao}</td>
@@ -200,17 +168,15 @@ function renderizarListaDoacoes(doacoes) {
       </tr>
     `;
   });
-
   htmlDoacoes += `
         </tbody>
       </table>
     </div>
   `;
-
   containerLista.innerHTML = htmlDoacoes;
 }
 
-// Formatar tipo de doação
+// formatar tipo de doação
 function formatarTipoDoacao(tipo) {
   const tipos = {
     sangue_total: "Sangue Total",
@@ -221,7 +187,7 @@ function formatarTipoDoacao(tipo) {
   return tipos[tipo] || tipo;
 }
 
-// Injetar e gerenciar formulário de preferências
+// gerenciar preferencias
 function injetarFormularioPreferencias() {
   const containerPreferencias = document.getElementById(
     "formulario-preferencias"
@@ -230,7 +196,6 @@ function injetarFormularioPreferencias() {
     console.warn("Container 'formulario-preferencias' não encontrado no HTML");
     return;
   }
-
   const diasSemana = [
     "segunda",
     "terca",
@@ -241,7 +206,6 @@ function injetarFormularioPreferencias() {
     "domingo",
   ];
   const periodosDia = ["manha", "tarde", "noite"];
-
   // HTML do formulário
   let htmlFormulario = `
     <form id="form-preferencias" style="max-width: 600px; margin: 20px 0;">
@@ -250,7 +214,6 @@ function injetarFormularioPreferencias() {
         <h3 style="color: #c41e3a; margin-bottom: 15px;">Dias da Semana Preferidos</h3>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px;">
   `;
-
   diasSemana.forEach((dia) => {
     const diaFormatado = dia.charAt(0).toUpperCase() + dia.slice(1);
     htmlFormulario += `
@@ -260,7 +223,6 @@ function injetarFormularioPreferencias() {
       </label>
     `;
   });
-
   htmlFormulario += `
         </div>
       </div>
@@ -269,7 +231,6 @@ function injetarFormularioPreferencias() {
         <h3 style="color: #c41e3a; margin-bottom: 15px;">Períodos Preferidos</h3>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px;">
   `;
-
   periodosDia.forEach((periodo) => {
     const periodoFormatado =
       periodo === "manha" ? "Manhã" : periodo === "tarde" ? "Tarde" : "Noite";
@@ -280,11 +241,9 @@ function injetarFormularioPreferencias() {
       </label>
     `;
   });
-
   htmlFormulario += `
         </div>
       </div>
-
       <div style="display: flex; gap: 12px; margin-top: 30px;">
         <button type="submit" class="btn-primario" style="flex: 1; padding: 12px; background: #c41e3a; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.3s;">
           Salvar Preferências
@@ -293,25 +252,18 @@ function injetarFormularioPreferencias() {
           Carregar Atuais
         </button>
       </div>
-
       <div id="mensagem-preferencias" style="margin-top: 15px; padding: 12px; border-radius: 6px; display: none; text-align: center; font-weight: bold;"></div>
     </form>
   `;
-
   containerPreferencias.innerHTML = htmlFormulario;
-
-  // Adicionar event listeners
   const formPreferencias = document.getElementById("form-preferencias");
   const btnCarregarPrefs = document.getElementById("btn-carregar-prefs");
-
   formPreferencias.addEventListener("submit", salvarPreferencias);
   btnCarregarPrefs.addEventListener("click", carregarPreferenciasAtuais);
-
-  // Carregar preferências ao abrir a página
   carregarPreferenciasAtuais();
 }
 
-// Carregar e pré-selecionar preferências atuais
+// pre seleciona preferencias
 async function carregarPreferenciasAtuais() {
   try {
     const token = localStorage.getItem("token");
@@ -319,7 +271,6 @@ async function carregarPreferenciasAtuais() {
       console.warn("Sem token para carregar preferências");
       return;
     }
-
     const resp = await fetch("/api/minhas_preferencias", {
       method: "GET",
       headers: {
@@ -327,17 +278,13 @@ async function carregarPreferenciasAtuais() {
         Authorization: `Bearer ${token}`,
       },
     });
-
     if (!resp.ok) {
       console.error("Erro ao carregar preferências:", resp.status);
       return;
     }
-
     const json = await resp.json();
     if (json.success && json.data) {
       const dados = json.data;
-
-      // Pré-selecionar dias
       if (dados.dias_preferencia && Array.isArray(dados.dias_preferencia)) {
         dados.dias_preferencia.forEach((dia) => {
           const checkbox = document.querySelector(
@@ -346,8 +293,6 @@ async function carregarPreferenciasAtuais() {
           if (checkbox) checkbox.checked = true;
         });
       }
-
-      // Pré-selecionar períodos
       if (
         dados.periodos_preferencia &&
         Array.isArray(dados.periodos_preferencia)
@@ -359,7 +304,6 @@ async function carregarPreferenciasAtuais() {
           if (checkbox) checkbox.checked = true;
         });
       }
-
       console.log("Preferências carregadas:", dados);
     }
   } catch (err) {
@@ -367,28 +311,21 @@ async function carregarPreferenciasAtuais() {
   }
 }
 
-// Enviar preferências via fetch
+// enviar preferências via fetch
 async function salvarPreferencias(event) {
   event.preventDefault();
-
   try {
     const token = localStorage.getItem("token");
     if (!token) {
       alert("Faça login para salvar suas preferências.");
       return;
     }
-
-    // Coletar dias selecionados
     const diasSelecionados = Array.from(
       document.querySelectorAll('input[name="dias_preferencia"]:checked')
     ).map((checkbox) => checkbox.value);
-
-    // Coletar períodos selecionados
     const periodosSelecionados = Array.from(
       document.querySelectorAll('input[name="periodos_preferencia"]:checked')
     ).map((checkbox) => checkbox.value);
-
-    // Validar se há seleção
     if (diasSelecionados.length === 0) {
       mostrarMensagemPreferencias(
         "Selecione pelo menos um dia da semana",
@@ -396,7 +333,6 @@ async function salvarPreferencias(event) {
       );
       return;
     }
-
     if (periodosSelecionados.length === 0) {
       mostrarMensagemPreferencias(
         "Selecione pelo menos um período do dia",
@@ -404,16 +340,11 @@ async function salvarPreferencias(event) {
       );
       return;
     }
-
-    // Preparar dados
     const dados = {
       dias_preferencia: diasSelecionados,
       periodos_preferencia: periodosSelecionados,
     };
-
     console.log("Enviando preferências:", dados);
-
-    // Enviar via fetch
     const resp = await fetch("/api/minhas_preferencias", {
       method: "POST",
       headers: {
@@ -422,9 +353,7 @@ async function salvarPreferencias(event) {
       },
       body: JSON.stringify(dados),
     });
-
     const json = await resp.json();
-
     if (json.success) {
       mostrarMensagemPreferencias(
         "Preferências salvas com sucesso!",
@@ -441,11 +370,10 @@ async function salvarPreferencias(event) {
   }
 }
 
-// Exibir mensagem de feedback
+// mensagem de feedback
 function mostrarMensagemPreferencias(mensagem, tipo) {
   const divMensagem = document.getElementById("mensagem-preferencias");
   if (!divMensagem) return;
-
   divMensagem.textContent = mensagem;
   divMensagem.style.display = "block";
   divMensagem.style.backgroundColor =
@@ -455,13 +383,11 @@ function mostrarMensagemPreferencias(mensagem, tipo) {
     tipo === "success" ? "#c3e6cb" : "#f5c6cb"
   }`;
 
-  // Auto-ocultar após 5 segundos
+  // ocultar após 5 segundos
   setTimeout(() => {
     divMensagem.style.display = "none";
   }, 5000);
 }
-
-///
 
 async function amostragemDePagina() {
   try {
@@ -472,7 +398,6 @@ async function amostragemDePagina() {
       alert("Faça login para ver seus agendamentos.");
       return;
     }
-
     const resp = await fetch("/api/perfil", {
       method: "GET",
       headers: {
@@ -481,14 +406,11 @@ async function amostragemDePagina() {
       },
     });
     console.warn("[perfil] amostragemDePagina: iniciando");
-
     const jsonPerfil = await resp.json();
-
     if (jsonPerfil.success) {
       console.log("Encontrou no sucesso");
       const dados = jsonPerfil.usuario;
       const tipoUser = dados.tipo_usuario;
-
       if (tipoUser === "doador") {
         console.log("Encontrou o doador");
         document
@@ -498,7 +420,6 @@ async function amostragemDePagina() {
           "parte-escondida-doador"
         );
         if (containerDoador) containerDoador.classList.remove("esconda");
-
         const resp = await fetch("/api/meus-agendamentos?futuro=true", {
           method: "GET",
           headers: {
@@ -506,57 +427,73 @@ async function amostragemDePagina() {
             Authorization: `Bearer ${token}`,
           },
         });
-
         if (!resp.ok) {
           console.error("Erro na busca");
           if (listaContainer)
             listaContainer.innerHTML =
-              "<tr><td>Erro ao carregar agendamentos.</td></tr>";
+              "<tr><td colspan='4'>Erro ao carregar agendamentos.</td></tr>";
           return;
         }
-
         const json = await resp.json();
         if (listaContainer) listaContainer.innerHTML = "";
-
-        if (json.success) {
+        if (json.success && json.agendamentos && json.agendamentos.length > 0) {
           json.agendamentos.forEach((agendamento) => {
             const dataObj = new Date(agendamento.data_hora);
             const dataFormatada = dataObj.toLocaleDateString("pt-BR");
-            const local =
-              agendamento.nome_hemocentro ||
-              `Hemocentro ID: ${agendamento.id_hemocentro}`;
+            const horaFormatada = dataObj.toLocaleTimeString("pt-BR", {
+              hour: '2-digit',
+              minute: '2-digit'
+            });
+            const tipoDoacao = formatarTipoDoacao(agendamento.tipo_sangue_doado || 'sangue_total');
+            const podeCancelar = agendamento.status === 'pendente' || agendamento.status === 'confirmado';
+            const acaoHTML = podeCancelar 
+              ? `<button 
+                  onclick="cancelarAgendamentoDoador(${agendamento.id_agendamento})"
+                  style="
+                    padding: 8px 16px;
+                    background: #FFD700;
+                    color: white;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    font-size: 14px;
+                    font-weight: bold;
+                    transition: background 0.3s;
+                  "
+                >
+                  Cancelar
+                </button>`
+              : `<span style="color: #999; font-size: 12px;">Não disponível</span>`;
 
             const cardHTML = `
             <tr class="card-agendamento" style="border: 1px solid #ccc; padding: 15px; margin-bottom: 10px; border-radius: 8px;">
               <td data-label="Data">${dataFormatada}</td>
-              <td data-label="Local">${local}</td>
-              <td data-label="Tipo">Sangue Total</td>
-              <td data-label="Status" class="status-concluido">${agendamento.status}</td>
+              <td data-label="Horário">${horaFormatada}</td>
+              <td data-label="Doação">${tipoDoacao}</td>
+              <td data-label="Ação">${acaoHTML}</td>
             </tr>
-                `;
-
+            `;
             if (listaContainer) listaContainer.innerHTML += cardHTML;
           });
         } else {
-          if (listaContainer)
+          if (listaContainer) {
             listaContainer.innerHTML = `
-        <tr>
-            <td>
-                Você não tem agendamentos futuros.
-            </td>
-        </tr>
-    `;
+              <tr>
+                <td colspan="4" style="text-align: center; padding: 20px;">
+                  Você não tem agendamentos futuros.
+                </td>
+              </tr>
+            `;
+          }
         }
+        
       } else {
-        // É um colaborador
         const ParteFunc = document.getElementById("parte-escondida-doador");
         if (ParteFunc) ParteFunc.classList.add("esconda");
         const containerFunc = document.getElementById(
           "parte-escondida-funcionario"
         );
         if (containerFunc) containerFunc.classList.remove("esconda");
-
-        // Carregar agendamentos para colaborador
         carregarAgendamentosColaborador();
       }
     }
@@ -565,11 +502,9 @@ async function amostragemDePagina() {
   }
 }
 
-// ===== NOVAS FUNÇÕES: GERENCIAMENTO DE AGENDAMENTOS COLABORADOR =====
-
-let filtroAtualAgendamentos = 'pendente'; // Filtro padrão
-
-// Carregar agendamentos do hemocentro
+// gerenciamento de agendamentos
+let filtroAtualAgendamentos = 'pendente';
+// carregar agendamentos do hemocentro
 async function carregarAgendamentosColaborador(status = null) {
   try {
     const token = localStorage.getItem("token");
@@ -577,7 +512,6 @@ async function carregarAgendamentosColaborador(status = null) {
       alert("Faça login para ver os agendamentos.");
       return;
     }
-
     const statusQuery = status ? `?status=${status}` : '';
     const resp = await fetch(`/api/agendamentos${statusQuery}`, {
       method: "GET",
@@ -586,15 +520,12 @@ async function carregarAgendamentosColaborador(status = null) {
         Authorization: `Bearer ${token}`,
       },
     });
-
     if (!resp.ok) {
       console.error("Erro ao buscar agendamentos:", resp.status);
       mostrarErroAgendamentos("Erro ao carregar agendamentos");
       return;
     }
-
     const json = await resp.json();
-    
     if (json.success && json.agendamentos) {
       renderizarAgendamentosColaborador(json.agendamentos);
     } else {
@@ -606,15 +537,13 @@ async function carregarAgendamentosColaborador(status = null) {
   }
 }
 
-// Renderizar tabela de agendamentos
+// renderizar tabela de agendamentos
 function renderizarAgendamentosColaborador(agendamentos) {
   const tbody = document.getElementById("lista-agendamentos-colaborador");
-  
   if (!tbody) {
     console.warn("Tbody 'lista-agendamentos-colaborador' não encontrado");
     return;
   }
-
   if (agendamentos.length === 0) {
     tbody.innerHTML = `
       <tr>
@@ -625,9 +554,7 @@ function renderizarAgendamentosColaborador(agendamentos) {
     `;
     return;
   }
-
   let htmlLinhas = '';
-  
   agendamentos.forEach((agendamento) => {
     const dataObj = new Date(agendamento.data_hora);
     const dataFormatada = dataObj.toLocaleDateString("pt-BR");
@@ -635,14 +562,11 @@ function renderizarAgendamentosColaborador(agendamentos) {
       hour: '2-digit',
       minute: '2-digit'
     });
-    
     const tipoDoacao = formatarTipoDoacao(agendamento.tipo_sangue_doado || 'sangue_total');
     const nomeDoador = agendamento.nome_usuario || 'Usuário não identificado';
     const statusFormatado = formatarStatusAgendamento(agendamento.status);
-    
-    // Determinar quais ações exibir baseado no status
+    // determinar quais ações exibir baseado no status
     const acoesHTML = gerarBotoesAcao(agendamento);
-
     htmlLinhas += `
       <tr style="border-bottom: 1px solid #eee;">
         <td style="padding: 12px;">#${agendamento.id_agendamento}</td>
@@ -657,11 +581,9 @@ function renderizarAgendamentosColaborador(agendamentos) {
       </tr>
     `;
   });
-
   tbody.innerHTML = htmlLinhas;
 }
 
-// Formatar status com badge colorido
 function formatarStatusAgendamento(status) {
   const statusMap = {
     'pendente': { texto: 'Pendente', cor: '#ffc107' },
@@ -670,9 +592,7 @@ function formatarStatusAgendamento(status) {
     'cancelado': { texto: 'Cancelado', cor: '#6c757d' },
     'nao_compareceu': { texto: 'Não Compareceu', cor: '#dc3545' }
   };
-
   const info = statusMap[status] || { texto: status, cor: '#666' };
-  
   return `<span style="
     background: ${info.cor};
     color: white;
@@ -684,14 +604,11 @@ function formatarStatusAgendamento(status) {
   ">${info.texto}</span>`;
 }
 
-// Gerar botões de ação baseado no status
+// botões de ação baseado no status
 function gerarBotoesAcao(agendamento) {
   const id = agendamento.id_agendamento;
   const status = agendamento.status;
-
   let botoes = '';
-
-  // Agendamentos pendentes ou confirmados podem ser marcados como realizado ou não compareceu
   if (status === 'pendente' || status === 'confirmado') {
     botoes = `
       <div style="display: flex; gap: 8px; flex-wrap: wrap;">
@@ -736,23 +653,20 @@ function gerarBotoesAcao(agendamento) {
   } else if (status === 'realizado' || status === 'nao_compareceu' || status === 'cancelado') {
     botoes = `<span style="color: #999; font-size: 12px;">Sem ações disponíveis</span>`;
   }
-
   return botoes;
 }
 
-// Marcar agendamento como realizado
+// marcar agendamento como realizado
 async function marcarComoRealizado(idAgendamento) {
   if (!confirm('Confirmar que a doação foi realizada?')) {
     return;
   }
-
   try {
     const token = localStorage.getItem("token");
     if (!token) {
       alert("Faça login para realizar esta ação.");
       return;
     }
-
     const resp = await fetch(`/api/agendamentos/${idAgendamento}/realizar`, {
       method: "PATCH",
       headers: {
@@ -760,12 +674,9 @@ async function marcarComoRealizado(idAgendamento) {
         Authorization: `Bearer ${token}`,
       },
     });
-
     const json = await resp.json();
-
     if (json.success) {
       mostrarMensagemAcaoAgendamento("Doação marcada como realizada!", "success");
-      // Recarregar lista de agendamentos
       setTimeout(() => {
         carregarAgendamentosColaborador(filtroAtualAgendamentos === 'todos' ? null : filtroAtualAgendamentos);
       }, 1000);
@@ -778,19 +689,17 @@ async function marcarComoRealizado(idAgendamento) {
   }
 }
 
-// Marcar agendamento como não compareceu
+// agendamento como não compareceu
 async function marcarComoNaoCompareceu(idAgendamento) {
   if (!confirm('Confirmar que o doador não compareceu?')) {
     return;
   }
-
   try {
     const token = localStorage.getItem("token");
     if (!token) {
       alert("Faça login para realizar esta ação.");
       return;
     }
-
     const resp = await fetch(`/api/agendamentos/${idAgendamento}/nao-compareceu`, {
       method: "PATCH",
       headers: {
@@ -798,12 +707,9 @@ async function marcarComoNaoCompareceu(idAgendamento) {
         Authorization: `Bearer ${token}`,
       },
     });
-
     const json = await resp.json();
-
     if (json.success) {
       mostrarMensagemAcaoAgendamento("Agendamento marcado como não compareceu", "success");
-      // Recarregar lista de agendamentos
       setTimeout(() => {
         carregarAgendamentosColaborador(filtroAtualAgendamentos === 'todos' ? null : filtroAtualAgendamentos);
       }, 1000);
@@ -816,13 +722,11 @@ async function marcarComoNaoCompareceu(idAgendamento) {
   }
 }
 
-// Filtrar agendamentos por status
+// filtrar agendamentos por status
 function filtrarAgendamentos(status) {
-  // Atualizar estilo dos botões de filtro
   document.querySelectorAll('.btn-filtro').forEach(btn => {
     btn.classList.remove('btn-filtro-ativo');
   });
-  
   if (status === 'todos') {
     document.getElementById('filtro-todos').classList.add('btn-filtro-ativo');
     filtroAtualAgendamentos = 'todos';
@@ -842,23 +746,21 @@ function filtrarAgendamentos(status) {
   }
 }
 
-// Mostrar mensagem de feedback nas ações
+// mensagem de feedback nas ações
 function mostrarMensagemAcaoAgendamento(mensagem, tipo) {
   const divMensagem = document.getElementById("mensagem-agendamento-acao");
   if (!divMensagem) return;
-
   divMensagem.textContent = mensagem;
   divMensagem.style.display = "block";
   divMensagem.style.backgroundColor = tipo === "success" ? "#d4edda" : "#f8d7da";
   divMensagem.style.color = tipo === "success" ? "#155724" : "#721c24";
   divMensagem.style.border = `1px solid ${tipo === "success" ? "#c3e6cb" : "#f5c6cb"}`;
-
   setTimeout(() => {
     divMensagem.style.display = "none";
   }, 5000);
 }
 
-// Mostrar erro ao carregar agendamentos
+// erro ao carregar agendamentos
 function mostrarErroAgendamentos(mensagem) {
   const tbody = document.getElementById("lista-agendamentos-colaborador");
   if (tbody) {
@@ -872,8 +774,6 @@ function mostrarErroAgendamentos(mensagem) {
   }
 }
 
-// ===== FIM DAS NOVAS FUNÇÕES =====
-
 if (document.getElementById("parte-escondida-funcionario")) {
   const nomeCampanha = document.getElementById("nome-campanha");
   const descricao = document.getElementById("descricao");
@@ -882,7 +782,6 @@ if (document.getElementById("parte-escondida-funcionario")) {
   const objetivo = document.getElementById("objetivo");
   const inicio = document.getElementById("data-inicio");
   const fim = document.getElementById("data-fim");
-
   const cadastroCampanha = document.getElementById("campanha");
   if (cadastroCampanha) {
     cadastroCampanha.addEventListener("submit", async (event) => {
@@ -897,7 +796,6 @@ if (document.getElementById("parte-escondida-funcionario")) {
         quantidade_meta_litros: qntMeta.value,
         objetivo: objetivo.value.trim(),
       };
-
       try {
         const resp = await fetch("/api/cadastrar_campanha", {
           method: "POST",
@@ -907,7 +805,6 @@ if (document.getElementById("parte-escondida-funcionario")) {
           },
           body: JSON.stringify(dados),
         });
-
         const res = await resp.json();
         const hint = document.getElementById("hint-aviso");
         if (res.success) {
@@ -926,11 +823,10 @@ if (document.getElementById("parte-escondida-funcionario")) {
   }
 }
 
-// Modal para editar dados da conta
+// editar dados da conta
 function abrirModalEditarConta(usuarioDados) {
   const modalAntigo = document.getElementById("modal-editar-conta");
   if (modalAntigo) modalAntigo.remove();
-
   const modal = document.createElement("section");
   modal.id = "modal-editar-conta";
   modal.className = "modal-overlay";
@@ -946,7 +842,6 @@ function abrirModalEditarConta(usuarioDados) {
     align-items: center;
     z-index: 1000;
   `;
-
   const tipoSanguineoField =
     usuarioDados.tipo_usuario === "doador"
       ? `
@@ -966,16 +861,13 @@ function abrirModalEditarConta(usuarioDados) {
       </div>
     `
       : "";
-
   modal.innerHTML = `
     <article class="modal-content" style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto;">
       <header class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #c41e3a; padding-bottom: 15px;">
         <h2 style="color: #c41e3a; margin: 0;">Editar Conta</h2>
         <button class="btn-fechar" style="background: none; border: none; font-size: 28px; cursor: pointer; color: #999;">X</button>
       </header>
-      
       <form id="form-editar-conta" class="form-grid" style="display: grid; gap: 20px;">
-        
         <div class="form-row">
           <label for="edit-nome">Nome Completo</label>
           <input 
@@ -987,7 +879,6 @@ function abrirModalEditarConta(usuarioDados) {
             style="padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;"
           />
         </div>
-
         <div class="form-row">
           <label for="edit-telefone">Telefone</label>
           <input 
@@ -999,11 +890,8 @@ function abrirModalEditarConta(usuarioDados) {
             style="padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;"
           />
         </div>
-
         ${tipoSanguineoField}
-
         <div id="mensagem-edicao" style="margin-top: 15px; padding: 12px; border-radius: 6px; display: none; text-align: center; font-weight: bold;"></div>
-
         <div style="display: flex; gap: 12px; margin-top: 25px;">
           <button type="submit" class="btn-salvar" style="flex: 1; padding: 12px; background: #c41e3a; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.3s;">
             Salvar Alterações
@@ -1015,10 +903,7 @@ function abrirModalEditarConta(usuarioDados) {
       </form>
     </article>
   `;
-
   document.body.appendChild(modal);
-
-  // Event listeners
   modal
     .querySelector(".btn-fechar")
     .addEventListener("click", () => modal.remove());
@@ -1028,42 +913,34 @@ function abrirModalEditarConta(usuarioDados) {
   modal.addEventListener("click", (e) => {
     if (e.target === modal) modal.remove();
   });
-
   document
     .getElementById("form-editar-conta")
     .addEventListener("submit", salvarAlteracoesPerfil);
-
-  // Pré-preencher tipo sanguíneo
   if (usuarioDados.tipo_usuario === "doador" && usuarioDados.tipo_sanguineo) {
     document.getElementById("edit-tipo-sanguineo").value =
       usuarioDados.tipo_sanguineo;
   }
 }
 
-// Salvar alterações do perfil via fetch
+// slavar alterações do perfil via fetch
 async function salvarAlteracoesPerfil(event) {
   event.preventDefault();
-
   try {
     const token = localStorage.getItem("token");
     if (!token) {
       alert("Faça login para editar sua conta.");
       return;
     }
-
     const nome = document.getElementById("edit-nome").value.trim();
     const telefone = document.getElementById("edit-telefone").value.trim();
     const tipoSanguineoField = document.getElementById("edit-tipo-sanguineo");
     const tipoSanguineo = tipoSanguineoField
       ? tipoSanguineoField.value.trim()
       : null;
-
-    // Validações básicas
     if (!nome || nome.length < 3) {
       mostrarMensagemEdicao("Nome deve ter no mínimo 3 caracteres", "error");
       return;
     }
-
     if (nome.length > 200) {
       mostrarMensagemEdicao(
         "Nome muito longo (máximo 200 caracteres)",
@@ -1071,22 +948,16 @@ async function salvarAlteracoesPerfil(event) {
       );
       return;
     }
-
-    // Preparar dados para envio
     const dados = {};
     if (nome) dados.nome = nome;
     if (telefone) dados.telefone = telefone;
     if (tipoSanguineoField && tipoSanguineo)
       dados.tipo_sanguineo = tipoSanguineo;
-
     if (Object.keys(dados).length === 0) {
       mostrarMensagemEdicao("Nenhuma alteração para salvar", "error");
       return;
     }
-
     console.log("Enviando alterações:", dados);
-
-    // Enviar via fetch
     const resp = await fetch("/api/perfil", {
       method: "PUT",
       headers: {
@@ -1095,14 +966,10 @@ async function salvarAlteracoesPerfil(event) {
       },
       body: JSON.stringify(dados),
     });
-
     const json = await resp.json();
-
     if (json.success) {
       mostrarMensagemEdicao("Perfil atualizado com sucesso!", "success");
       console.log("Resposta do servidor:", json);
-
-      // Recarregar perfil após 1.5 segundos
       setTimeout(() => {
         window.location.href = "/perfil";
       }, 1500);
@@ -1116,11 +983,10 @@ async function salvarAlteracoesPerfil(event) {
   }
 }
 
-// Exibir mensagem de feedback na edição
+//mensagem de feedback na edição
 function mostrarMensagemEdicao(mensagem, tipo) {
   const divMensagem = document.getElementById("mensagem-edicao");
   if (!divMensagem) return;
-
   divMensagem.textContent = mensagem;
   divMensagem.style.display = "block";
   divMensagem.style.backgroundColor =
@@ -1129,21 +995,18 @@ function mostrarMensagemEdicao(mensagem, tipo) {
   divMensagem.style.border = `1px solid ${
     tipo === "success" ? "#c3e6cb" : "#f5c6cb"
   }`;
-
-  // Auto-ocultar após 5 segundos (a menos que seja sucesso)
   if (tipo !== "success") {
     setTimeout(() => {
       divMensagem.style.display = "none";
     }, 5000);
   }
 }
-
 document.addEventListener("DOMContentLoaded", () => {
   if (document.getElementById("meus-agendamentos")) {
     amostragemDePagina();
   }
 
-  // Configurar botão "Editar Conta"
+  // botão "Editar Conta"
   const btnEditarConta = document.getElementById("btn-editar-conta");
   if (btnEditarConta) {
     btnEditarConta.addEventListener("click", async () => {
@@ -1153,7 +1016,6 @@ document.addEventListener("DOMContentLoaded", () => {
           alert("Faça login para editar sua conta.");
           return;
         }
-
         const resp = await fetch("/api/perfil", {
           method: "GET",
           headers: {
@@ -1161,12 +1023,10 @@ document.addEventListener("DOMContentLoaded", () => {
             Authorization: `Bearer ${token}`,
           },
         });
-
         if (!resp.ok) {
           alert("Erro ao carregar dados da conta.");
           return;
         }
-
         const json = await resp.json();
         if (json.success && json.usuario) {
           abrirModalEditarConta(json.usuario);
@@ -1180,3 +1040,78 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+// botão "Agendar Doação" com último hemocentro
+document.addEventListener("DOMContentLoaded", () => {
+  const btnAgendarDoacao = document.getElementById("btn-agendar-doacao");
+  if (btnAgendarDoacao) {
+    btnAgendarDoacao.addEventListener("click", async (e) => {
+      e.preventDefault();
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          alert("Faça login para agendar uma doação.");
+          window.location.href = "/login";
+          return;
+        }
+        const resp = await fetch("/api/perfil", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (!resp.ok) {
+          alert("Erro ao carregar dados. Tente novamente.");
+          return;
+        }
+        const json = await resp.json();
+        if (json.success && json.usuario) {
+          const historico = json.usuario.historico_doacoes?.doacoes;
+          if (historico && historico.length > 0) {
+            const ultimaDoacao = historico[0];
+            const idHemocentro = ultimaDoacao.id_hemocentro;
+            const nomeHemocentro = ultimaDoacao.nome_hemocentro || "Hemocentro";
+            window.location.href = `/agendamento?id_hemocentro=${idHemocentro}&nome_hemocentro=${encodeURIComponent(nomeHemocentro)}`;
+          } else {
+            alert("Você ainda não tem doações registradas. Selecione um hemocentro na próxima tela.");
+            window.location.href = "/agendamento";
+          }
+        }
+      } catch (err) {
+        console.error("Erro ao buscar histórico:", err);
+        window.location.href = "/agendamento";
+      }
+    });
+  }
+});
+
+async function cancelarAgendamentoDoador(idAgendamento) {
+  if (!confirm('Tem certeza que deseja cancelar este agendamento?')) {
+    return;
+  }
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("Faça login para cancelar o agendamento.");
+      return;
+    }
+    const resp = await fetch(`/api/agendamentos/${idAgendamento}`, {
+      method: "Delete",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const json = await resp.json();
+    if (json.success) {
+      alert("Agendamento cancelado com sucesso!");
+      window.location.reload();
+    } else {
+      alert(`Erro ao cancelar: ${json.message}`);
+    }
+  } catch (err) {
+    console.error("Erro ao cancelar agendamento:", err);
+    alert("Erro ao conectar com o servidor");
+  }
+}

@@ -1,4 +1,3 @@
-/* Box-sizing universal para evitar overflow causado por padding/border */
 * {
   box-sizing: border-box;
 }
@@ -12,7 +11,7 @@ body {
   min-height: 100vh;
   line-height: 1.5;
   font-family: verdana, arial;
-  overflow-x: hidden; /* Previne scroll horizontal inesperado */
+  overflow-x: hidden;
 }
 
 main {
@@ -22,8 +21,6 @@ main {
 :root {
   --cor-principal: darkred;
 }
-
-/* ==================== MENU DE NAVEGAÇÃO ==================== */
 
 .menu {
   display: flex;
@@ -67,8 +64,6 @@ main {
   background-color: red;
 }
 
-/* ==================== BANNER DA CAMPANHA ==================== */
-
 #titulo-detalhes {
   text-align: center;
   margin-bottom: 50px;
@@ -94,8 +89,6 @@ main {
   font-size: 1.2em;
   font-style: italic;
 }
-
-/* ==================== DETALHES DA CAMPANHA ==================== */
 
 .detalhes-campanha {
   padding: 0 5%;
@@ -159,8 +152,6 @@ main {
 .lista-requisitos {
   list-style-type: none;
 }
-
-/* ==================== CAMPANHAS CADASTRADAS ==================== */
 
 .campanhas-cadastradas {
   padding: 40px 5%;
@@ -238,8 +229,6 @@ main {
   border-radius: 5px;
 }
 
-/* ==================== BOTÃO DE EDIÇÃO ==================== */
-
 .btn-editar {
   background-color: #ffffff;
   color: #a30000;
@@ -266,9 +255,6 @@ main {
   transform: scale(0.98);
 }
 
-/* ==================== MODAL DE EDIÇÃO ==================== */
-
-/* Fundo escuro do modal */
 .modal {
   display: none;
   position: fixed;
@@ -293,7 +279,6 @@ main {
   }
 }
 
-/* Conteúdo do modal */
 .modal-conteudo {
   background-color: #fefefe;
   padding: 30px;
@@ -318,7 +303,6 @@ main {
   }
 }
 
-/* Botão de fechar (X) */
 .fechar {
   color: #aaa;
   float: right;
@@ -335,7 +319,6 @@ main {
   text-decoration: none;
 }
 
-/* Título do modal */
 .modal-conteudo h2 {
   margin-top: 0;
   color: #333;
@@ -345,7 +328,6 @@ main {
   padding-bottom: 10px;
 }
 
-/* Formulário dentro do modal */
 #form-edicao-campanha {
   display: flex;
   flex-direction: column;
@@ -387,14 +369,12 @@ main {
   font-family: inherit;
 }
 
-/* Checkboxes */
 #form-edicao-campanha label input[type="checkbox"] {
   width: auto;
   margin-right: 8px;
   cursor: pointer;
 }
 
-/* Botões de ação */
 .btn-salvar,
 .btn-cancelar {
   padding: 12px 25px;
@@ -435,7 +415,6 @@ main {
   transform: translateY(0);
 }
 
-/* Scrollbar personalizada para o modal */
 .modal-conteudo::-webkit-scrollbar {
   width: 8px;
 }
@@ -454,8 +433,6 @@ main {
   background: #d60000;
 }
 
-/* ==================== FOOTER ==================== */
-
 footer {
   background-color: darkred;
   color: white;
@@ -465,15 +442,11 @@ footer {
   margin-bottom: 0;
 }
 
-/* ==================== RESPONSIVIDADE - DESKTOP GRANDE (1025px+) ==================== */
-
 @media (min-width: 1025px) {
   footer {
     margin-bottom: 0;
   }
 }
-
-/* ==================== RESPONSIVIDADE - TABLET (769px a 1024px) ==================== */
 
 @media (min-width: 769px) and (max-width: 1024px) {
   .menu a {
@@ -486,10 +459,9 @@ footer {
   }
 }
 
-/* ==================== RESPONSIVIDADE - MOBILE (até 768px) ==================== */
+/* responsividade*/
 
 @media (max-width: 768px) {
-  /* Menu em Coluna */
   .menu {
     flex-direction: column;
     padding: 0;
@@ -514,7 +486,6 @@ footer {
     border-bottom: none;
   }
 
-  /* Conteúdo */
   .banner-campanha {
     padding: 30px 10px;
   }
@@ -548,7 +519,6 @@ footer {
     margin-bottom: 0;
   }
 
-  /* Campanhas Cadastradas */
   .campanhas-cadastradas {
     padding: 30px 10px;
   }
@@ -573,7 +543,6 @@ footer {
     margin-top: 15px;
   }
 
-  /* Modal */
   .modal-conteudo {
     width: 95%;
     padding: 20px;

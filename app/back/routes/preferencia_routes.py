@@ -15,28 +15,23 @@ def salvar_preferencias(current_user):
                 "success": False,
                 "message": "Corpo da requisição não pode estar vazio"
             }), 400
-        
         if 'dias_preferencia' not in data:
             return jsonify({
                 "success": False,
                 "message": "Campo obrigatório: dias_preferencia"
             }), 400
-        
         if 'periodos_preferencia' not in data:
             return jsonify({
                 "success": False,
                 "message": "Campo obrigatório: periodos_preferencia"
             }), 400
-
         dias_validos = ['segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado', 'domingo']
         dias_preferencia = data['dias_preferencia']
-        
         if not isinstance(dias_preferencia, list):
             return jsonify({
                 "success": False,
                 "message": "dias_preferencia deve ser uma lista"
             }), 400
-        
         if len(dias_preferencia) == 0:
             return jsonify({
                 "success": False,
@@ -48,22 +43,18 @@ def salvar_preferencias(current_user):
                     "success": False,
                     "message": "Todos os dias devem ser strings"
                 }), 400
-            
             if dia.lower() not in dias_validos:
                 return jsonify({
                     "success": False,
                     "message": f"Dia inválido: '{dia}'. Valores aceitos: {', '.join(dias_validos)}"
                 }), 400
-
         periodos_validos = ['manha', 'tarde', 'noite']
         periodos_preferencia = data['periodos_preferencia']
-        
         if not isinstance(periodos_preferencia, list):
             return jsonify({
                 "success": False,
                 "message": "periodos_preferencia deve ser uma lista"
             }), 400
-        
         if len(periodos_preferencia) == 0:
             return jsonify({
                 "success": False,
@@ -75,16 +66,13 @@ def salvar_preferencias(current_user):
                     "success": False,
                     "message": "Todos os períodos devem ser strings"
                 }), 400
-            
             if periodo.lower() not in periodos_validos:
                 return jsonify({
                     "success": False,
                     "message": f"Período inválido: '{periodo}'. Valores aceitos: {', '.join(periodos_validos)}"
                 }), 400
-        
         dias_preferencia = [dia.lower() for dia in dias_preferencia]
         periodos_preferencia = [periodo.lower() for periodo in periodos_preferencia]
-        
         # ve se já tem preferência e atualiza ou cria
         preferencia_existente = PreferenciaModel.buscar_por_usuario(g.id_usuario)
         if preferencia_existente:
@@ -108,8 +96,7 @@ def salvar_preferencias(current_user):
                 "success": True,
                 "message": "Preferências criadas com sucesso",
                 "data": preferencia
-            }), 201
-        
+            }), 201     
     except ValueError as ve:
         return jsonify({
             "success": False,
@@ -148,7 +135,6 @@ def buscar_minhas_preferencias(current_user):
             "success": True,
             "data": preferencia
         }), 200
-        
     except Exception as e:
         print(f"[ERRO] Buscar preferências: {str(e)}")
         import traceback
@@ -157,7 +143,6 @@ def buscar_minhas_preferencias(current_user):
             "success": False,
             "message": "Erro ao buscar preferências"
         }), 500
-
 
 # deleta
 @preferencia_bp.route('/minhas_preferencias', methods=['DELETE'])
@@ -174,8 +159,7 @@ def deletar_preferencias(current_user):
         return jsonify({
             "success": True,
             "message": "Preferências deletadas com sucesso. Valores padrão serão usados."
-        }), 200
-        
+        }), 200  
     except Exception as e:
         print(f"[ERRO] Deletar preferências: {str(e)}")
         import traceback

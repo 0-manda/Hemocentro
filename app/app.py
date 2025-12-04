@@ -3,7 +3,6 @@ from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
 from dotenv import load_dotenv
 from config.config import Config
-import traceback
 
 #importa os blueprints
 from back.routes.usuario_routes import usuario_bp

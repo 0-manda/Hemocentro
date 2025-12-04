@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Página de cadastro de Hemocentros."/>
     <link rel="icon" type="image/png" href="../static/styles/imagens/icon_pagina.png"/>
     <link rel="stylesheet" href="../static/styles/styles_cadastro.css" />
-
     <title>Hemocentro - Cadastro de Hemocentro</title>
   </head>
+
   <body>
+
     <header>
       <nav>
         <a href="/" class="voltar">VOLTAR</a>
@@ -18,7 +20,6 @@
 
     <main class="container">
       <section class="bloco"></section>
-
       <section class="cadastro">
         <section class="cadastro-content">
           <h1 class="titulo_cadastro">CADASTRO DE HEMOCENTRO</h1>
@@ -96,8 +97,11 @@
               <label for="termos">Declaro que as informações são verdadeiras.</label>
               <small id="hintTermos" class="hint"></small>
             </nav>
+
             <br />
+
             <input type="submit" id="btnEnviar" value="CADASTRAR HEMOCENTRO" />
+
           </form>
 
           <section class="iten_1">
@@ -109,10 +113,15 @@
               Já tem um cadastro de colaborador?
               <a href="/login">Faça login</a>
             </label>
+
           </section>
+
         </section>
+
       </section>
+
     </main>
+
     <footer role="contentinfo">
       <p>&copy;2025 - Todos os direitos reservados | HemoCamp</p>
       <nav aria-label="Links institucionais">
@@ -127,11 +136,9 @@
     <script>
       document.getElementById('cadastro-hemocentro').addEventListener('submit', async function(e) {
         e.preventDefault();
-        
         const btnEnviar = document.getElementById('btnEnviar');
         btnEnviar.disabled = true;
         btnEnviar.value = 'CADASTRANDO...';
-
         const dados = {
           nome: document.getElementById('nome').value,
           cnpj: document.getElementById('cnpj').value,
@@ -143,7 +150,6 @@
           cep: document.getElementById('cep').value,
           site: document.getElementById('site').value || null
         };
-
         try {
           const response = await fetch('/api/cadastrar-hemocentro', {
             method: 'POST',
@@ -152,9 +158,7 @@
             },
             body: JSON.stringify(dados)
           });
-
           const resultado = await response.json();
-
           if (resultado.success) {
             alert(resultado.message);
             window.location.href = '/login';
@@ -171,5 +175,7 @@
         }
       });
     </script>
+
   </body>
+  
 </html>

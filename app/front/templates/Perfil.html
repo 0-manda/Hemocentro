@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,14 +8,12 @@
       name="description"
       content="Perfil do usuário com informações de cadastro, histórico de doações, campanhas e agendamentos."
     />
-
     <link
       rel="icon"
       type="image/png"
       href="../static/styles/imagens/icon_pagina.png"
     />
     <link rel="stylesheet" href="../static/styles/styles_perfil.css" />
-    <link rel="stylesheet" href="../static/styles/styles_perfil_adicional.css" />
     <title>Hemocentro - Meu Perfil</title>
   </head>
   <body>
@@ -33,6 +32,7 @@
     </header>
 
     <main class="container" id="perfil">
+
       <section class="perfil-info-basica" aria-labelledby="info-titulo">
         <h1 id="titulo">Dados Pessoais</h1>
         <p id="id_user">ID de Doador: DDR12345</p>
@@ -78,7 +78,6 @@
 
       <hr />
 
-      <!-- PARTE ESCONDIDA DO DOADOR -->
       <section id="parte-escondida-doador" class="esconda">
 
         <section class="secao-estatisticas" aria-labelledby="estatisticas-titulo">
@@ -91,7 +90,7 @@
         <section class="secao-dados" aria-labelledby="agendamentos-titulo">
           <header class="header-section">
             <h2 id="agendamentos-titulo">Próximos Agendamentos</h2>
-            <a href="/agendamento" class="btn-novo-agendamento">Agendar Doação</a>
+            <a href="#" id="btn-agendar-doacao" class="btn-novo-agendamento">Agendar Doação</a>
           </header>
 
           <table class="tabela-dados">
@@ -99,7 +98,7 @@
               <tr>
                 <th>Data</th>
                 <th>Horário</th>
-                <th>Local</th>
+                <th>Doação</th>
                 <th>Ação</th>
               </tr>
             </thead>
@@ -123,16 +122,14 @@
           <h2 id="preferencias-titulo">Preferências de Doação</h2>
           <section id="formulario-preferencias"></section>
         </section>
-
+        <hr />
       </section>
-
-      <!-- PARTE ESCONDIDA DO FUNCIONÁRIO -->
+      
       <section id="parte-escondida-funcionario" class="esconda">
         
         <section class="secao-dados" aria-labelledby="gerenciar-agendamentos-titulo">
           <header class="header-section" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
             <h2 id="gerenciar-agendamentos-titulo">Gerenciar Agendamentos</h2>
-
             <nav style="display: flex; gap: 10px;">
               <button id="filtro-todos" class="btn-filtro" onclick="filtrarAgendamentos('todos')">Todos</button>
               <button id="filtro-pendentes" class="btn-filtro btn-filtro-ativo" onclick="filtrarAgendamentos('pendente')">Pendentes</button>

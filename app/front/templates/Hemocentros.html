@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,8 +9,11 @@
     <link rel="icon" type="image/png" href="../static/styles/imagens/icon_pagina.png"/>
     <link rel="stylesheet" href="../static/styles/style_hemocentros.css" />
   </head>
+
   <body>
+
     <header>
+
       <section>
         <nav class="menu">
           <ul>
@@ -27,21 +31,15 @@
     
     <main>
       <h1>Hemocentros disponíveis</h1>
-      
-      <!-- ===== LISTA DE HEMOCENTROS - AGORA DINÂMICA ===== -->
       <section id="lista-view" class="lista-view">
-        <!-- Os cards serão gerados dinamicamente pelo JavaScript -->
         <p style="text-align: center; padding: 40px; color: #666;">Carregando hemocentros...</p>
       </section>
-
-      <!-- ===== TELA DE DETALHES ===== -->
       <section id="detalhe-view" class="tela-detalhe">
         <section class="coluna-mapa">
           <section class="mapa-container" id="mapa-container-js">
             <iframe id="detalhe_mapa" title="Mapa de localização do hemocentro" aria-label="Mapa interativo"></iframe>
             <button id="btn-voltar" aria-label="Voltar para a lista de hemocentros">Voltar</button>
           </section>
-
           <section class="detalhes-hemocentro">
             <h3 id="detalhe-nome"></h3>
             <address>
@@ -56,6 +54,7 @@
           <div id="estoque-grid" class="estoque-grid"></div>
         </aside>
       </section>
+      
     </main>
     
     <footer>
@@ -63,5 +62,6 @@
     </footer>
     
     <script src="../static/scripts/hemocentro.js"></script>
+
   </body>
 </html>

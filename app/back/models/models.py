@@ -543,10 +543,10 @@ class CampanhaModel:
 
 class EstoqueModel:
     # níveis de estoque:
-    # - CRÍTICO: <= 5 unidades
-    # - BAIXO: 6-15 unidades
-    # - NORMAL: 16-30 unidades
-    # - BOM: > 30 unidades
+    # - critico: <= 5 unidades
+    # - baixo: 6-15 unidades
+    # - normal: 16-30 unidades
+    # - bom: > 30 unidades
     @staticmethod
     def adicionar_estoque(id_hemocentro, tipo_sanguineo, quantidade):
         with get_db_manager() as db:
@@ -770,7 +770,6 @@ class HemocentroModel:
             raise ValueError(f"CNPJ já cadastrado")
         if HemocentroModel.buscar_por_email(email):
             raise ValueError(f"Email já cadastrado")
-        
         #hemocentro com ativo=False (aguardando aprovação)
         with get_db_manager() as db:
             sql = """
@@ -794,14 +793,11 @@ class HemocentroModel:
             )
             db.execute(sql, valores)
             hemocentro_id = db.lastrowid
-            
             print(f"[DEBUG] Hemocentro criado com ID: {hemocentro_id}")
-            
             # Buscar dentro do mesmo bloco with
             sql_buscar = "SELECT * FROM Hemocentros WHERE id_hemocentro = %s"
             db.execute(sql_buscar, (hemocentro_id,))
             result = db.fetchone()
-            
             if result:
                 print(f"[DEBUG] Hemocentro encontrado!")
                 return dict(result)
@@ -867,7 +863,6 @@ class HemocentroModel:
         if not is_cnpj(cnpj):
             raise ValueError("CNPJ inválido")
         cnpj_limpo = only_numbers(cnpj)
-        
         hemocentro = HemocentroModel.buscar_por_cnpj(cnpj_limpo)
         if not hemocentro:
             raise ValueError(f"Hemocentro com CNPJ {cnpj_limpo} não encontrado")
@@ -937,13 +932,10 @@ class HemocentroModel:
     def ativar_por_cnpj(cnpj):
         if not is_cnpj(cnpj):
             raise ValueError("CNPJ inválido")
-        
         cnpj_limpo = only_numbers(cnpj)
         hemocentro = HemocentroModel.buscar_por_cnpj(cnpj_limpo)
-        
         if not hemocentro:
             raise ValueError("Hemocentro não encontrado")
-        
         return HemocentroModel.reativar(cnpj_limpo)
         
 ###################################################################################
@@ -1246,7 +1238,6 @@ class HorarioFuncionamentoModel:
             )
             db.execute(sql, valores)
             horario_id = db.lastrowid
-            
             return HorarioFuncionamentoModel.buscar_por_id(horario_id)
     
     @staticmethod
@@ -1499,7 +1490,6 @@ class PreferenciaModel:
             """
             db.execute(sql, (dia,))
             resultados = db.fetchall()
-            
             return [row['id_usuario'] for row in resultados]
     
     @staticmethod
@@ -1530,17 +1520,26 @@ class PreferenciaModel:
             """
             db.execute(sql, (dia, periodo))
             resultados = db.fetchall()
-            
             return [PreferenciaModel._formatar_preferencia(row) for row in resultados]
     
     @staticmethod
     def _formatar_preferencia(row: dict) -> dict:
         if not row:
             return None
-        dias_str = row.get('dia_preferencia', '')
-        periodos_str = row.get('periodo_preferencia', '')
-        dias_list = [d.strip() for d in dias_str.split(',') if d.strip()] if dias_str else []
-        periodos_list = [p.strip() for p in periodos_str.split(',') if p.strip()] if periodos_str else []
+        dias_raw = row.get('dia_preferencia', '')
+        periodos_raw = row.get('periodo_preferencia', '')
+        if isinstance(dias_raw, set):
+            dias_list = list(dias_raw)
+        elif isinstance(dias_raw, str):
+            dias_list = [d.strip() for d in dias_raw.split(',') if d.strip()] if dias_raw else []
+        else:
+            dias_list = []
+        if isinstance(periodos_raw, set):
+            periodos_list = list(periodos_raw)
+        elif isinstance(periodos_raw, str):
+            periodos_list = [p.strip() for p in periodos_raw.split(',') if p.strip()] if periodos_raw else []
+        else:
+            periodos_list = []
         return {
             'id_preferencia': row.get('id_preferencia'),
             'id_usuario': row.get('id_usuario'),
@@ -1553,19 +1552,14 @@ class PreferenciaModel:
 
 class UsuarioModel:
     @staticmethod
-    def criar_doador(nome, email, senha_hash, telefone, cpf, 
-                    data_nascimento=None, tipo_sanguineo=None):
-        """Cria um novo doador no sistema - CPF OBRIGATÓRIO"""
+    def criar_doador(nome, email, senha_hash, telefone, cpf, data_nascimento=None, tipo_sanguineo=None):
         if not is_cpf(cpf):
             raise ValueError("CPF inválido")
-        
         cpf_limpo = only_numbers(cpf)
-    
         if UsuarioModel.buscar_por_cpf(cpf_limpo):
             raise ValueError("CPF já cadastrado")
         if UsuarioModel.buscar_por_email(email):
             raise ValueError("Email já cadastrado")
-        
         with get_db_manager() as db:
             sql = """
                 INSERT INTO Usuario (
@@ -1588,44 +1582,36 @@ class UsuarioModel:
             )
             db.execute(sql, valores)
             usuario_id = db.lastrowid
-
         return UsuarioModel.buscar_por_id(usuario_id)
     
     @staticmethod
     def criar_colaborador(nome, email, senha_hash, telefone, cnpj, cpf=None):
-        """Cria um novo colaborador - CPF OPCIONAL, CNPJ OBRIGATÓRIO"""
-        
-        # Validar CNPJ (obrigatório)
+        #validar CNPJ (obrigatório)
         if not is_cnpj(cnpj):
             raise ValueError("CNPJ inválido")
-        
         cnpj_limpo = only_numbers(cnpj)
-        
-        # Validar e limpar CPF se fornecido (opcional)
+        # validar e limpar CPF se fornecido (opcional)
         cpf_limpo = None
         if cpf:
             if not is_cpf(cpf):
                 raise ValueError("CPF inválido")
             cpf_limpo = only_numbers(cpf)
-            
-            # Verificar se CPF já existe
+            #verificar se CPF já existe
             if UsuarioModel.buscar_por_cpf(cpf_limpo):
                 raise ValueError("Este CPF já está cadastrado")
         
-        # Verificar se hemocentro existe e está ativo
+        # verificar se hemocentro existe e está ativo
         hemocentro = HemocentroModel.buscar_por_cnpj(cnpj_limpo)
         if not hemocentro:
             raise ValueError("Hemocentro não encontrado")
         if not hemocentro.get('ativo'):
             raise ValueError("Hemocentro ainda não foi aprovado. Aguarde a aprovação para criar colaboradores.")
         
-        # Verificar duplicidades
+        # verificar duplicidades
         if UsuarioModel.buscar_por_email(email):
             raise ValueError("Email já cadastrado")
-        
-        # Verificar se já existe colaborador com este CNPJ
+        # verificar se já existe colaborador com este CNPJ
         # (permite múltiplos colaboradores do mesmo hemocentro, mas não duplicar email)
-        
         with get_db_manager() as db:
             sql = """
                 INSERT INTO Usuario (
@@ -1644,11 +1630,10 @@ class UsuarioModel:
                 cnpj_limpo,         # CNPJ obrigatório
                 None,
                 None,
-                False  # Colaboradores aguardam aprovação
+                False  # colaboradores aguardam aprovação
             )
             db.execute(sql, valores)
             usuario_id = db.lastrowid
-        
         return UsuarioModel.buscar_por_id(usuario_id)
     
     @staticmethod
@@ -1669,14 +1654,11 @@ class UsuarioModel:
     
     @staticmethod
     def buscar_por_cpf(cpf):
-        """Busca usuário por CPF (doador ou colaborador)"""
         if not cpf:
             return None
-        
         cpf_limpo = only_numbers(cpf)
         if len(cpf_limpo) != 11:
             return None
-        
         with get_db_manager() as db:
             sql = "SELECT * FROM Usuario WHERE cpf = %s"
             db.execute(sql, (cpf_limpo,))
@@ -1685,16 +1667,13 @@ class UsuarioModel:
     
     @staticmethod
     def buscar_por_cnpj(cnpj):
-        """Busca colaborador por CNPJ - retorna o primeiro encontrado"""
         if not cnpj:
             return None
-        
         cnpj_limpo = only_numbers(cnpj)
         if len(cnpj_limpo) != 14:
             return None
-        
         with get_db_manager() as db:
-            # Retorna o primeiro colaborador deste hemocentro
+            # retorna o primeiro colaborador deste hemocentro
             sql = "SELECT * FROM Usuario WHERE cnpj = %s AND tipo_usuario = 'colaborador' LIMIT 1"
             db.execute(sql, (cnpj_limpo,))
             result = db.fetchone()
@@ -1702,14 +1681,11 @@ class UsuarioModel:
     
     @staticmethod
     def buscar_colaboradores_por_cnpj(cnpj):
-        """Busca TODOS os colaboradores de um hemocentro (CNPJ)"""
         if not cnpj:
             return []
-        
         cnpj_limpo = only_numbers(cnpj)
         if len(cnpj_limpo) != 14:
             return []
-        
         with get_db_manager() as db:
             sql = "SELECT * FROM Usuario WHERE cnpj = %s AND tipo_usuario = 'colaborador'"
             db.execute(sql, (cnpj_limpo,))
@@ -1717,11 +1693,6 @@ class UsuarioModel:
     
     @staticmethod
     def login_por_documento(identificador):
-        """
-        Realiza busca de usuário por CPF ou CNPJ
-        - CPF (11 dígitos): busca doador OU colaborador
-        - CNPJ (14 dígitos): busca colaborador
-        """
         identificador_limpo = only_numbers(identificador)
         
         if len(identificador_limpo) == 11:
@@ -1747,10 +1718,9 @@ class UsuarioModel:
             k: v for k, v in campos.items() 
             if k in campos_permitidos
         }
-        
+
         if not campos_validos:
             return False 
-        
         with get_db_manager() as db:
             campos_sql = ', '.join([f"{campo} = %s" for campo in campos_validos.keys()])
             sql = f"UPDATE Usuario SET {campos_sql} WHERE id_usuario = %s"
@@ -1809,11 +1779,9 @@ class UsuarioModel:
             """
             db.execute(sql)
             resultados = db.fetchall()
-            
             contagem = {'doador': 0, 'colaborador': 0}
             for row in resultados:
                 contagem[row['tipo_usuario']] = row['total']
-            
             return contagem
     
     @staticmethod
@@ -1839,40 +1807,30 @@ class UsuarioModel:
     @staticmethod
     def obter_hemocentro_por_colaborador(usuario_id):
         colaborador = UsuarioModel.buscar_por_id(usuario_id)
-        
         if not colaborador or colaborador['tipo_usuario'] != 'colaborador':
             return None
-        
         cnpj = colaborador.get('cnpj')
         if not cnpj:
             return None
-        
         return HemocentroModel.buscar_por_cnpj(cnpj)
     
     @staticmethod
     def ativar_por_cpf(cpf):
         if not is_cpf(cpf):
             raise ValueError("CPF inválido")
-        
         cpf_limpo = only_numbers(cpf)
         usuario = UsuarioModel.buscar_por_cpf(cpf_limpo)
-        
         if not usuario:
             raise ValueError("Usuário não encontrado")
-        
         return UsuarioModel.reativar(usuario['id_usuario'])
 
     @staticmethod
     def ativar_por_cnpj(cnpj):
-        """Ativa um colaborador específico por CNPJ"""
         if not is_cnpj(cnpj):
             raise ValueError("CNPJ inválido")
-        
         cnpj_limpo = only_numbers(cnpj)
         usuario = UsuarioModel.buscar_por_cnpj(cnpj_limpo)
-        
         if not usuario:
             raise ValueError("Colaborador não encontrado")
-        
         return UsuarioModel.reativar(usuario['id_usuario'])
 #####################################################################################

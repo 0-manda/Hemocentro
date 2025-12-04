@@ -2,7 +2,6 @@ from config.config import get_db_manager
 from datetime import datetime, timedelta
 
 class AprovacaoModel:
-    
     #Cria um token de aprovação retorna o ID do token criado
     @staticmethod
     def criar_token(tipo, id_entidade, token):

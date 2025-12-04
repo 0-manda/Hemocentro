@@ -1,76 +1,68 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <link rel="icon" type="image/png" href="../static/styles/imagens/icon_pagina.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Notícias e informações atualizadas 
     sobre hemocentros e doação de sangue."/>
-    <title>Hemocentro - Notícias!</title>
+    <title>Hemocentro-Notícias!</title>
     <link rel="stylesheet" href="../static/styles/styles_noticia.css" />
   </head>
+
   <body>
+
     <header>
+
       <nav class="menu" aria-label="Menu principal">
         <ul>
           <li><a class="home" href="/">HOME</a> </li>
           <li><a class="hemocentro" href="/hemocentros">HEMOCENTRO</a></li>
           <li><a class="contato" href="/contato">CONTATO</a></li>
           <li><a class="sobre" href="/historia">SOBRE </a></li>
-          <li><a class="noticias active" href="/noticias">NOTICIAS</a></li>
+          <li><a class="noticias" href="/noticias">NOTICIAS</a></li>
           <li><a class="campanha" href="/campanha">CAMPANHA</a></li>
           <li><a class="perfil" href="/perfil">USUARIO</a></li>
         </ul>
       </nav>
     </header>
+
     <main class="container">
       <aside class="barra_lateral">
         <section class="pesquisa">
-          <h1 class="titulo_lateral">NOTÍCIAS</h1>
-          <p class="subtitulo_lateral">
-            Tudo o que você precisa saber para ficar por dentro dos assuntos do momento.
-          </p>
+          <h1>NOTÍCIAS</h1>
+          <br>
+          <p><b>Tudo o que você precisa saber para ficar por dentro dos assuntos do momento</b></p>
+          <br>
           <form role="search">
-            <label for="pesquisa_block" class="sr-only">Pesquisar Notícias</label>
-            <input type="text" id="pesquisa_block" name="pesquisa" placeholder="Buscar..." />
-            <button type="submit" aria-label="Buscar Notícias">BUSCAR</button>
+            <input type="text" id="pesquisa_block" name="pesquisa" placeholder="Buscar..." /><label for="pesquisa_block" class="sr-only">Pesquisar Notícias</label>
+            <button type="submit" aria-label="Buscar Notícias">🔍</button>
           </form>
         </section>
-        
-        </aside>
-      
-      <section class="campo_noticia" aria-labelledby="noticias-principais-heading">
-        <h2 id="noticias-principais-heading" class="sr-only">Notícias em Destaque</h2>
-        
+      </aside>
+
+      <section class="campo_noticia">
         <article class="noticia_principal">
           <figure>
             <img
-              class="img_noticia_princ" 
-              src="../static/styles/imagens/noticia_principal.jpg"
+              class="img_noticia_princ" src="../static/styles/imagens/noticia_principal.jpg"
               alt="Imagem de destaque de uma notícia principal sobre doação de sangue."/>
           </figure>
-          <section class="conteudo_sobreposto">
-              <h2>URGENTE: Queda nos estoques de sangue - O que fazer?</h2>
-              <p>Com o feriado prolongado, os bancos de sangue enfrentam o menor nível do ano. Veja como e onde você pode ajudar.</p>
-          </section>
-          <a class="btn_ler" href="#" role="button" aria-label="Saiba mais sobre a notícia principal"> LER AGORA </a>
+          <a class="btn_ler" href="#" role="button" 
+          aria-label="Saiba mais sobre a notícia principal"> SAIBA MAIS </a>
         </article>
-        
+
         <section class="noticias_secundarias" aria-labelledby="noticias-secundarias-heading">
-          <h2 id="noticias-secundarias-heading" class="sr-only">Notícias Secundárias</h2>
-          
           <article class="noticia_1">
             <figure>
               <img class="img_noticia1"
               src="../static/styles/imagens/noticia_secundaria1.jpg"
-              alt="Imagem da notícia secundária, mostrando um voluntário doando sangue."/>
+              alt="Imagem da notícia secundária."/>
             </figure>
-            <section class="conteudo_sobreposto">
-                <h3>Novo app facilita agendamento em hemocentros regionais</h3>
-                <p>Confira a lista de cidades que já adotaram a ferramenta e planeje sua doação com antecedência.</p>
-            </section>
+
           <a class="btn_ler" href="#" role="button" aria-label="Saiba mais sobre a primeira notícia secundária"> SAIBA MAIS </a>
           </article>
-          
+          </article>
           <article class="noticia_2">
             <figure>
               <img
@@ -78,18 +70,20 @@
                 src="../static/styles/imagens/noticia_secundaria2.jpg"
                 alt="Imagem de uma notícia secundária sobre a importância da doação de sangue."/>
             </figure>
-            <section class="conteudo_sobreposto">
-                <h3>Mitos e Verdades sobre a doação de sangue no inverno</h3>
-                <p>O frio afeta a doação? Esclareça as dúvidas mais comuns e contribua para salvar vidas.</p>
-            </section>
             <a class="btn_ler" href="#" role="button" aria-label="Saiba mais sobre a segunda notícia secundária"> SAIBA MAIS </a>
+          
           </article>
+        
         </section>
+      
       </section>
+    
     </main>
+    
     <footer>
       <p>&copy;2025 - Todos os direitos reservados | HemoCamp</p>
     </footer>
+
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         // Botões "SAIBA MAIS"
@@ -112,5 +106,6 @@
         }
       });
     </script>
+    
   </body>
 </html>

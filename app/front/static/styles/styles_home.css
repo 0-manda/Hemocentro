@@ -7,8 +7,6 @@
   --cor-fonte-main-page: white;
 }
 
-/* ==================== ESTILOS GERAIS ==================== */
-
 body {
   display: flex;
   flex-direction: column;
@@ -36,14 +34,11 @@ h1 {
   text-align: center;
 }
 
-/* ==================== MENU DE NAVEGAÇÃO E ÍCONES DO TOPO ==================== */
-
 .menu {
   background-color: darkred;
   padding: 0;
 }
 
-/* Container FLEX para alinhar os itens horizontalmente (esquerda e direita) */
 .menu ul {
   display: flex;
   list-style: none;
@@ -53,10 +48,9 @@ h1 {
   height: 70px;
 }
 
-/* Base do item de menu (o link 'a') */
 .botao_menu {
   display: flex;
-  align-items: center; /* Centraliza o ícone verticalmente */
+  align-items: center;
   justify-content: center;
   cursor: pointer;
   margin: 0;
@@ -64,28 +58,24 @@ h1 {
   height: 100%;
 }
 
-/* Lógica da ESQUERDA (LOGIN DOADOR) */
 .menu ul li.menu-item-esquerda {
   margin-left: 2%;
   height: 100%;
 }
 
-/* Aplica o padding e o estilo inicial do link doador */
 .menu ul li:first-child a {
   padding: 0 20px;
   display: flex;
   align-items: center;
 }
 
-/* Hover para o botão da esquerda */
 .menu ul li:first-child a:hover {
   background-color: red;
   color: white;
 }
 
-/* Posiciona o item no canto direito */
 .menu ul li.menu-item-direita {
-  margin-left: auto; /* Empurra para a direita */
+  margin-left: auto;
   margin-right: 1px;
   height: 100%;
 }
@@ -115,8 +105,6 @@ h1 {
   margin-right: 0;
   padding: 0;
 }
-
-/* ==================== BANNER PRINCIPAL E OPÇÕES DE NAVEGAÇÃO ==================== */
 
 .imagem {
   background-repeat: no-repeat;
@@ -155,7 +143,7 @@ h1 {
   color: var(--cor-fonte-main-page);
   text-decoration: none;
   border: none;
-  display: block; /* Garante que o link ocupe todo o banner */
+  display: block;
   height: 100%;
 }
 
@@ -168,15 +156,12 @@ figcaption {
   margin-top: 25%;
 }
 
-/* Estilos para as imagens dentro dos banners */
 .banner_home img {
   width: 60%;
   height: 50%;
   margin-top: 30px;
   border: none;
 }
-
-/* ==================== ESTILOS DE CAMPANHA ==================== */
 
 .banner-campanha {
   background-color: #fce4e4;
@@ -256,8 +241,6 @@ figcaption {
   background-image: url('../static/styles/imagens/campanha.png');
 }
 
-/* ==================== FOOTER ==================== */
-
 footer {
   background-color: darkred;
   color: white;
@@ -266,7 +249,7 @@ footer {
   margin-bottom: 0;
 }
 
-/* ==================== RESPONSIVIDADE - MOBILE (até 768px) ==================== */
+/* responsividade*/ 
 
 @media (max-width: 768px) {
   body {
@@ -280,7 +263,6 @@ footer {
     margin-bottom: 10%;
   }
 
-  /* Menu em Coluna */
   .menu ul {
     flex-direction: column;
     height: auto;
@@ -293,7 +275,6 @@ footer {
     height: auto;
   }
 
-  /* Link do Menu (geral) */
   .menu ul li a {
     padding: 10px;
     width: 100%;
@@ -303,7 +284,6 @@ footer {
     align-items: center;
   }
 
-  /* Garante que os ícones no topo não sejam afetados pelo ajuste de texto */
   .menu ul li.menu-item-esquerda a,
   .menu ul li.menu-item-direita a {
     width: 100%;
@@ -314,7 +294,7 @@ footer {
   }
 
   .menu ul li.menu-item-direita a {
-    border-bottom: none; /* Remove o divisor do último item */
+    border-bottom: none;
   }
 
   .opcoes {
@@ -332,7 +312,6 @@ footer {
     font-size: 12px;
   }
 
-  /* Imagens nos Banners (Responsivo) */
   .banner_home img {
     width: 80%;
     height: auto;
@@ -356,8 +335,6 @@ footer {
     padding: 10px 20px;
   }
 }
-
-/* ==================== RESPONSIVIDADE - MOBILE EXTRA PEQUENO (até 480px) ==================== */
 
 @media (max-width: 480px) {
   .opcoes {

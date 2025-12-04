@@ -92,9 +92,8 @@ TEMPLATE_CONFIRMACAO = """
 @aprovacao_bp.route('/aprovar/<token>', methods=['GET'])
 def aprovar_cadastro(token):
     try:
-        # Validar token
+        # validar token
         token_info = AprovacaoModel.validar_token(token)
-        
         if not token_info:
             return render_template_string(
                 TEMPLATE_CONFIRMACAO,
@@ -104,13 +103,11 @@ def aprovar_cadastro(token):
                 cor="#dc3545",
                 detalhes=None
             ), 400
-        
         tipo = token_info['tipo']
         id_entidade = token_info['id_entidade']
         #processar aprovação usuario
         if tipo == 'doador':
             usuario = UsuarioModel.buscar_por_id(id_entidade)
-            
             if not usuario:
                 return render_template_string(
                     TEMPLATE_CONFIRMACAO,
@@ -120,10 +117,8 @@ def aprovar_cadastro(token):
                     cor="#dc3545",
                     detalhes=None
                 ), 404
-            
             #ativar o usuário
             sucesso = UsuarioModel.atualizar(id_entidade, {'ativo': True})
-            
             if sucesso:
                 AprovacaoModel.marcar_como_aprovado(token)
                 #enviaer email de notificação
@@ -132,7 +127,6 @@ def aprovar_cadastro(token):
                     usuario['nome'],
                     'doador'
                 )
-                
                 return render_template_string(
                     TEMPLATE_CONFIRMACAO,
                     titulo="Cadastro Aprovado!",
@@ -159,8 +153,7 @@ def aprovar_cadastro(token):
         
         #processar aprovação colaborador
         elif tipo == 'colaborador':
-            usuario = UsuarioModel.buscar_por_id(id_entidade)
-            
+            usuario = UsuarioModel.buscar_por_id(id_entidade) 
             if not usuario:
                 return render_template_string(
                     TEMPLATE_CONFIRMACAO,
@@ -179,7 +172,6 @@ def aprovar_cadastro(token):
                     usuario['nome'],
                     'colaborador'
                 )
-                
                 return render_template_string(
                     TEMPLATE_CONFIRMACAO,
                     titulo="Cadastro Aprovado!",
@@ -218,7 +210,6 @@ def aprovar_cadastro(token):
                 hemocentro['cnpj'],
                 {'ativo': True}
             )
-            
             if sucesso:
                 AprovacaoModel.marcar_como_aprovado(token)
                 enviar_notificacao_aprovacao(
@@ -226,7 +217,6 @@ def aprovar_cadastro(token):
                     hemocentro['nome'],
                     'hemocentro'
                 )
-                
                 return render_template_string(
                     TEMPLATE_CONFIRMACAO,
                     titulo="Cadastro Aprovado!",
@@ -249,7 +239,6 @@ def aprovar_cadastro(token):
                     cor="#dc3545",
                     detalhes=None
                 ), 500
-        
         # tipo inválido
         else:
             return render_template_string(
@@ -260,7 +249,6 @@ def aprovar_cadastro(token):
                 cor="#dc3545",
                 detalhes=None
             ), 400
-    
     except Exception as e:
         print(f"[ERRO] Aprovar cadastro: {str(e)}")
         import traceback
@@ -288,14 +276,11 @@ def rejeitar_cadastro(token):
                 cor="#dc3545",
                 detalhes=None
             ), 400
-        
         tipo = token_info['tipo']
         id_entidade = token_info['id_entidade']
-        
         #rejeitar doador
         if tipo == 'doador':
             usuario = UsuarioModel.buscar_por_id(id_entidade)
-            
             if not usuario:
                 return render_template_string(
                     TEMPLATE_CONFIRMACAO,
@@ -305,7 +290,6 @@ def rejeitar_cadastro(token):
                     cor="#dc3545",
                     detalhes=None
                 ), 404
-
             AprovacaoModel.marcar_como_rejeitado(token)
             enviar_notificacao_rejeicao(
                 usuario['email'],
@@ -313,7 +297,6 @@ def rejeitar_cadastro(token):
                 'doador',
                 motivo="Cadastro não aprovado pelo administrador"
             )
-            
             return render_template_string(
                 TEMPLATE_CONFIRMACAO,
                 titulo="Cadastro Rejeitado",
@@ -327,11 +310,9 @@ def rejeitar_cadastro(token):
                     "Tipo": "Doador"
                 }
             ), 200
-        
         #rejeitar colaborador
         elif tipo == 'colaborador':
             usuario = UsuarioModel.buscar_por_id(id_entidade)
-            
             if not usuario:
                 return render_template_string(
                     TEMPLATE_CONFIRMACAO,
@@ -341,7 +322,6 @@ def rejeitar_cadastro(token):
                     cor="#dc3545",
                     detalhes=None
                 ), 404
-            
             AprovacaoModel.marcar_como_rejeitado(token)
             enviar_notificacao_rejeicao(
                 usuario['email'],
@@ -349,7 +329,6 @@ def rejeitar_cadastro(token):
                 'colaborador',
                 motivo="Cadastro não aprovado pelo administrador"
             )
-            
             return render_template_string(
                 TEMPLATE_CONFIRMACAO,
                 titulo="Cadastro Rejeitado",
@@ -362,7 +341,6 @@ def rejeitar_cadastro(token):
                     "Tipo": "Colaborador"
                 }
             ), 200
-        
         #rejeitar hemocentro
         elif tipo == 'hemocentro':
             hemocentro = HemocentroModel.buscar_por_id(id_entidade)
@@ -383,7 +361,6 @@ def rejeitar_cadastro(token):
                 'hemocentro',
                 motivo="Cadastro não aprovado pelo administrador"
             )
-            
             return render_template_string(
                 TEMPLATE_CONFIRMACAO,
                 titulo="Cadastro Rejeitado",
@@ -397,7 +374,6 @@ def rejeitar_cadastro(token):
                     "Tipo": "Hemocentro"
                 }
             ), 200
-        
         # tipo inválido
         else:
             return render_template_string(
@@ -408,7 +384,6 @@ def rejeitar_cadastro(token):
                 cor="#dc3545",
                 detalhes=None
             ), 400
-    
     except Exception as e:
         print(f"[ERRO] Rejeitar cadastro: {str(e)}")
         import traceback
@@ -428,13 +403,11 @@ def listar_pendentes():
     #lista todas as aprovações pendentes (para uso administrativo)
     try:
         pendentes = AprovacaoModel.listar_pendentes()
-        
         return jsonify({
             "success": True,
             "pendentes": pendentes,
             "total": len(pendentes)
         }), 200
-    
     except Exception as e:
         print(f"[ERRO] Listar pendentes: {str(e)}")
         import traceback

@@ -52,8 +52,7 @@ def adicionar_estoque(current_user):
             "success": True,
             "message": f"{quantidade} unidade(s) de {tipo_sanguineo} adicionada(s) ao estoque",
             "estoque": estoque_atualizado
-        }), 200
-        
+        }), 200 
     except Exception as e:
         print(f"[ERRO] Adicionar estoque: {str(e)}")
         import traceback
@@ -114,13 +113,11 @@ def remover_estoque(current_user):
             tipo_sanguineo=tipo_sanguineo,
             quantidade=quantidade
         )
-        
         return jsonify({
             "success": True,
             "message": f"{quantidade} unidade(s) de {tipo_sanguineo} removida(s) do estoque",
             "estoque": estoque_atualizado
         }), 200
-        
     except Exception as e:
         print(f"[ERRO] Remover estoque: {str(e)}")
         import traceback
@@ -143,7 +140,6 @@ def consultar_estoque():
         estoque = EstoqueModel.listar_estoque_hemocentro(hemocentro['id_hemocentro'])
         total_unidades = sum(item.get('quantidade', 0) for item in estoque)
         tipos_criticos = sum(1 for item in estoque if item.get('nivel') == 'critico')
-        
         return jsonify({
             "success": True,
             "hemocentro": {
@@ -160,7 +156,6 @@ def consultar_estoque():
                 "tipos_criticos": tipos_criticos
             }
         }), 200
-        
     except Exception as e:
         print(f"[ERRO] Consultar estoque: {str(e)}")
         import traceback
@@ -198,12 +193,10 @@ def consultar_estoque():
 #                 "nivel": "critico",
 #                 "necessita_doacao": True
 #             }), 200
-        
 #         return jsonify({
 #             "success": True,
 #             "estoque": estoque
-#         }), 200
-        
+#         }), 200     
 #     except Exception as e:
 #         print(f"[ERRO] Consultar tipo específico: {str(e)}")
 #         import traceback
@@ -212,7 +205,6 @@ def consultar_estoque():
 #             "success": False,
 #             "message": "Erro ao consultar estoque"
 #         }), 500
-
 
 # listar estoques críticos
 @estoque_bp.route('/estoque/criticos', methods=['GET'])
@@ -225,7 +217,6 @@ def listar_estoques_criticos():
                 "message": "Limite deve ser maior ou igual a zero"
             }), 400
         estoques_criticos = EstoqueModel.listar_estoques_criticos(limite_critico)
-        
         return jsonify({
             "success": True,
             "total": len(estoques_criticos),
@@ -233,7 +224,6 @@ def listar_estoques_criticos():
             "estoques": estoques_criticos,
             "alerta": len(estoques_criticos) > 0
         }), 200
-        
     except Exception as e:
         print(f"[ERRO] Listar estoques críticos: {str(e)}")
         import traceback
@@ -242,7 +232,6 @@ def listar_estoques_criticos():
             "success": False,
             "message": "Erro ao listar estoques críticos"
         }), 500
-
 
 # atualizar estoque diretamente
 @estoque_bp.route('/estoque/atualizar', methods=['PUT'])
@@ -285,7 +274,6 @@ def atualizar_estoque_direto(current_user):
             "message": f"Estoque de {tipo_sanguineo} atualizado para {quantidade} unidade(s)",
             "estoque": estoque_atualizado
         }), 200
-        
     except Exception as e:
         print(f"[ERRO] Atualizar estoque direto: {str(e)}")
         import traceback
@@ -300,23 +288,19 @@ def atualizar_estoque_direto(current_user):
 def consultar_estoque_por_hemocentro(id_hemocentro):
     try:
         hemocentro = HemocentroModel.buscar_por_id(id_hemocentro)
-        
         if not hemocentro:
             return jsonify({
                 "success": False,
                 "message": "Hemocentro não encontrado"
             }), 404
-        
         if not hemocentro.get('ativo'):
             return jsonify({
                 "success": False,
                 "message": "Hemocentro inativo"
             }), 404
-        
         estoque = EstoqueModel.listar_estoque_hemocentro(id_hemocentro)
         total_unidades = sum(item.get('quantidade', 0) for item in estoque)
         tipos_criticos = sum(1 for item in estoque if item.get('nivel') == 'critico')
-        
         return jsonify({
             "success": True,
             "hemocentro": {
@@ -333,7 +317,6 @@ def consultar_estoque_por_hemocentro(id_hemocentro):
                 "tipos_criticos": tipos_criticos
             }
         }), 200
-        
     except Exception as e:
         print(f"[ERRO] Consultar estoque por hemocentro: {str(e)}")
         import traceback

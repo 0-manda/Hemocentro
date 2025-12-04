@@ -96,12 +96,18 @@ def criar_agendamento(current_user):
                     "success": False,
                     "message": "A doação de sangue é permitida até os 69 anos"
                 }), 400
+            
         ultima_doacao = AgendamentoModel.buscar_ultima_doacao_realizada(g.id_usuario)
         if ultima_doacao:
             ultima_data = ultima_doacao.get('data_hora')
             if isinstance(ultima_data, str):
                 ultima_data = datetime.fromisoformat(ultima_data.replace('Z', '+00:00'))
-            dias_desde_ultima = (data_agendamento - ultima_data).day
+            
+            if ultima_data.tzinfo is None:
+                ultima_data = ultima_data.replace(tzinfo=timezone.utc)
+
+            dias_desde_ultima = (data_agendamento - ultima_data).days
+            
             if tipo_sangue == 'sangue_total':
                 intervalo_minimo = 75
                 tipo_intervalo = "sangue total"
@@ -111,6 +117,7 @@ def criar_agendamento(current_user):
             else:
                 intervalo_minimo = 7
                 tipo_intervalo = "aférese"
+            
             if dias_desde_ultima < intervalo_minimo:
                 dias_faltando = intervalo_minimo - dias_desde_ultima
                 return jsonify({
@@ -118,6 +125,7 @@ def criar_agendamento(current_user):
                     "message": f"Intervalo mínimo entre doações de {tipo_intervalo} não respeitado. Aguarde {dias_faltando} dias",
                     "proxima_doacao_permitida": (ultima_data + timedelta(days=intervalo_minimo)).isoformat()
                 }), 400
+        
         agendamentos_existentes = AgendamentoModel.listar_por_usuario(
             id_usuario=g.id_usuario,
             status='pendente'
@@ -278,8 +286,6 @@ def listar_todos_agendamentos(current_user):
             "message": "Erro ao buscar agendamentos"
         }), 500
 
-# ===== NOVOS ENDPOINTS PARA COLABORADOR GERENCIAR AGENDAMENTOS =====
-
 # confirmar agendamento
 @agendamento_bp.route('/agendamentos/<int:id_agendamento>/confirmar', methods=['PATCH'])
 @requer_colaborador
@@ -330,7 +336,7 @@ def confirmar_agendamento(current_user, id_agendamento):
 @requer_colaborador
 def marcar_realizado(current_user, id_agendamento):
     try:
-        from back.models import HistoricoModel  # Importar o model de histórico
+        from back.models import HistoricoModel  # importar o model de histórico aqui pra evitar conflito circular
         
         agendamento = AgendamentoModel.buscar_por_id(id_agendamento)
         if not agendamento:
@@ -345,7 +351,7 @@ def marcar_realizado(current_user, id_agendamento):
                 "message": "Você não tem permissão para gerenciar este agendamento"
             }), 403
         
-        # Permite marcar como realizado agendamentos pendentes ou confirmados
+        # permite marcar como realizado agendamentos pendentes ou confirmados
         status_atual = agendamento.get('status', '').lower()
         if status_atual not in ['pendente', 'confirmado']:
             return jsonify({
@@ -353,7 +359,7 @@ def marcar_realizado(current_user, id_agendamento):
                 "message": f"Apenas agendamentos pendentes ou confirmados podem ser marcados como realizados. Status atual: {status_atual}"
             }), 400
         
-        # Verificar se já existe doação registrada para este agendamento
+        # verificar se já existe doação registrada para este agendamento
         doacao_existente = HistoricoModel.buscar_por_agendamento(id_agendamento)
         if doacao_existente:
             return jsonify({
@@ -361,9 +367,8 @@ def marcar_realizado(current_user, id_agendamento):
                 "message": "Doação já foi registrada para este agendamento"
             }), 409
         
-        # 1️⃣ ⭐ CRIAR REGISTRO NO HISTÓRICO DE DOAÇÕES ⭐
         try:
-            # Calcular próxima doação permitida
+            # calcular próxima doação permitida
             tipo_doacao = agendamento.get('tipo_sangue_doado', 'sangue_total')
             agora = datetime.now()
             
@@ -376,10 +381,10 @@ def marcar_realizado(current_user, id_agendamento):
             else:
                 proxima_doacao = agora + timedelta(days=60)
             
-            # Quantidade padrão de sangue coletado (pode ser parametrizado depois)
+            # quantidade padrão de sangue coletado (pode ser parametrizado depois)
             quantidade_ml = 450
             
-            # Criar registro no histórico
+            # criar registro no histórico
             historico = HistoricoModel.criar(
                 id_usuario=agendamento['id_usuario'],
                 id_hemocentro=g.id_hemocentro,
@@ -402,7 +407,6 @@ def marcar_realizado(current_user, id_agendamento):
                 "message": f"Erro ao registrar doação no histórico: {str(e_historico)}"
             }), 500
         
-        # 2️⃣ Atualizar status do agendamento
         sucesso = AgendamentoModel.atualizar(id_agendamento, {'status': 'realizado'})
         if not sucesso:
             print("[ERRO] Falha ao atualizar status do agendamento")
@@ -410,8 +414,7 @@ def marcar_realizado(current_user, id_agendamento):
                 "success": False,
                 "message": "Erro ao atualizar status do agendamento"
             }), 500
-        
-        # 3️⃣ Se houver campanha, incrementar o contador
+
         if agendamento.get('id_campanha'):
             try:
                 quantidade_litros = quantidade_ml / 1000.0
@@ -422,7 +425,7 @@ def marcar_realizado(current_user, id_agendamento):
                 print(f"[INFO] Campanha {agendamento['id_campanha']} atualizada: +{quantidade_litros}L")
             except Exception as e_campanha:
                 print(f"[AVISO] Erro ao atualizar campanha: {str(e_campanha)}")
-                # Não falha a operação se não conseguir atualizar campanha
+                # não falha a operação se não conseguir atualizar campanha
         
         return jsonify({
             "success": True,

@@ -2,7 +2,6 @@
 if (localStorage.getItem("token")) {
   // registro de campanha
   const campanha = document.getElementById("campanha");
-
   if (campanha) {
     const nome = document.getElementById("nome");
     const descricao = document.getElementById("descricao");
@@ -14,15 +13,11 @@ if (localStorage.getItem("token")) {
     const objetivo = document.getElementById("objetivo");
     const destaque = document.getElementById("destaque");
     let ativo = true;
-
-    //pega a data atual
     const hoje = new Date();
     const dia = String(hoje.getDate()).padStart(2, "0");
     const mes = String(hoje.getMonth() + 1).padStart(2, "0");
     const ano = hoje.getFullYear();
     const dCriacao = `${ano}-${mes}-${dia}`;
-
-    //validação
     const vTexto = (v) => v.trim().length >= 3;
     const vData = (v) => /^\d{4}-\d{2}-\d{2}$/.test(v);
     const vNumero = (v) => !isNaN(v) && Number(v) >= 0;
@@ -38,8 +33,6 @@ if (localStorage.getItem("token")) {
       const okTipo = vTexto(tipoSangueRequerido.value);
       const okMeta = vNumero(qtdMetaLitros.value);
       const okObjetivo = vTexto(objetivo.value);
-
-      // aplicar classes de erro simples
       nome.classList.toggle("erro", !okNome);
       descricao.classList.toggle("erro", !okDescricao);
       dInic.classList.toggle("erro", !okInicio);
@@ -47,7 +40,6 @@ if (localStorage.getItem("token")) {
       tipoSangueRequerido.classList.toggle("erro", !okTipo);
       qtdMetaLitros.classList.toggle("erro", !okMeta);
       objetivo.classList.toggle("erro", !okObjetivo);
-
       return (
         okNome &&
         okDescricao &&
@@ -65,12 +57,10 @@ if (localStorage.getItem("token")) {
     // envio pro backend
     campanha.addEventListener("submit", async (e) => {
       e.preventDefault();
-
       if (!validar()) {
         alert("Verifique os campos antes de enviar. Há erros no formulário.");
         return;
       }
-
       const dados = {
         nome: nome.value.trim(),
         descricao: descricao.value.trim(),
@@ -81,8 +71,6 @@ if (localStorage.getItem("token")) {
         objetivo: objetivo.value.trim(),
         destaque: destaque.checked || false,
       };
-
-      // ver conectividade com o flask
       try {
         const token = localStorage.getItem("token");
         const resp = await fetch("/api/cadastrar_campanha", {
@@ -93,9 +81,7 @@ if (localStorage.getItem("token")) {
           },
           body: JSON.stringify(dados),
         });
-
         const res = await resp.json();
-
         if (res.success) {
           alert("Campanha registrada com sucesso!");
           campanha.reset();
@@ -115,39 +101,28 @@ if (localStorage.getItem("token")) {
 }
 
 // buscar e exibir campanhas (SEMPRE PÚBLICO)
-
 async function buscarCampanhas() {
   console.log("Iniciando busca de campanhas...");
-
   try {
     const token = localStorage.getItem("token");
     console.log("Token existe?", token ? "SIM" : "NÃO");
-
-    // MUDANÇA: Sempre usa o endpoint público
     const endpoint = "/api/campanhas";
     console.log("Endpoint que será chamado:", endpoint);
-
     const headers = {
       "Content-Type": "application/json",
     };
-
-    // Token é enviado apenas para verificar se é colaborador (opcional)
     if (token) {
       headers.Authorization = `Bearer ${token}`;
     }
-
     console.log("Fazendo requisição...");
     const resp = await fetch(endpoint, {
       method: "GET",
       headers: headers,
     });
-
     console.log("Status da resposta:", resp.status);
     console.log("Resposta OK?", resp.ok);
-
     const res = await resp.json();
     console.log("Resposta completa do servidor:", res);
-
     if (res.success && res.campanhas) {
       console.log("Número de campanhas encontradas:", res.campanhas.length);
       renderizarCampanhas(res.campanhas);
@@ -170,31 +145,23 @@ async function buscarCampanhas() {
 function renderizarCampanhas(campanhas) {
   console.log("Renderizando campanhas...");
   console.log("Campanhas recebidas:", campanhas);
-
   const listaCampanhas = document.getElementById("lista-campanhas");
-
   if (!listaCampanhas) {
     console.error("Elemento #lista-campanhas não encontrado!");
     return;
   }
-
   listaCampanhas.innerHTML = "";
-
   if (campanhas.length === 0) {
     listaCampanhas.innerHTML = "<p>Nenhuma campanha cadastrada no momento.</p>";
     return;
   }
-
   const token = localStorage.getItem("token");
   const tipoUsuario = localStorage.getItem("tipo_usuario");
   const ehColaborador = token && tipoUsuario === "colaborador";
-
   campanhas.forEach((camp, index) => {
     console.log(`Renderizando campanha ${index + 1}:`, camp);
-
     const article = document.createElement("article");
     article.className = "card-campanha";
-
     const dataInicio = new Date(camp.data_inicio).toLocaleDateString("pt-BR");
     const dataFim = new Date(camp.data_fim).toLocaleDateString("pt-BR");
     const percentual = Math.round(
@@ -227,18 +194,26 @@ function renderizarCampanhas(campanhas) {
           : ""
       }
     `;
-
     listaCampanhas.appendChild(article);
   });
-
   console.log("Campanhas renderizadas com sucesso!");
 }
 
 function abrirModalEdicao(idCampanha) {
   console.log("Abrindo modal para editar campanha ID:", idCampanha);
-
+  const token = localStorage.getItem("token");
+  if (!token) {
+    alert("Você precisa estar logado como colaborador para editar campanhas.");
+    return;
+  }
   // buscar dados da campanha
-  fetch(`/api/campanhas/${idCampanha}`)
+  fetch(`/api/campanhas/${idCampanha}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    }
+  })
     .then((resp) => resp.json())
     .then((res) => {
       if (res.success && res.campanha) {
@@ -256,7 +231,6 @@ function abrirModalEdicao(idCampanha) {
 function preencherModalEdicao(campanha) {
   // criar modal dinamicamente se não existir
   let modal = document.getElementById("modal-edicao-campanha");
-
   if (!modal) {
     modal = document.createElement("section");
     modal.id = "modal-edicao-campanha";
@@ -288,26 +262,20 @@ function preencherModalEdicao(campanha) {
             <option value="O+">O+</option>
             <option value="O-">O-</option>
           </select>
-          
           <label for="edit-meta-litros">Meta (litros):</label>
           <input type="number" id="edit-meta-litros" required min="1">
-          
           <label for="edit-atual-litros">Quantidade Atual (litros):</label>
           <input type="number" id="edit-atual-litros" required min="0">
-          
           <label for="edit-objetivo">Objetivo:</label>
           <textarea id="edit-objetivo" required rows="3"></textarea>
-          
           <label>
             <input type="checkbox" id="edit-ativa">
             Campanha Ativa
           </label>
-          
           <label>
             <input type="checkbox" id="edit-destaque">
             Campanha em Destaque
           </label>
-          
           <button type="submit" class="btn-salvar">💾 Salvar Alterações</button>
           <button type="button" class="btn-cancelar" onclick="fecharModalEdicao()">❌ Cancelar</button>
         </form>
@@ -330,11 +298,7 @@ function preencherModalEdicao(campanha) {
   document.getElementById("edit-objetivo").value = campanha.objetivo || "";
   document.getElementById("edit-ativa").checked = campanha.ativa;
   document.getElementById("edit-destaque").checked = campanha.destaque || false;
-
-  // mostrar modal
   modal.style.display = "flex";
-
-  // adicionar listener do form se ainda não tiver
   const form = document.getElementById("form-edicao-campanha");
   form.onsubmit = salvarEdicaoCampanha;
 }
@@ -348,15 +312,12 @@ function fecharModalEdicao() {
 
 async function salvarEdicaoCampanha(e) {
   e.preventDefault();
-
   const idCampanha = document.getElementById("edit-id-campanha").value;
   const token = localStorage.getItem("token");
-
   if (!token) {
     alert("Você precisa estar logado como colaborador para editar campanhas.");
     return;
   }
-
   const dadosAtualizados = {
     nome: document.getElementById("edit-nome").value.trim(),
     descricao: document.getElementById("edit-descricao").value.trim(),
@@ -374,9 +335,7 @@ async function salvarEdicaoCampanha(e) {
     ativa: document.getElementById("edit-ativa").checked,
     destaque: document.getElementById("edit-destaque").checked,
   };
-
   console.log("Enviando atualização:", dadosAtualizados);
-
   try {
     const resp = await fetch(`/api/campanhas/${idCampanha}`, {
       method: "PUT",
@@ -386,31 +345,26 @@ async function salvarEdicaoCampanha(e) {
       },
       body: JSON.stringify(dadosAtualizados),
     });
-
     const res = await resp.json();
 
     if (res.success) {
-      alert("✅ Campanha atualizada com sucesso!");
+      alert("Campanha atualizada com sucesso!");
       fecharModalEdicao();
-      buscarCampanhas(); // recarrega a lista
+      buscarCampanhas();
     } else {
-      alert("❌ Erro ao atualizar: " + res.message);
+      alert("Erro ao atualizar: " + res.message);
     }
   } catch (err) {
     console.error(err);
     alert("Erro ao conectar com o servidor.");
   }
 }
-
-// fechar modal ao clicar fora dele
 window.onclick = function (event) {
   const modal = document.getElementById("modal-edicao-campanha");
   if (modal && event.target === modal) {
     fecharModalEdicao();
   }
 };
-
-// carrega as campanhas ao abrir a página
 console.log("Script carregado. Verificando se #lista-campanhas existe...");
 if (document.getElementById("lista-campanhas")) {
   console.log("Elemento encontrado! Chamando buscarCampanhas()...");

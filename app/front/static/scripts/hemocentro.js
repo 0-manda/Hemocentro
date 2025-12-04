@@ -1,8 +1,7 @@
-// Variável global para armazenar dados
+// variável global para armazenar dados
 let hemocentrosDataGlobal = [];
 
-// Funções auxiliares
-
+// funções auxiliares
 function dadosAleatorios(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -13,9 +12,6 @@ function obterMapUrl(hemo) {
   );
   return `https://www.google.com/maps?q=${endereco}&output=embed`;
 }
-
-// Buscar dados do banco
-
 async function buscarHemocentrosBD() {
   try {
     console.log("=== BUSCANDO HEMOCENTROS DO BD ===");
@@ -24,11 +20,9 @@ async function buscarHemocentrosBD() {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     });
-
     console.log("Status da resposta:", resp.status);
     const res = await resp.json();
     console.log("Resposta completa:", res);
-
     if (res.success && res.hemocentros) {
       console.log("Hemocentros encontrados:", res.hemocentros.length);
       return res.hemocentros;
@@ -45,19 +39,15 @@ async function buscarHemocentrosBD() {
 async function buscarEstoquePorHemocentro(idHemocentro) {
   try {
     console.log(`Buscando estoque do hemocentro ID ${idHemocentro}...`);
-
     const resp = await fetch(`/api/estoque/hemocentro/${idHemocentro}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     });
-
     if (!resp.ok) {
       console.error(`Erro ao buscar estoque (${resp.status})`);
       return null;
     }
-
     const json = await resp.json();
-
     if (json.success && json.estoque) {
       console.log(
         `Estoque encontrado para hemocentro ${idHemocentro}:`,
@@ -77,19 +67,15 @@ async function buscarEstoquePorHemocentro(idHemocentro) {
 function mapearEstoque(listaEstoque) {
   const buscaEstoque = {};
   if (!listaEstoque) return buscaEstoque;
-
   listaEstoque.forEach((item) => {
     buscaEstoque[item.tipo_sanguineo] = item.quantidade;
   });
   return buscaEstoque;
 }
 
-// Verificação de colaborador
-
 async function verificarColaborador(idHemocentro) {
   const token = localStorage.getItem("token");
   if (!token) return false;
-
   try {
     const resp = await fetch("/api/perfil", {
       method: "GET",
@@ -98,11 +84,8 @@ async function verificarColaborador(idHemocentro) {
         Authorization: `Bearer ${token}`,
       },
     });
-
     if (!resp.ok) return false;
-
     const res = await resp.json();
-
     if (res.success && res.usuario) {
       const usuario = res.usuario;
       return (
@@ -111,7 +94,6 @@ async function verificarColaborador(idHemocentro) {
         usuario.hemocentro.id_hemocentro === idHemocentro
       );
     }
-
     return false;
   } catch (err) {
     console.error("Erro ao verificar colaborador:", err);
@@ -119,30 +101,23 @@ async function verificarColaborador(idHemocentro) {
   }
 }
 
-// Renderização
-
+// renderização
 function renderizarCardsHemocentros(hemocentros) {
   console.log("=== RENDERIZANDO CARDS ===");
-
   const listaView = document.getElementById("lista-view");
   if (!listaView) {
     console.error("Elemento #lista-view não encontrado!");
     return;
   }
-
   listaView.innerHTML = "";
-
   if (hemocentros.length === 0) {
     listaView.innerHTML =
       "<p style='text-align: center; padding: 40px;'>Nenhum hemocentro ativo no momento.</p>";
     return;
   }
-
   hemocentros.forEach((hemo, index) => {
     const article = document.createElement("article");
     article.className = "hemocentro-card";
-
-    // Renderizar horários resumidos
     let horariosHTML = "";
     if (hemo.horarios && hemo.horarios.length > 0) {
       horariosHTML = `
@@ -178,7 +153,6 @@ function renderizarCardsHemocentros(hemocentros) {
         </section>
       `;
     }
-
     article.innerHTML = `
       <section class="info">
         <header>
@@ -196,9 +170,7 @@ function renderizarCardsHemocentros(hemocentros) {
             ? `<p><strong>Site:</strong> <a href="${hemo.site}" target="_blank" rel="noopener">${hemo.site}</a></p>`
             : ""
         }
-        
         ${horariosHTML}
-        
         <button class="btn btn-visitar" data-index="${index}" aria-label="Visitar ${
       hemo.nome
     }">Visitar</button>
@@ -207,16 +179,13 @@ function renderizarCardsHemocentros(hemocentros) {
     }" aria-label="Agendar no ${hemo.nome}">Agendar</button>
       </section>
     `;
-
     listaView.appendChild(article);
   });
-
   console.log("Cards renderizados com sucesso!");
 }
 
 function renderizarHorariosDetalhes(horarios, abertoAgora) {
   let horariosHTML = "";
-
   if (horarios && horarios.length > 0) {
     horariosHTML = `
       <section class="horarios-completos">
@@ -245,14 +214,12 @@ function renderizarHorariosDetalhes(horarios, abertoAgora) {
       </section>
     `;
   }
-
   return horariosHTML;
 }
 
 function calcularStatus(bolsas, meta) {
   const porcentagem = (bolsas / meta) * 100;
   let statusTexto, statusClasse;
-
   if (porcentagem >= 70) {
     statusTexto = "ADEQUADO - Estoque satisfatório";
     statusClasse = "status-adequado";
@@ -269,16 +236,13 @@ function renderizarEstoque(estoqueData) {
     console.error("Elemento #estoque-grid não encontrado!");
     return;
   }
-
   grid.innerHTML = "";
-
   for (const tipo in estoqueData) {
     const data = estoqueData[tipo];
     const { porcentagem, statusTexto, statusClasse } = calcularStatus(
       data.bolsas,
       data.meta
     );
-
     const cardHTML = `
       <article class="card-sangue">
         <span class="tipo-sanguineo">${tipo}</span>
@@ -296,141 +260,28 @@ function renderizarEstoque(estoqueData) {
   }
 }
 
-// Gerenciamento de estoque
-
-async function adicionarBotoesGerenciamento(hemocentro) {
-  const ehColaborador = await verificarColaborador(hemocentro.id);
-
-  if (!ehColaborador) return;
-
-  console.log(
-    `Usuário é colaborador do ${hemocentro.nome}. Adicionando botões de gerenciamento...`
-  );
-
-  const botoesAcao = document.querySelector(".botoes-acao");
-  if (botoesAcao) {
-    // Verifica se o botão já existe para evitar duplicação
-    const btnExistente = document.querySelector(".btn-gerenciar");
-    if (btnExistente) return;
-
-    const btnGerenciar = document.createElement("button");
-    btnGerenciar.className = "btn-detalhe btn-gerenciar";
-    btnGerenciar.textContent = "⚙️ Gerenciar Estoque";
-    btnGerenciar.setAttribute("aria-label", "Gerenciar estoque do hemocentro");
-    btnGerenciar.addEventListener("click", () =>
-      abrirModalGerenciamento(hemocentro)
-    );
-
-    botoesAcao.insertBefore(btnGerenciar, botoesAcao.firstChild);
-  }
-}
-
-function abrirModalGerenciamento(hemocentro) {
-  console.log("Abrindo modal de gerenciamento para:", hemocentro.nome);
-
-  const modalAntigo = document.getElementById("modal-gerenciamento");
-  if (modalAntigo) modalAntigo.remove();
-
-  const modal = document.createElement("section");
-  modal.id = "modal-gerenciamento";
-  modal.className = "modal-overlay";
-  modal.innerHTML = `
-    <article class="modal-content">
-      <header class="modal-header">
-        <h3>⚙️ Gerenciar Estoque - ${hemocentro.nome}</h3>
-        <button class="btn-fechar" aria-label="Fechar modal">&times;</button>
-      </header>
-      
-      <form id="form-gerenciar-estoque" class="modal-body">
-        <label for="tipo-sangue-gerenciar">
-          <strong>Tipo Sanguíneo:</strong>
-        </label>
-        <select id="tipo-sangue-gerenciar" required>
-          <option value="">Selecione o tipo</option>
-          <option value="O+">O+</option>
-          <option value="O-">O-</option>
-          <option value="A+">A+</option>
-          <option value="A-">A-</option>
-          <option value="B+">B+</option>
-          <option value="B-">B-</option>
-          <option value="AB+">AB+</option>
-          <option value="AB-">AB-</option>
-        </select>
-
-        <label for="quantidade-gerenciar">
-          <strong>Quantidade (litros):</strong>
-        </label>
-        <input 
-          type="number" 
-          id="quantidade-gerenciar" 
-          min="1" 
-          max="1000" 
-          required 
-          placeholder="Ex: 10"
-        />
-
-        <section class="modal-botoes">
-          <button type="button" class="btn-acao btn-adicionar" id="btn-adicionar-estoque">
-            ➕ Adicionar
-          </button>
-          <button type="button" class="btn-acao btn-remover" id="btn-remover-estoque">
-            ➖ Remover
-          </button>
-        </section>
-
-        <p class="modal-aviso" id="modal-aviso"></p>
-      </form>
-    </article>
-  `;
-
-  document.body.appendChild(modal);
-
-  modal
-    .querySelector(".btn-fechar")
-    .addEventListener("click", () => modal.remove());
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) modal.remove();
-  });
-
-  document
-    .getElementById("btn-adicionar-estoque")
-    .addEventListener("click", () => {
-      gerenciarEstoque(hemocentro, "adicionar");
-    });
-
-  document
-    .getElementById("btn-remover-estoque")
-    .addEventListener("click", () => {
-      gerenciarEstoque(hemocentro, "remover");
-    });
-}
-
 async function gerenciarEstoque(hemocentro, acao) {
   const tipoSangue = document.getElementById("tipo-sangue-gerenciar").value;
   const quantidade = parseInt(
     document.getElementById("quantidade-gerenciar").value
   );
   const aviso = document.getElementById("modal-aviso");
-
   if (!tipoSangue) {
-    aviso.textContent = "⚠️ Selecione o tipo sanguíneo";
+    aviso.textContent = "Selecione o tipo sanguíneo";
     aviso.style.color = "red";
     return;
   }
-
   if (!quantidade || quantidade <= 0) {
-    aviso.textContent = "⚠️ Informe uma quantidade válida";
+    aviso.textContent = "Informe uma quantidade válida";
     aviso.style.color = "red";
     return;
   }
-
   const token = localStorage.getItem("token");
   if (!token) {
-    aviso.textContent = "⚠️ Você precisa estar logado";
+    aviso.textContent = "Você precisa estar logado";
     aviso.style.color = "red";
     return;
   }
-
   try {
     aviso.textContent = `${
       acao === "adicionar" ? "Adicionando" : "Removendo"
@@ -455,7 +306,7 @@ async function gerenciarEstoque(hemocentro, acao) {
     const res = await resp.json();
 
     if (res.success) {
-      aviso.textContent = `✅ ${res.message}`;
+      aviso.textContent = `! ${res.message}`;
       aviso.style.color = "green";
 
       document.getElementById("form-gerenciar-estoque").reset();
@@ -465,22 +316,20 @@ async function gerenciarEstoque(hemocentro, acao) {
         document.getElementById("modal-gerenciamento").remove();
       }, 1000);
     } else {
-      aviso.textContent = `❌ ${res.message}`;
+      aviso.textContent = `X ${res.message}`;
       aviso.style.color = "red";
     }
   } catch (err) {
     console.error("Erro ao gerenciar estoque:", err);
-    aviso.textContent = "❌ Erro ao conectar com o servidor";
+    aviso.textContent = "X Erro ao conectar com o servidor";
     aviso.style.color = "red";
   }
 }
 
 async function atualizarEstoqueNaTela(hemocentro) {
   console.log("Atualizando estoque na tela...");
-
   const estoqueArray = await buscarEstoquePorHemocentro(hemocentro.id);
   const estoqueMap = mapearEstoque(estoqueArray);
-
   const index = hemocentrosDataGlobal.findIndex((h) => h.id === hemocentro.id);
   if (index !== -1) {
     hemocentrosDataGlobal[index].estoque = {
@@ -493,57 +342,43 @@ async function atualizarEstoqueNaTela(hemocentro) {
       "B+": { bolsas: estoqueMap["B+"] ?? 0, meta: 100 },
       "B-": { bolsas: estoqueMap["B-"] ?? 0, meta: 100 },
     };
-
     renderizarEstoque(hemocentrosDataGlobal[index].estoque);
   }
-
   console.log("Estoque atualizado!");
 }
 
-// Navegação entre views
-
+// navegação entre views
 async function mostrarDetalhes(index) {
   console.log("=== MOSTRANDO DETALHES ===");
   console.log("Index clicado:", index);
   console.log("Total de hemocentros:", hemocentrosDataGlobal.length);
   console.log("Hemocentro selecionado:", hemocentrosDataGlobal[index]);
-
   const hemocentro = hemocentrosDataGlobal[index];
   const detalheMapaIframe = document.getElementById("detalhe_mapa");
-
   document.getElementById("detalhe-nome").textContent = hemocentro.nome;
   document.getElementById("detalhe-localizacao").textContent =
     hemocentro.localizacao;
-
   if (hemocentro.map_url && detalheMapaIframe) {
     detalheMapaIframe.src = hemocentro.map_url;
   } else if (detalheMapaIframe) {
     detalheMapaIframe.src = "";
   }
-
   console.log("Estoque que será renderizado:", hemocentro.estoque);
   renderizarEstoque(hemocentro.estoque);
-
-  // Renderizar horários na tela de detalhes
   const detalhesHemocentro = document.querySelector(".detalhes-hemocentro");
   if (detalhesHemocentro) {
-    // Remover horários anteriores se existirem
     const horariosAntigos = detalhesHemocentro.querySelector(
       ".horarios-completos"
     );
     if (horariosAntigos) {
       horariosAntigos.remove();
     }
-
-    // Adicionar novos horários
     const horariosHTML = renderizarHorariosDetalhes(
       hemocentro.horarios,
       hemocentro.abertoAgora
     );
     const horariosDiv = document.createElement("div");
     horariosDiv.innerHTML = horariosHTML;
-
-    // Inserir antes dos botões de ação
     const botoesAcao = detalhesHemocentro.querySelector(".botoes-acao");
     if (botoesAcao) {
       detalhesHemocentro.insertBefore(
@@ -554,10 +389,7 @@ async function mostrarDetalhes(index) {
       detalhesHemocentro.appendChild(horariosDiv.firstElementChild);
     }
   }
-
-  // Adicionar botões de gerenciamento se for colaborador
   await adicionarBotoesGerenciamento(hemocentro);
-
   document.getElementById("lista-view").style.display = "none";
   document.getElementById("detalhe-view").classList.add("ativo");
   window.scrollTo(0, 0);
@@ -568,39 +400,26 @@ function mostrarLista() {
   document.getElementById("detalhe-view").classList.remove("ativo");
   const iframe = document.getElementById("detalhe_mapa");
   if (iframe) iframe.src = "";
-
-  // Remover botão de gerenciamento ao voltar
   const btnGerenciar = document.querySelector(".btn-gerenciar");
   if (btnGerenciar) btnGerenciar.remove();
-
-  // Remover horários ao voltar
   const horariosDetalhes = document.querySelector(".horarios-completos");
   if (horariosDetalhes) horariosDetalhes.remove();
-
   window.scrollTo(0, 0);
 }
 
-// Sistema principal
-
+// sistema principal
 async function iniciarSistema() {
   console.log("=== INICIANDO SISTEMA ===");
-
   const hemocentrosBD = await buscarHemocentrosBD();
-
   renderizarCardsHemocentros(hemocentrosBD);
-
   hemocentrosDataGlobal = [];
-
   for (const hemo of hemocentrosBD) {
     console.log(
       `\n=== Processando hemocentro: ${hemo.nome} (ID: ${hemo.id_hemocentro}) ===`
     );
-
     const estoqueArray = await buscarEstoquePorHemocentro(hemo.id_hemocentro);
     const estoqueMap = mapearEstoque(estoqueArray);
-
     console.log(`Estoque mapeado para ${hemo.nome}:`, estoqueMap);
-
     const hemocentroCompleto = {
       id: hemo.id_hemocentro,
       nome: hemo.nome,
@@ -619,15 +438,12 @@ async function iniciarSistema() {
         "B-": { bolsas: estoqueMap["B-"] ?? 0, meta: 100 },
       },
     };
-
     hemocentrosDataGlobal.push(hemocentroCompleto);
   }
-
   console.log(
     "\n=== Dados completos de todos os hemocentros ===",
     hemocentrosDataGlobal
   );
-
   configurarEventListeners();
 }
 
@@ -654,7 +470,6 @@ function configurarEventListeners() {
       button.addEventListener("click", function () {
         const hemocentroIndex = parseInt(this.getAttribute("data-index"));
         const hemocentroId = this.getAttribute("data-id");
-
         if (hemocentrosDataGlobal[hemocentroIndex]) {
           const h = hemocentrosDataGlobal[hemocentroIndex];
           const nomeCodificado = encodeURIComponent(h.nome);
@@ -667,8 +482,7 @@ function configurarEventListeners() {
   }, 100);
 }
 
-// Inicialização da página de hemocentros
-
+// inicialização da página de hemocentros
 document.addEventListener("DOMContentLoaded", () => {
   const listaView = document.getElementById("lista-view");
   if (listaView) {
@@ -676,10 +490,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Cadastro de hemocentro
-
+// cadastro de hemocentro
 const cadastroHemocentro = document.getElementById("cadastroHemocentro");
-
 if (cadastroHemocentro) {
   const nomeHemocentro = document.getElementById("nomeHemocentro");
   const email = document.getElementById("emailInstitucional");
@@ -687,49 +499,38 @@ if (cadastroHemocentro) {
   const end = document.getElementById("endereco");
   const cep = document.getElementById("cep");
   const site = document.getElementById("site");
-
   const hoje = new Date();
   const dia = String(hoje.getDate()).padStart(2, "0");
   const mes = String(hoje.getMonth() + 1).padStart(2, "0");
   const ano = hoje.getFullYear();
   const dCadastro = `${ano}-${mes}-${dia}`;
-
   const ativo = true;
-
   const reMail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   const reCEP = /^\d{5}-?\d{3}$/;
-
   const vNome = (v) => v.trim().length >= 3;
   const vMail = (v) => reMail.test(v.trim());
   const vTel = (v) => v.trim().length >= 8;
   const vEnd = (v) => v.trim().length >= 5;
   const vCEP = (v) => reCEP.test(v.trim());
-
   function validar() {
     const okNome = vNome(nomeHemocentro.value);
     const okEmail = vMail(email.value);
     const okTel = vTel(tel.value);
     const okEnd = vEnd(end.value);
     const okCEP = vCEP(cep.value);
-
     [nomeHemocentro, email, tel, end, cep].forEach((elemento, index) => {
       const valids = [okNome, okEmail, okTel, okEnd, okCEP];
       elemento.classList.toggle("erro", !valids[index]);
     });
-
     return okNome && okEmail && okTel && okEnd && okCEP;
   }
-
   cadastroHemocentro.addEventListener("input", validar);
-
   cadastroHemocentro.addEventListener("submit", async (evento) => {
     evento.preventDefault();
-
     if (!validar()) {
       alert("Por favor, preencha corretamente todos os campos obrigatórios.");
       return;
     }
-
     const dados = {
       nomeHemocentro: nomeHemocentro.value.trim(),
       emailInstitucional: email.value.trim(),
@@ -740,16 +541,13 @@ if (cadastroHemocentro) {
       dCadastro: dCadastro,
       ativo: ativo,
     };
-
     try {
       const resp = await fetch("/cadastroHemocentro", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dados),
       });
-
       const res = await resp.json();
-
       if (res.ok) {
         alert("Hemocentro cadastrado com sucesso!");
         cadastroHemocentro.reset();
@@ -764,10 +562,8 @@ if (cadastroHemocentro) {
   });
 }
 
-// Login de hemocentro
-
+// login de hemocentro
 const loginHemocentro = document.getElementById("login_hemocentro");
-
 if (loginHemocentro) {
   const loginUser = document.getElementById("login-usuario");
   const email = document.getElementById("email");
@@ -775,13 +571,10 @@ if (loginHemocentro) {
   const avisoEmail = document.getElementById("aviso-email");
   const avisoSenha = document.getElementById("aviso-senha");
   const avisoGeral = document.getElementById("aviso-geral");
-
   loginUser.addEventListener("submit", async function (e) {
     e.preventDefault();
-
     const emailTeste = email.value.trim();
     const senhaTeste = senha.value.trim();
-
     if (emailTeste === "") {
       avisoEmail.style.color = "red";
       avisoEmail.textContent = "Email vazio.";
@@ -791,7 +584,6 @@ if (loginHemocentro) {
       avisoSenha.textContent = "Senha vazia.";
       return;
     }
-
     try {
       const resp = await fetch("/api/login", {
         method: "POST",
@@ -801,7 +593,6 @@ if (loginHemocentro) {
           senha: senhaTeste,
         }),
       });
-
       const res = await resp.json();
       if (res.success) {
         localStorage.setItem("token", res.token);

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content="Página de login do usuário" />
@@ -21,10 +22,8 @@
 
     <main class="container">
       <aside class="bloco"></aside>
-
       <section class="login">
         <section class="login-content">
-          <!-- Agrupa tudo no lado direito -->
           <h1 class="titulo_login">LOGIN</h1>
 
           <form id="login-usuario" method="post" action="/api/login">
@@ -41,7 +40,7 @@
                 <input type="checkbox" id="lembrar" />
                 <label for="lembrar">Lembrar-me</label>
               </nav>
-              <a href="esquecersenha.html">Esqueceu a senha?</a>
+              <a href="#" onclick="event.preventDefault(); alert('Ação não disponível, estamos tratando isso. Tente mais tarde.');">Esqueceu a senha?</a>
             </section>
 
             <input id="loginBtn" type="submit" value="ENTRAR" />
@@ -70,6 +69,7 @@
                 />
               </figure>
             </a>
+
             <a href="nao_definido_ainda" id="Facebook">
               <figure>
                 <img
@@ -80,6 +80,7 @@
                 />
               </figure>
             </a>
+
             <a href="nao_definido_ainda" id="Apple">
               <figure>
                 <img
@@ -90,11 +91,15 @@
                 />
               </figure>
             </a>
+
           </article>
+
         </section>
+
       </section>
 
       <aside class="bloco2"></aside>
+
     </main>
 
     <script src="../static/scripts/cadastro.js"></script>
@@ -112,5 +117,6 @@
         </ul>
       </nav>
     </footer>
+    
   </body>
 </html>

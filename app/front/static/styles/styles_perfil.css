@@ -1,4 +1,3 @@
-/* Box-sizing universal para evitar overflow causado por padding/border */
 * {
   box-sizing: border-box;
 }
@@ -12,10 +11,8 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  overflow-x: hidden; /* Previne scroll horizontal inesperado */
+  overflow-x: hidden;
 }
-
-/* ==================== MENU DE NAVEGAÇÃO ==================== */
 
 .menu {
   display: flex;
@@ -54,8 +51,6 @@ body {
   background-color: #d60000;
 }
 
-/* ==================== CONTAINER PRINCIPAL ==================== */
-
 .container {
   width: 90%;
   max-width: 900px;
@@ -66,8 +61,6 @@ body {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   flex-grow: 1;
 }
-
-/* ==================== TÍTULOS ==================== */
 
 h1,
 h2 {
@@ -95,8 +88,6 @@ h2 {
   border-bottom: 1px solid #eee;
 }
 
-/* ==================== CARDS DE INFORMAÇÃO ==================== */
-
 .info-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -110,6 +101,7 @@ h2 {
   padding: 15px;
   border: 1px solid #ddd;
   border-radius: 4px;
+  text-align: center;
 }
 
 .card-dado h3 {
@@ -124,8 +116,6 @@ h2 {
   font-size: 50px;
 }
 
-/* ==================== SEÇÃO DE HEADER ==================== */
-
 .header-section {
   display: flex;
   justify-content: space-between;
@@ -137,8 +127,6 @@ h2 {
   color: #c41e3a;
   margin: 0;
 }
-
-/* ==================== BOTÕES ==================== */
 
 .btn-novo-agendamento,
 .btn-cancelar {
@@ -171,7 +159,6 @@ h2 {
   background-color: #e0a800;
 }
 
-/* Botões de Filtro de Agendamentos */
 .btn-filtro {
   padding: 8px 16px;
   background: #f0f0f0;
@@ -201,7 +188,19 @@ h2 {
   border-color: #a01528;
 }
 
-/* ==================== TABELAS ==================== */
+.btn-primario {
+  background-color: darkred;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-primario:hover {
+  background-color: #b20000;
+}
 
 .tabela-dados {
   width: 100%;
@@ -243,12 +242,21 @@ h2 {
   border-bottom: 1px solid #ddd;
 }
 
+.tabela-dados td span {
+  display: inline-block;
+  white-space: nowrap;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  min-width: fit-content;
+}
+
 .status-concluido {
   font-weight: bold;
   color: green;
 }
-
-/* ==================== LISTA DE CAMPANHAS ==================== */
 
 .lista-campanhas {
   list-style: none;
@@ -276,8 +284,6 @@ h2 {
 .lista-campanhas a:hover {
   background-color: red;
 }
-
-/* ==================== FORMULÁRIO ADMINISTRATIVO (CAMPANHAS) ==================== */
 
 .card-form {
   background: #fff;
@@ -344,22 +350,6 @@ h2 {
   gap: 12px;
 }
 
-.btn-primario {
-  background-color: darkred;
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.btn-primario:hover {
-  background-color: #b20000;
-}
-
-/* ==================== FOOTER ==================== */
-
 footer {
   text-align: center;
   padding: 20px;
@@ -369,13 +359,11 @@ footer {
   margin-top: auto;
 }
 
-/* ==================== UTILITÁRIOS ==================== */
-
 .esconda {
   display: none !important;
 }
 
-/* ==================== RESPONSIVIDADE - DESKTOP GRANDE (1025px+) ==================== */
+/*  responsividade */
 
 @media (min-width: 1025px) {
   .container {
@@ -383,16 +371,12 @@ footer {
   }
 }
 
-/* ==================== RESPONSIVIDADE - TABLET (769px a 1024px) ==================== */
-
 @media (min-width: 769px) and (max-width: 1024px) {
   .menu a {
     padding: 15px 18px;
     font-size: 16px;
   }
 }
-
-/* ==================== RESPONSIVIDADE - MOBILE (até 768px) ==================== */
 
 @media (max-width: 768px) {
   .container {
@@ -403,7 +387,6 @@ footer {
     border-radius: 0;
   }
 
-  /* Menu em Coluna */
   .menu {
     flex-direction: column;
     padding: 0;
@@ -428,26 +411,15 @@ footer {
     text-align: center;
   }
 
-  /* Grid de Informações */
   .info-grid {
     grid-template-columns: 1fr;
     gap: 15px;
   }
 
-  /* Tabelas */
   .tabela-dados {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
     font-size: 12px;
   }
 
-  .tabela-dados th,
-  .tabela-dados td {
-    padding: 8px;
-  }
-
-  /* Tornar tabela responsiva em formato de cards */
   .tabela-dados thead {
     display: none;
   }
@@ -478,7 +450,6 @@ footer {
     color: #c41e3a;
   }
 
-  /* Header de Seção */
   .header-section {
     flex-direction: column;
     align-items: flex-start;
@@ -486,7 +457,6 @@ footer {
     gap: 15px;
   }
 
-  /* Botões */
   .btn-novo-agendamento,
   .btn-cancelar {
     margin-top: 10px;
@@ -499,7 +469,6 @@ footer {
     font-size: 12px;
   }
 
-  /* Lista de Campanhas */
   .lista-campanhas li {
     flex-direction: column;
     align-items: flex-start;
@@ -510,7 +479,6 @@ footer {
     margin-top: 10px;
   }
 
-  /* Formulário */
   .form-grid {
     grid-template-columns: 1fr;
   }
@@ -519,7 +487,6 @@ footer {
     flex-direction: column;
   }
 
-  /* Footer */
   footer {
     padding: 15px 10px;
     font-size: 15px;

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,12 +14,12 @@
       type="image/png"
       href="../static/styles/imagens/icon_pagina.png"
     />
-
     <link rel="stylesheet" href="../static/styles/style_hemocentros.css" />
-
     <link rel="stylesheet" href="../static/styles/style_agendamento.css" />
   </head>
+
   <body>
+
     <header>
       <section>
         <nav class="menu">
@@ -46,11 +47,11 @@
       <h1>Agendar sua Doação</h1>
 
       <div class="formulario-agendamento">
-        <a href="/hemocentros" class="btn btn-voltar-agendamento"
-          >← Voltar para Hemocentros</a
-        >
 
+        <a href="/hemocentros" class="btn btn-voltar-agendamento"
+          >← Voltar para Hemocentros</a>
         <form action="/processar-agendamento" method="POST" id="agendamento">
+
           <input
             type="hidden"
             id="id_hemocentro"
@@ -80,15 +81,18 @@
             name="data_hora"
             required
           />
-
           <label for="tipo_doacao">Motivo da Doação:</label>
+
           <select id="tipo_doacao" name="tipo_doacao" required>
+
             <option value="" disabled selected>
               Selecione o tipo de agendamento
             </option>
+
             <option value="espontanea">Doação Espontânea (Rotina)</option>
             <option value="campanha">Participação em Campanha</option>
             <option value="primeira_vez">Primeira Vez</option>
+
           </select>
 
           <label for="tipo_sangue_doado">O que você pretende doar?</label>
@@ -97,6 +101,7 @@
             <option value="plaquetas">Plaquetas</option>
             <option value="plasma">Plasma</option>
             <option value="aferese">Aférese (Componente específico)</option>
+
           </select>
 
           <label for="observacoes"
@@ -113,13 +118,17 @@
           <button type="submit" class="btn btn-submit">
             Confirmar Agendamento
           </button>
+
         </form>
+
       </div>
+
     </main>
 
     <footer>
       <p>&copy; 2025 - Todos os direitos reservados | HemoCamp</p>
     </footer>
+    
     <script src="../static/scripts/agendamento.js"></script>
   </body>
 </html>

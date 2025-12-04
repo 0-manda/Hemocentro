@@ -1,9 +1,7 @@
 if (!localStorage.getItem("token")) {
   console.warn("Sem token — bloqueando horários.");
 } else {
-
   let horariosTemp = [];
-
   const DIAS_SEMANA_NOMES = [
     'Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira',
     'Quinta-feira', 'Sexta-feira', 'Sábado'
@@ -17,7 +15,6 @@ if (!localStorage.getItem("token")) {
   const aviso = document.getElementById("aviso-horario");
   const container = document.getElementById("horarios-container");
   const btnAdicionar = document.getElementById("btn-adicionar-horario");
-
   const vDia = (v) => v.trim().length > 0;
   const vHora = (v) => /^\d{2}:\d{2}$/.test(v.trim());
   const compararHoras = (inicio, fim) => {
@@ -31,11 +28,9 @@ if (!localStorage.getItem("token")) {
     const okAbertura = vHora(hAbertura.value);
     const okFechado = vHora(hFechamento.value);
     const ordem = okAbertura && okFechado && compararHoras(hAbertura.value, hFechamento.value);
-
     dFuncionamento.classList.toggle("erro", !okDia);
     hAbertura.classList.toggle("erro", !okAbertura);
     hFechamento.classList.toggle("erro", !okFechado || !ordem);
-
     return okDia && okAbertura && okFechado && ordem;
   }
 
@@ -61,7 +56,6 @@ if (!localStorage.getItem("token")) {
     `)
       .join("");
   }
-
   window.removerHorarioTemp = function (index) {
     const removido = horariosTemp[index];
     horariosTemp.splice(index, 1);
@@ -79,38 +73,30 @@ if (!localStorage.getItem("token")) {
     }
 
     const diaSemana = parseInt(dFuncionamento.value);
-
     if (horariosTemp.some((h) => h.dia_semana === diaSemana)) {
       aviso.textContent = `${DIAS_SEMANA_NOMES[diaSemana]} já foi adicionado`;
       aviso.style.color = "red";
       return;
     }
-
     horariosTemp.push({
       dia_semana: diaSemana,
       horario_abertura: hAbertura.value.trim(),
       horario_fechamento: hFechamento.value.trim(),
       observacao: observacao.value.trim()
     });
-
     horariosTemp.sort((a, b) => a.dia_semana - b.dia_semana);
     renderizarHorariosTemp();
-
     aviso.textContent = `${DIAS_SEMANA_NOMES[diaSemana]} adicionado`;
     aviso.style.color = "green";
-
     dFuncionamento.value = "";
     hAbertura.value = "";
     hFechamento.value = "";
     observacao.value = "";
-
     setTimeout(() => (aviso.textContent = ""), 3000);
   }
-
   if (btnAdicionar) {
     btnAdicionar.addEventListener("click", adicionarHorarioTemp);
   }
-
   [dFuncionamento, hAbertura, hFechamento, observacao].forEach((campo) => {
     campo.addEventListener("keypress", (e) => {
       if (e.key === "Enter") {
@@ -119,21 +105,16 @@ if (!localStorage.getItem("token")) {
       }
     });
   });
-
-  // Envio final ao backend (todos os horários da lista)
+  // envio final ao backend (todos os horários da lista)
   horarioFuncionamento.addEventListener("submit", async (e) => {
     e.preventDefault();
-
     if (horariosTemp.length === 0) {
       alert("Adicione pelo menos um horário.");
       return;
     }
-
     const token = localStorage.getItem("token");
-
     let sucesso = 0;
     let erro = 0;
-
     for (const h of horariosTemp) {
       try {
         const resp = await fetch("/horario/horarios", {
@@ -150,17 +131,13 @@ if (!localStorage.getItem("token")) {
             ativo: true
           }),
         });
-
         const res = await resp.json();
-
         if (res.success) sucesso++;
         else erro++;
-
       } catch {
         erro++;
       }
     }
-
     if (erro > 0) {
       alert(`${sucesso} horário(s) salvos, ${erro} falharam.`);
     } else {
@@ -170,6 +147,5 @@ if (!localStorage.getItem("token")) {
       horarioFuncionamento.reset();
     }
   });
-
   renderizarHorariosTemp();
 }

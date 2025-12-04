@@ -70,7 +70,6 @@ def criar_campanha(current_user):
                 "success": False, 
                 "message": "Quantidade meta deve ser um número inteiro positivo."
             }), 400
-        
         campanha = CampanhaModel.criar(
             id_hemocentro=g.id_hemocentro,
             nome=data['nome'].strip(),
@@ -139,30 +138,34 @@ def listar_campanhas():
         }), 500
 
 # buscar campanha por id
-# @campanha_bp.route('/campanhas/<int:campanha_id>', methods=['GET'])
-# def buscar_campanha(campanha_id):
-#     try:
-#         campanha = CampanhaModel.buscar_por_id(campanha_id)
-        
-#         if not campanha:
-#             return jsonify({
-#                 "success": False,
-#                 "message": "Campanha não encontrada."
-#             }), 404
-#         return jsonify({
-#             "success": True,
-#             "campanha": campanha
-#         }), 200
-        
-#     except Exception as e:
-#         print(f"[ERRO] Buscar campanha: {str(e)}")
-#         import traceback
-#         traceback.print_exc()
-#         return jsonify({
-#             "success": False,
-#             "message": "Erro interno do servidor."
-#         }), 500
-
+@campanha_bp.route('/campanhas/<int:campanha_id>', methods=['GET'])
+@requer_colaborador
+def buscar_campanha(current_user, campanha_id):
+    try:
+        campanha = CampanhaModel.buscar_por_id(campanha_id)
+        if not campanha:
+            return jsonify({
+                "success": False,
+                "message": "Campanha não encontrada."
+            }), 404
+        # Verifica se a campanha pertence ao hemocentro do colaborador
+        if campanha['id_hemocentro'] != g.id_hemocentro:
+            return jsonify({
+                "success": False,
+                "message": "Você só pode visualizar campanhas do seu hemocentro."
+            }), 403 
+        return jsonify({
+            "success": True,
+            "campanha": campanha
+        }), 200
+    except Exception as e:
+        print(f"[ERRO] Buscar campanha: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({
+            "success": False,
+            "message": "Erro interno do servidor."
+        }), 500
 
 # atualizar campanha
 @campanha_bp.route('/campanhas/<int:campanha_id>', methods=['PUT'])
@@ -225,7 +228,10 @@ def atualizar_campanha(current_user, campanha_id):
         if 'data_fim' in campos_para_atualizar:
             try:
                 data_fim = datetime.strptime(campos_para_atualizar['data_fim'], '%Y-%m-%d')
-                data_inicio = datetime.strptime(campanha['data_inicio'], '%Y-%m-%d')
+                if isinstance(campanha['data_inicio'], str):
+                    data_inicio = datetime.strptime(campanha['data_inicio'], '%Y-%m-%d')
+                else:
+                    data_inicio = datetime.combine(campanha['data_inicio'], datetime.min.time())
                 
                 if data_fim <= data_inicio:
                     return jsonify({
@@ -258,12 +264,10 @@ def atualizar_campanha(current_user, campanha_id):
                     "message": "Quantidade atual deve ser um número inteiro não-negativo."
                 }), 400
         CampanhaModel.atualizar(campanha_id, campos_para_atualizar)
-        
         return jsonify({
             "success": True,
             "message": "Campanha atualizada com sucesso!"
-        }), 200
-        
+        }), 200  
     except Exception as e:
         print(f"[ERRO] Atualizar campanha: {str(e)}")
         import traceback
@@ -293,8 +297,7 @@ def desativar_campanha(current_user, campanha_id):
         return jsonify({
             "success": True,
             "message": "Campanha desativada com sucesso!"
-        }), 200
-        
+        }), 200 
     except Exception as e:
         print(f"[ERRO] Desativar campanha: {str(e)}")
         import traceback

@@ -4,7 +4,6 @@ from back.utils.auth_utils import requer_colaborador
 from datetime import time, datetime
 
 horario_bp = Blueprint('horario_bp', __name__)
-
 # busca hemocentro (só retorna um que tenha no sistema)
 def obter_hemocentro_sistema():
     hemocentros = HemocentroModel.listar_ativos()
@@ -55,7 +54,6 @@ def cadastrar_horario(current_user):
                 "message": "Dia inválido. Use 0-6 ou nome (ex: 'segunda', 'terça')"
             }), 400
         dia_nome_banco = numero_para_dia(dia_numero)
-
         try:
             hora_abertura = data['horario_abertura'].strip()
             hora_fechamento = data['horario_fechamento'].strip()
@@ -72,13 +70,11 @@ def cadastrar_horario(current_user):
                 }), 400
             horario_abertura = hora_abertura[:5]
             horario_fechamento = hora_fechamento[:5]
-            
         except ValueError:
             return jsonify({
                 "success": False,
                 "message": "Formato inválido. Use HH:MM (ex: 08:00, 18:00)"
             }), 400
-        
         horario_existente = HorarioFuncionamentoModel.buscar_por_dia(
             id_hemocentro=g.id_hemocentro,
             dia_semana=dia_nome_banco
@@ -88,7 +84,6 @@ def cadastrar_horario(current_user):
                 "success": False,
                 "message": f"Já existe horário para {DIAS_SEMANA_NOMES[dia_numero]}"
             }), 409
-
         horario = HorarioFuncionamentoModel.criar(
             id_hemocentro=g.id_hemocentro,
             dia_semana=dia_nome_banco,
@@ -100,8 +95,7 @@ def cadastrar_horario(current_user):
             "success": True,
             "message": f"Horário de {DIAS_SEMANA_NOMES[dia_numero]} cadastrado com sucesso!",
             "horario": horario
-        }), 201
-        
+        }), 201  
     except ValueError as ve:
         return jsonify({
             "success": False,
@@ -147,7 +141,6 @@ def listar_horarios():
             },
             "horarios": horarios
         }), 200
-        
     except Exception as e:
         print(f"[ERRO] Listar horários: {str(e)}")
         import traceback
@@ -174,7 +167,6 @@ def atualizar_horario(current_user, horario_id):
                 "success": False,
                 "message": "Você não tem permissão para editar este horário"
             }), 403
-        
         campos_para_atualizar = {}
         if data.get('horario_abertura'):
             hora = data['horario_abertura'].strip()
@@ -188,7 +180,6 @@ def atualizar_horario(current_user, horario_id):
                     "success": False,
                     "message": "Formato de abertura inválido"
                 }), 400
-
         if data.get('horario_fechamento'):
             hora = data['horario_fechamento'].strip()
             if len(hora.split(':')) == 2:
@@ -215,13 +206,10 @@ def atualizar_horario(current_user, horario_id):
                     "success": False,
                     "message": "Abertura deve ser antes do fechamento"
                 }), 400
-
         if 'observacao' in data:
             campos_para_atualizar['observacao'] = data['observacao'].strip() if data['observacao'] else None
-
         if 'ativo' in data:
             campos_para_atualizar['ativo'] = bool(data['ativo'])
-
         if not campos_para_atualizar:
             return jsonify({
                 "success": False,
@@ -246,8 +234,7 @@ def atualizar_horario(current_user, horario_id):
             "success": True,
             "message": "Horário atualizado com sucesso!",
             "horario": horario_atualizado
-        }), 200
-        
+        }), 200   
     except Exception as e:
         print(f"[ERRO] Atualizar horário: {str(e)}")
         import traceback
@@ -256,7 +243,6 @@ def atualizar_horario(current_user, horario_id):
             "success": False,
             "message": "Erro ao atualizar horário"
         }), 500
-
 
 # deletar horario
 @horario_bp.route('/horarios/<int:horario_id>', methods=['DELETE'])
@@ -283,8 +269,7 @@ def deletar_horario(current_user, horario_id):
         return jsonify({
             "success": True,
             "message": "Horário deletado com sucesso!"
-        }), 200
-        
+        }), 200      
     except Exception as e:
         print(f"[ERRO] Deletar horário: {str(e)}")
         import traceback
@@ -321,19 +306,15 @@ def esta_aberto_agora():
         hora_atual = agora.time()
         abertura = horario_hoje['horario_abertura']
         fechamento = horario_hoje['horario_fechamento']
-
         if isinstance(abertura, str):
             if len(abertura.split(':')) == 2:
                 abertura += ':00'
             abertura = time.fromisoformat(abertura)
-        
         if isinstance(fechamento, str):
             if len(fechamento.split(':')) == 2:
                 fechamento += ':00'
             fechamento = time.fromisoformat(fechamento)
-        
         esta_aberto = abertura <= hora_atual <= fechamento
-        
         return jsonify({
             "success": True,
             "aberto": esta_aberto,
@@ -344,7 +325,6 @@ def esta_aberto_agora():
             },
             "mensagem": "Aberto agora!" if esta_aberto else f"Fechado (Abre às {str(abertura)[:5]})"
         }), 200
-        
     except Exception as e:
         print(f"[ERRO] Verificar abertura: {str(e)}")
         import traceback
@@ -353,7 +333,6 @@ def esta_aberto_agora():
             "success": False,
             "message": "Erro ao verificar status"
         }), 500
-
 
 # horario colaborador
 @horario_bp.route('/meus-horarios', methods=['GET'])
@@ -376,8 +355,7 @@ def meus_horarios(current_user):
             "success": True,
             "horarios": horarios,
             "total": len(horarios)
-        }), 200
-        
+        }), 200 
     except Exception as e:
         print(f"[ERRO] Listar meus horários: {str(e)}")
         import traceback

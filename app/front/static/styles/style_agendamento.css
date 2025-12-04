@@ -35,7 +35,7 @@
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-sizing: border-box; /* Garante que padding e border não aumentem a largura total */
+    box-sizing: border-box;
     font-size: 1em;
     transition: border-color 0.3s;
 }
@@ -43,13 +43,12 @@
 .formulario-agendamento input:focus,
 .formulario-agendamento select:focus,
 .formulario-agendamento textarea:focus {
-    border-color: #d60000; /* Realça o campo focado */
+    border-color: #d60000;
     outline: none;
 }
 
-/* Botão de Submissão (Confirmar) */
 .btn-submit {
-    background-color: #4CAF50; /* Verde para ação de sucesso */
+    background-color: #4CAF50;
     color: white;
     border: none;
     padding: 15px 20px;
@@ -67,10 +66,9 @@
     background-color: #45a049;
 }
 
-/* Botão Voltar */
 .btn-voltar-agendamento {
     display: inline-block;
-    background-color: #a30000; /* Mantém a cor do tema principal */
+    background-color: #a30000;
     color: white;
     text-decoration: none;
     padding: 10px 15px;
@@ -84,7 +82,7 @@
     background-color: #d60000;
 }
 
-/* Responsividade (Ajuste para telas menores) */
+/* responsividade*/
 @media (max-width: 768px) {
     .formulario-agendamento {
         margin: 20px 5%;

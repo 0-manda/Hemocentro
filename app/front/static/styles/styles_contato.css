@@ -1,4 +1,3 @@
-/* Box-sizing universal para evitar overflow causado por padding/border */
 * {
   box-sizing: border-box;
 }
@@ -10,10 +9,8 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  overflow-x: hidden; /* Previne scroll horizontal inesperado */
+  overflow-x: hidden;
 }
-
-/* ==================== MENU DE NAVEGAÇÃO ==================== */
 
 .menu {
   display: flex;
@@ -56,8 +53,6 @@ body {
   background-color: red;
 }
 
-/* ==================== SEÇÃO DE INFORMAÇÕES DE CONTATO ==================== */
-
 .cor_primaria {
   display: flex;
   justify-content: space-around;
@@ -82,8 +77,6 @@ body {
   min-width: 200px;
 }
 
-/* ==================== SEÇÃO PRINCIPAL ==================== */
-
 .cor_secundaria {
   display: flex;
   background-color: rgb(228, 228, 228);
@@ -93,8 +86,8 @@ body {
   padding: 40px 5%;
   gap: 20px;
   align-items: center;
-  justify-content: center; /* Centraliza os blocos horizontalmente */
-  flex-wrap: wrap; /* Garante quebras em telas menores */
+  justify-content: center; 
+  flex-wrap: wrap;
 }
 
 .informativo {
@@ -105,7 +98,7 @@ body {
   align-items: center;
   justify-content: center;
   max-width: 450px;
-  min-width: 300px; /* Garante tamanho mínimo para desktop */
+  min-width: 300px;
 }
 
 .forms {
@@ -115,7 +108,7 @@ body {
   align-items: center;
   justify-content: center;
   max-width: 450px;
-  min-width: 300px; /* Garante tamanho mínimo para desktop */
+  min-width: 300px;
 }
 
 .cor_secundaria p {
@@ -131,8 +124,6 @@ body {
   text-align: center;
   margin: 0 10%;
 }
-
-/* ==================== FORMULÁRIO ==================== */
 
 .forms {
   color: darkred;
@@ -173,8 +164,6 @@ body {
   box-sizing: border-box;
 }
 
-/* ==================== BOTÕES ==================== */
-
 .btn_ler {
   padding: 10px 40px;
   background-color: darkred;
@@ -203,8 +192,6 @@ body {
   margin-top: 15px;
 }
 
-/* ==================== FOOTER ==================== */
-
 footer {
   background-color: darkred;
   color: white;
@@ -213,7 +200,7 @@ footer {
   margin-top: auto;
 }
 
-/* ==================== RESPONSIVIDADE - TABLET (até 1024px) ==================== */
+/* responsividade */
 
 @media (max-width: 1024px) {
   .menu {
@@ -260,10 +247,7 @@ footer {
   }
 }
 
-/* ==================== RESPONSIVIDADE - MOBILE (até 768px) ==================== */
-
 @media (max-width: 768px) {
-  /* Menu em Coluna */
   .menu ul {
     flex-direction: column;
     width: 100%;
@@ -283,7 +267,6 @@ footer {
     border-bottom: none;
   }
 
-  /* Conteúdo */
   .cor_secundaria {
     padding: 20px 5%;
     gap: 20px;
@@ -322,8 +305,6 @@ footer {
     font-size: 14px;
   }
 }
-
-/* ==================== RESPONSIVIDADE - MOBILE PEQUENO (até 600px) ==================== */
 
 @media (max-width: 600px) {
   .menu {
@@ -374,8 +355,6 @@ footer {
     font-size: 14px;
   }
 }
-
-/* ==================== RESPONSIVIDADE - MOBILE EXTRA PEQUENO (até 480px) ==================== */
 
 @media (max-width: 480px) {
   body {

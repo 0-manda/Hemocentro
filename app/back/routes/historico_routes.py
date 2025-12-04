@@ -4,7 +4,6 @@ from back.models import HistoricoModel, AgendamentoModel, CampanhaModel
 from datetime import datetime, timedelta
 
 historico_bp = Blueprint('historico_bp', __name__)
-
 # calculo de próxima doação
 def calcular_proxima_doacao(tipo_doacao):
     agora = datetime.now()
@@ -36,7 +35,6 @@ def registrar_doacao(current_user):
                 }), 400
         id_agendamento = data['id_agendamento']
         observacoes = data.get('observacoes', '').strip() if data.get('observacoes') else None
-
         agendamento = AgendamentoModel.buscar_por_id(id_agendamento)
         if not agendamento:
             return jsonify({
@@ -48,20 +46,17 @@ def registrar_doacao(current_user):
                 "success": False,
                 "message": "Você não tem permissão para registrar esta doação"
             }), 403
-
         status_validos = ['pendente', 'confirmado']
         if agendamento.get('status') not in status_validos:
             return jsonify({
                 "success": False,
                 "message": f"Agendamento não pode ser registrado. Status atual: {agendamento.get('status')}"
             }), 400
-        
         if HistoricoModel.buscar_por_agendamento(id_agendamento):
             return jsonify({
                 "success": False,
                 "message": "Doação já foi registrada para este agendamento"
-            }), 409
-
+            }), 404
         try:
             quantidade_ml = int(data['quantidade_ml'])
             if quantidade_ml < 200 or quantidade_ml > 600:
@@ -74,16 +69,13 @@ def registrar_doacao(current_user):
                 "success": False,
                 "message": "Quantidade deve ser um número inteiro"
             }), 400
-
         tipos_validos = ['sangue_total', 'plaquetas', 'plasma', 'aferese']
         tipo_doacao = data['tipo_doacao'].lower()
-        
         if tipo_doacao not in tipos_validos:
             return jsonify({
                 "success": False,
                 "message": f"Tipo de doação inválido. Use: {', '.join(tipos_validos)}"
             }), 400
-
         proxima_doacao = calcular_proxima_doacao(tipo_doacao)
         data_doacao_str = data.get('data_doacao')
         if data_doacao_str:
@@ -96,7 +88,6 @@ def registrar_doacao(current_user):
                 }), 400
         else:
             data_doacao = datetime.now().date()
-
         historico = HistoricoModel.criar(
             id_usuario=agendamento['id_usuario'],
             id_hemocentro=g.id_hemocentro,
@@ -107,7 +98,6 @@ def registrar_doacao(current_user):
             data_doacao=data_doacao,
             observacoes=observacoes
         )
-
         AgendamentoModel.atualizar(id_agendamento, {'status': 'realizado'})
         if agendamento.get('id_campanha'):
             quantidade_litros = quantidade_ml / 1000.0
@@ -115,14 +105,12 @@ def registrar_doacao(current_user):
                 agendamento['id_campanha'], 
                 quantidade_litros
             )
-        
         return jsonify({
             "success": True,
             "message": "Doação registrada com sucesso!",
             "historico": historico,
             "proxima_doacao_permitida": proxima_doacao.strftime('%Y-%m-%d')
         }), 201
-        
     except ValueError as ve:
         return jsonify({
             "success": False,
@@ -137,7 +125,6 @@ def registrar_doacao(current_user):
             "message": "Erro ao registrar doação"
         }), 500
 
-
 # historico e doação (doador)
 @historico_bp.route('/minhas-doacoes', methods=['GET'])
 @requer_doador
@@ -148,17 +135,13 @@ def minhas_doacoes(current_user):
         total_ml = sum(d.get('quantidade_ml', 0) for d in historico)
         proxima_doacao = None
         pode_doar = True
-        
         if historico:
             doacao_recente = historico[0]
             proxima_doacao = doacao_recente.get('proxima_doacao_permitida')
-            
             if proxima_doacao:
                 if isinstance(proxima_doacao, str):
                     proxima_doacao = datetime.strptime(proxima_doacao, '%Y-%m-%d').date()
-                
                 pode_doar = datetime.now().date() >= proxima_doacao
-        
         return jsonify({
             "success": True,
             "doacoes": historico,
@@ -169,7 +152,6 @@ def minhas_doacoes(current_user):
                 "pode_doar_agora": pode_doar
             }
         }), 200
-        
     except Exception as e:
         print(f"[ERRO] Listar minhas doações: {str(e)}")
         import traceback
@@ -178,7 +160,6 @@ def minhas_doacoes(current_user):
             "success": False,
             "message": "Erro ao buscar histórico"
         }), 500
-
 
 # listar todas doações (colaborador)
 @historico_bp.route('/doacoes', methods=['GET'])
@@ -215,7 +196,6 @@ def listar_todas_doacoes(current_user):
                 "por_tipo": por_tipo
             }
         }), 200
-        
     except Exception as e:
         print(f"[ERRO] Listar doações: {str(e)}")
         import traceback
@@ -224,7 +204,6 @@ def listar_todas_doacoes(current_user):
             "success": False,
             "message": "Erro ao listar doações"
         }), 500
-
 
 # buscar uma doação específica
 @historico_bp.route('/doacoes/<int:historico_id>', methods=['GET'])
@@ -252,8 +231,7 @@ def buscar_doacao(current_user, historico_id):
         return jsonify({
             "success": True,
             "doacao": doacao
-        }), 200
-        
+        }), 200  
     except Exception as e:
         print(f"[ERRO] Buscar doação: {str(e)}")
         import traceback
@@ -278,7 +256,6 @@ def doadores_frequentes(current_user):
             "doadores": doadores,
             "total": len(doadores)
         }), 200
-        
     except Exception as e:
         print(f"[ERRO] Doadores frequentes: {str(e)}")
         import traceback
@@ -299,7 +276,6 @@ def minhas_campanhas(current_user):
             "campanhas": campanhas,
             "total": len(campanhas)
         }), 200
-        
     except Exception as e:
         print(f"[ERRO] Minhas campanhas: {str(e)}")
         import traceback

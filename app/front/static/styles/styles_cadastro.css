@@ -1,4 +1,3 @@
-/* FIX: Adiciona box-sizing universal para evitar que padding/border causem overflow */
 * {
     box-sizing: border-box;
 }
@@ -11,28 +10,26 @@ body {
     min-height: 100vh;
     line-height: 1.5;
     font-family: verdana, arial;
-    /* FIX: Previne o scroll horizontal inesperado */
     overflow-x: hidden;
 }
 
 .container {
     display: flex;
     flex-grow: 1;
-    min-height: 100%; /* Garante que ocupe o espaço vertical disponível */
+    min-height: 100%;
 }
 
 .bloco {
     background-color: red;
     width: 50vw;
     margin: 0;
-    min-height: 100%; /* Garante que o bloco preencha a altura do container */
+    min-height: 100%;
 }
 
 .cadastro {
     flex: 1;
     display: flex;
     justify-content: center;
-    /* FIX: Centraliza verticalmente, mas ainda permite o scroll do formulário se for longo */
     align-items: flex-start; 
     align-items: flex-start;
     padding-top: 40px;
@@ -65,7 +62,7 @@ body {
 #secao-tipo-sangue {
     display: block;
     width: 100%;
-    margin-bottom: 10px; /* Adiciona espaço após a seção completa */
+    margin-bottom: 10px;
 }
 
 .cadastro input[type="email"],
@@ -89,12 +86,11 @@ body {
     box-sizing: border-box; 
 }
 
-
 .cadastro input[type="submit"] {
-    padding: 10px; /* Mantém o padding para igualar a altura */
-    font-size: 16px; /* Mantém o font-size para igualar a altura */
+    padding: 10px; 
+    font-size: 16px;
     border-radius: 5px;
-    box-sizing: border-box; /* Garante que a largura de 100% não seja afetada pelo padding */
+    box-sizing: border-box;
     background-color: darkred;
     color: white;
     border: none;
@@ -105,7 +101,6 @@ body {
 .cadastro input[type="submit"]:hover {
     background-color: red;
 }
-
 
 .extras {
     display: flex;
@@ -128,7 +123,6 @@ body {
     gap: 5px;
     margin-top: 10px;
 }
-
 
 .titulo_cadastro {
     margin-bottom: 20px;
@@ -191,8 +185,7 @@ footer nav a:hover {
     display: flex;
     gap: 7px;
 }
-/* Media Query para Mobile (até 768px) */
-/* (até 480px) */
+/* responsividade mobile (até 768px) */
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
@@ -223,7 +216,6 @@ footer nav a:hover {
     }
 }
 
-/* (até 480px) */
 @media (max-width: 480px) {
     body {
         font-size: 14px;
@@ -246,8 +238,6 @@ footer nav a:hover {
         font-size: 1.6em;
         margin-bottom: 15px;
     }
-
-    /* fieldset não está no HTML, removido para evitar confusão. */
 
     .cadastro section {
         margin-bottom: 12px;
