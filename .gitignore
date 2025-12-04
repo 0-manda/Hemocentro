@@ -1,1 +1,3 @@
-# arquivos, pastas e afins para ignorar 
+.env
+.env.local
+.env*.local
