@@ -1,0 +1,215 @@
+/* FIX: Adiciona box-sizing universal para evitar que padding/border causem overflow */
+* {
+  box-sizing: border-box;
+}
+body {
+  background-color: darkred;
+  margin: 0;
+  font-family: Verdana, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  /* FIX: Previne o scroll horizontal inesperado */
+  overflow-x: hidden;
+}
+
+.historia {
+  background-color: red;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: darkred;
+  color: white;
+  font-size: 18px;
+  padding: 0 15px;
+}
+
+.menu ul {
+  display: flex; 
+  list-style: none; 
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu li {
+  margin: 0;
+} 
+
+.menu a {
+  text-decoration: none;
+  color: white;
+  padding: 15px 25px;
+  transition: background 0.3s;
+  display: block;
+}
+
+.menu a:hover,
+.menu a.active {
+  background-color: #d60000;
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  min-height: calc(100vh - 80px);
+}
+
+.block1 {
+  background-color: darkred;
+  width: 50%;
+  height: 100%;
+  color: white;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.texto p {
+
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+  padding: 2%;
+  color: white;
+  font-family: verdana, sans-serif;
+  font-size: 1.3em;
+  line-height: 1.2;
+  text-align: left;
+}
+
+.titulo {
+
+  font-size: 70px;
+
+}
+
+.block2 {
+  background-color: darkred;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.block2 figure {
+  margin: 0;
+  text-align: center;
+}
+
+.block2 img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.block2 figcaption {
+  margin-top: 15px;
+  font-style: italic;
+  color: darkred;
+  font-size: 1.1rem;
+}
+
+footer {
+  background-color: darkred;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: auto;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .block1,
+  .block2 {
+    width: 100%;
+    padding: 30px 20px;
+  }
+
+  .titulo {
+    font-size: 2.8rem;
+  }
+
+  .texto p {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .menu ul {
+    flex-direction: column;
+  }
+
+  .menu li {
+    width: 100%;
+  }
+
+  .menu a {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #d60000; /* Adiciona a borda de separação */
+  }
+  
+  .menu li:last-child a {
+    border-bottom: none;
+  }
+
+  .titulo {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+  }
+
+  .texto h2 {
+    font-size: 1.5rem;
+  }
+
+  .texto p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    width: 90%;
+  }
+
+  .block2 figcaption {
+    font-size: 1rem;
+    color: white;
+  }
+}
+
+@media (max-width: 600px) {
+  .titulo {
+    font-size: 1.8rem;
+  }
+
+  .texto h2 {
+    font-size: 1.3rem;
+  }
+
+  .texto p {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .block1,
+  .block2 {
+    padding: 20px 15px;
+  }
+
+  footer {
+    padding: 15px;
+  }
+
+  footer p {
+    font-size: 0.9rem;
+  }
+}

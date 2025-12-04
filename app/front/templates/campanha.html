@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Participe da campanha de doação de sangue 'Gota de Esperança' do Hemocentro. Veja datas, locais e como doar."
+    />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="../static/styles/imagens/icon_pagina.png"
+    />
+
+    <link rel="stylesheet" href="../static/styles/styles_campanha.css" />
+
+    <title>Hemocentro - Campanha Gota de Esperança</title>
+  </head>
+  <body>
+    <header>
+      <nav class="menu">
+        <ul>
+          <li><a class="home" href="/">HOME</a></li>
+          <li>
+            <a class="hemocentro" href="/hemocentros" id="pagina_atual"
+              >HEMOCENTRO</a
+            >
+          </li>
+          <li><a class="contato" href="/contato">CONTATO</a></li>
+          <li><a class="sobre" href="/historia">SOBRE </a></li>
+          <li><a class="noticias" href="/noticias">NOTICIAS</a></li>
+          <li><a class="campanha" href="/campanha">CAMPANHA</a></li>
+          <li><a class="perfil" href="/perfil">USUARIO</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="banner-campanha">
+      <h1><strong>Campanhas de Doação de Sangue</strong></h1>
+      <p class="slogan">
+        Sua doação vale mais que mil palavras. Doe sangue, doe vida!
+      </p>
+    </section>
+
+    <main>
+      <!-- FORMULÁRIO DE CADASTRO (APENAS PARA COLABORADORES) -->
+      <section
+        class="secao-cadastro-campanha"
+        id="secao-form-campanha"
+        style="display: none"
+      >
+        <h2>📋 Cadastrar Nova Campanha</h2>
+        <form id="campanha" class="form-campanha">
+          <fieldset class="form-group">
+            <label for="nome">Nome da Campanha: *</label>
+            <input
+              type="text"
+              id="nome"
+              name="nome"
+              required
+              placeholder="Ex: Gota de Esperança 2025"
+              minlength="3"
+            />
+          </fieldset>
+
+          <fieldset class="form-group">
+            <label for="descricao">Descrição: *</label>
+            <textarea
+              id="descricao"
+              name="descricao"
+              required
+              rows="4"
+              placeholder="Descreva o objetivo e importância da campanha..."
+              minlength="3"
+            ></textarea>
+          </fieldset>
+
+          <fieldset class="form-row">
+            <legend class="sr-only">Período da Campanha</legend>
+
+            <label class="form-group">
+              <span>Data de Início: *</span>
+              <input type="date" id="diaInicio" name="diaInicio" required />
+            </label>
+
+            <label class="form-group">
+              <span>Data de Término: *</span>
+              <input type="date" id="diaFim" name="diaFim" required />
+            </label>
+          </fieldset>
+
+          <fieldset class="form-row">
+            <legend class="sr-only">Requisitos da Doação</legend>
+
+            <label class="form-group">
+              <span>Tipo Sanguíneo Necessário: *</span>
+              <select
+                id="tipoSangueRequerido"
+                name="tipoSangueRequerido"
+                required
+              >
+                <option value="">Selecione...</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+                <option value="Todos">Todos os tipos</option>
+              </select>
+            </label>
+
+            <label class="form-group">
+              <span>Meta em Litros: *</span>
+              <input
+                type="number"
+                id="qtdMetaLitros"
+                name="qtdMetaLitros"
+                required
+                min="1"
+                step="0.1"
+                placeholder="Ex: 100"
+              />
+            </label>
+          </fieldset>
+
+          <fieldset class="form-group">
+            <label for="objetivo">Objetivo da Campanha: *</label>
+            <textarea
+              id="objetivo"
+              name="objetivo"
+              required
+              rows="3"
+              placeholder="Ex: Atender demanda de cirurgias emergenciais..."
+              minlength="3"
+            ></textarea>
+          </fieldset>
+
+          <fieldset class="form-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="destaque" name="destaque" />
+              <span>⭐ Marcar como campanha em destaque</span>
+            </label>
+          </fieldset>
+
+          <input type="hidden" id="qtdAtual" value="0" />
+
+          <footer class="form-actions">
+            <button type="submit" class="btn-cadastrar">
+              ✅ Cadastrar Campanha
+            </button>
+            <button type="reset" class="btn-limpar">
+              🔄 Limpar Formulário
+            </button>
+          </footer>
+        </form>
+      </section>
+
+      <!-- LISTAGEM DE CAMPANHAS (PÚBLICO) -->
+      <section class="campanhas-cadastradas" aria-labelledby="titulo-campanhas">
+        <h2 id="titulo-campanhas">🎯 Campanhas Ativas</h2>
+        <article id="lista-campanhas" class="container-campanhas">
+          <p>Carregando campanhas...</p>
+        </article>
+      </section>
+
+      <!-- CHAMADA PARA AÇÃO -->
+      <aside class="chamada-acao" aria-labelledby="titulo-como-doar">
+        <h2 id="titulo-como-doar">💉 Como Participar?</h2>
+        <p>
+          Basta comparecer ao Hemocentro mais próximo dentro do período da
+          campanha e seguir as orientações abaixo:
+        </p>
+
+        <ul class="lista-requisitos">
+          <li>Ter entre 16 e 69 anos (menores de 18 com consentimento).</li>
+          <li>Estar em boas condições de saúde e pesar mais de 50kg.</li>
+          <li>Estar descansado e alimentado (evitar jejum prolongado).</li>
+          <li>Apresentar documento oficial com foto.</li>
+        </ul>
+
+        <a href="/hemocentros" class="botao-doar">QUERO DOAR AGORA!</a>
+      </aside>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 - Todos os direitos reservados | HemoCamp</p>
+    </footer>
+
+    <script src="../static/scripts/campanha.js"></script>
+    <script>
+      // Mostrar formulário apenas para colaboradores
+      document.addEventListener("DOMContentLoaded", () => {
+        const token = localStorage.getItem("token");
+        const tipoUsuario = localStorage.getItem("tipo_usuario");
+
+        console.log("Token:", token);
+        console.log("Tipo de usuário:", tipoUsuario);
+
+        if (token && tipoUsuario === "colaborador") {
+          document.getElementById("secao-form-campanha").style.display =
+            "block";
+          console.log("✅ Formulário exibido para colaborador");
+        } else {
+          console.log("ℹ Formulário oculto - usuário não é colaborador");
+        }
+      });
+    </script>
+     
+  </body>
+</html>

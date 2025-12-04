@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Perfil do usuário com informações de cadastro, histórico de doações, campanhas e agendamentos."
+    />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="../static/styles/imagens/icon_pagina.png"
+    />
+    <link rel="stylesheet" href="../static/styles/styles_perfil.css" />
+    <link rel="stylesheet" href="../static/styles/styles_perfil_adicional.css" />
+    <title>Hemocentro - Meu Perfil</title>
+  </head>
+  <body>
+    <header>
+      <nav class="menu" aria-label="Menu Principal">
+        <ul>
+          <li><a class="home" href="/">HOME</a></li>
+          <li><a class="hemocentro" href="/hemocentros">HEMOCENTRO</a></li>
+          <li><a class="contato" href="/contato">CONTATO</a></li>
+          <li><a class="sobre" href="/historia">SOBRE </a></li>
+          <li><a class="noticias" href="/noticias">NOTICIAS</a></li>
+          <li><a class="campanha" href="/campanha">CAMPANHA</a></li>
+          <li><a class="sair" href="/login" id="saida">SAIR</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="container" id="perfil">
+      <section class="perfil-info-basica" aria-labelledby="info-titulo">
+        <h1 id="titulo">Dados Pessoais</h1>
+        <p id="id_user">ID de Doador: DDR12345</p>
+
+        <section class="info-grid">
+          <article class="card-dado">
+            <h3>Nome Completo:</h3>
+            <p id="campo-nome"></p>
+          </article>
+
+          <article class="card-dado">
+            <h3>Tipo Sanguíneo:</h3>
+            <p id="tipo-sangue"></p>
+          </article>
+
+          <article class="card-dado">
+            <h3>E-mail:</h3>
+            <p id="campo-email"></p>
+          </article>
+        </section>
+
+        <section
+          style="display: flex; justify-content: center; margin-top: 20px"
+        >
+          <button
+            id="btn-editar-conta"
+            class="btn-primario"
+            style="
+              padding: 12px 30px;
+              background: #c41e3a;
+              color: white;
+              border: none;
+              border-radius: 6px;
+              cursor: pointer;
+              font-weight: bold;
+              font-size: 16px;
+            "
+          >
+            Editar Conta
+          </button>
+        </section>
+      </section>
+
+      <hr />
+
+      <!-- PARTE ESCONDIDA DO DOADOR -->
+      <section id="parte-escondida-doador" class="esconda">
+
+        <section class="secao-estatisticas" aria-labelledby="estatisticas-titulo">
+          <h2 id="estatisticas-titulo">Minhas Estatísticas</h2>
+          <section id="estatisticas-doacoes"></section>
+        </section>
+
+        <hr />
+
+        <section class="secao-dados" aria-labelledby="agendamentos-titulo">
+          <header class="header-section">
+            <h2 id="agendamentos-titulo">Próximos Agendamentos</h2>
+            <a href="/agendamento" class="btn-novo-agendamento">Agendar Doação</a>
+          </header>
+
+          <table class="tabela-dados">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Horário</th>
+                <th>Local</th>
+                <th>Ação</th>
+              </tr>
+            </thead>
+            <tbody id="meus-agendamentos"></tbody>
+          </table>
+        </section>
+
+        <hr />
+
+        <section class="secao-dados" aria-labelledby="historico-titulo">
+          <article id="lista-doacoes">
+            <article style="text-align: center; padding: 40px; color: #666">
+              <p style="font-size: 18px">Carregando histórico de doações...</p>
+            </article>
+          </article>
+        </section>
+
+        <hr />
+
+        <section class="secao-dados" aria-labelledby="preferencias-titulo">
+          <h2 id="preferencias-titulo">Preferências de Doação</h2>
+          <section id="formulario-preferencias"></section>
+        </section>
+
+      </section>
+
+      <!-- PARTE ESCONDIDA DO FUNCIONÁRIO -->
+      <section id="parte-escondida-funcionario" class="esconda">
+        
+        <section class="secao-dados" aria-labelledby="gerenciar-agendamentos-titulo">
+          <header class="header-section" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2 id="gerenciar-agendamentos-titulo">Gerenciar Agendamentos</h2>
+
+            <nav style="display: flex; gap: 10px;">
+              <button id="filtro-todos" class="btn-filtro" onclick="filtrarAgendamentos('todos')">Todos</button>
+              <button id="filtro-pendentes" class="btn-filtro btn-filtro-ativo" onclick="filtrarAgendamentos('pendente')">Pendentes</button>
+              <button id="filtro-confirmados" class="btn-filtro" onclick="filtrarAgendamentos('confirmado')">Confirmados</button>
+              <button id="filtro-realizados" class="btn-filtro" onclick="filtrarAgendamentos('realizado')">Realizados</button>
+            </nav>
+          </header>
+
+          <article
+            id="mensagem-agendamento-acao"
+            style="margin-bottom: 15px; padding: 12px; border-radius: 6px; display: none; text-align: center; font-weight: bold;"
+          ></article>
+
+          <table class="tabela-dados">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Doador</th>
+                <th>Data</th>
+                <th>Horário</th>
+                <th>Tipo</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="lista-agendamentos-colaborador">
+              <tr>
+                <td colspan="7" style="text-align: center; padding: 40px; color: #666;">
+                  Carregando agendamentos...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <hr />
+
+        <section class="cadastro-campanha">
+          <article class="card card-form">
+
+            <header class="card-header">
+              <h2>Área Administrativa</h2>
+              <p class="card-sub">Cadastro de Campanhas</p>
+            </header>
+
+            <form
+              id="campanha"
+              action="/registro-de-campanha"
+              method="post"
+              class="form-grid"
+            >
+              <article class="form-row">
+                <label for="nome-campanha">Nome da Campanha</label>
+                <input
+                  name="nome-campanha"
+                  id="nome-campanha"
+                  type="text"
+                  placeholder="Digite o nome da Campanha"
+                  class="input-text"
+                />
+              </article>
+
+              <article class="form-row">
+                <label for="descricao">Descrição</label>
+                <input
+                  name="descricao"
+                  id="descricao"
+                  type="text"
+                  placeholder="Descreva os fins da Campanha"
+                  class="input-text"
+                />
+              </article>
+
+              <article class="form-row">
+                <label for="tipo-sanguineo-necessario">Tipo Sanguíneo Necessário</label>
+                <select
+                  id="tipo-sanguineo-necessario"
+                  name="tipo-sanguineo-necessario"
+                  class="input-select"
+                >
+                  <option value="">Selecione</option>
+                  <option value="Todos">Todos</option>
+                  <option value="A+">A+</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B-">B-</option>
+                  <option value="AB+">AB+</option>
+                  <option value="AB-">AB-</option>
+                  <option value="O+">O+</option>
+                  <option value="O-">O-</option>
+                </select>
+              </article>
+
+              <article class="form-row">
+                <label for="quantidade-meta-litros">Meta (litros)</label>
+                <input
+                  type="number"
+                  id="quantidade-meta-litros"
+                  placeholder="Quantidade esperada"
+                  class="input-number"
+                />
+              </article>
+
+              <article class="form-row">
+                <label for="objetivo">Objetivo</label>
+                <input
+                  name="objetivo"
+                  id="objetivo"
+                  type="text"
+                  placeholder="Objetivo central da Campanha"
+                  class="input-text"
+                />
+              </article>
+
+              <section class="form-row form-row--inline">
+                <article>
+                  <label for="data-inicio">Início</label>
+                  <input name="data-inicio" type="date" id="data-inicio" class="input-date" />
+                </article>
+
+                <article>
+                  <label for="data-fim">Fim</label>
+                  <input name="data-fim" type="date" id="data-fim" class="input-date" />
+                </article>
+              </section>
+
+              <section class="form-row form-actions">
+                <input type="submit" id="btnEnviar" class="btn-primario" value="CRIAR" />
+                <small id="hint-aviso" class="hint"></small>
+              </section>
+            </form>
+
+          </article>
+        </section>
+
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 - Todos os direitos reservados | HemoCamp</p>
+    </footer>
+
+    <script src="/static/scripts/perfil.js"></script>
+  </body>
+</html>

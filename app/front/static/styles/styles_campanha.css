@@ -1,0 +1,589 @@
+/* Box-sizing universal para evitar overflow causado por padding/border */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(228, 228, 228);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  line-height: 1.5;
+  font-family: verdana, arial;
+  overflow-x: hidden; /* Previne scroll horizontal inesperado */
+}
+
+main {
+  flex-grow: 1;
+}
+
+:root {
+  --cor-principal: darkred;
+}
+
+/* ==================== MENU DE NAVEGAÇÃO ==================== */
+
+.menu {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  background-color: #a30000;
+  color: white;
+  font-size: 18px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.menu ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  justify-content: center;
+}
+
+.menu li {
+  margin: 0;
+}
+
+.menu a {
+  text-decoration: none;
+  color: white;
+  padding: 15px 25px;
+  display: block;
+  transition: background 0.3s;
+}
+
+.menu a:hover,
+.menu a.active {
+  background-color: #d60000;
+}
+
+.campanha {
+  background-color: red;
+}
+
+/* ==================== BANNER DA CAMPANHA ==================== */
+
+#titulo-detalhes {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.banner-campanha {
+  background-image: url("https://img.freepik.com/free-vector/red-wavy-background-minimal_78370-9509.jpg?semt=ais_hybrid&w=740&q=80");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  color: white;
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.banner-campanha h1 {
+  font-size: 3em;
+  margin-bottom: 10px;
+}
+
+.slogan {
+  font-size: 1.2em;
+  font-style: italic;
+}
+
+/* ==================== DETALHES DA CAMPANHA ==================== */
+
+.detalhes-campanha {
+  padding: 0 5%;
+}
+
+.info-grid {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.card-info {
+  flex: 1;
+  min-width: 250px;
+  border: 1px solid white;
+  padding: 20px;
+  color: white;
+  background-color: darkred;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgb(228, 228, 228);
+}
+
+.card-info a {
+  color: white;
+  border-radius: 13px;
+  padding: 10px;
+  background-color: red;
+  text-decoration: none;
+}
+
+.card-info a:hover {
+  background-color: darkred;
+}
+
+.chamada-acao {
+  text-align: center;
+  padding: 40px 5%;
+  margin-top: 30px;
+}
+
+.botao-doar {
+  display: inline-block;
+  background-color: #a30000;
+  color: white;
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 15px 30px;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-top: 25px;
+  transition: background-color 0.3s;
+}
+
+.botao-doar:hover {
+  background-color: red;
+}
+
+.lista-requisitos {
+  list-style-type: none;
+}
+
+/* ==================== CAMPANHAS CADASTRADAS ==================== */
+
+.campanhas-cadastradas {
+  padding: 40px 5%;
+  margin-top: 30px;
+}
+
+.campanhas-cadastradas h2 {
+  text-align: center;
+  color: darkred;
+  margin-bottom: 50px;
+  font-size: 2em;
+}
+
+.container-campanhas {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.container-campanhas > p {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+.card-campanha {
+  border: 1px solid white;
+  padding: 20px;
+  color: white;
+  background-color: darkred;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgb(228, 228, 228);
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 70px;
+}
+
+.card-campanha h3 {
+  color: white;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.5em;
+  border-bottom: 2px solid #a30000;
+  padding-bottom: 10px;
+}
+
+.card-campanha p {
+  margin: 10px 0;
+  line-height: 1.6;
+}
+
+.card-campanha strong {
+  color: #ffcccc;
+}
+
+.card-campanha progress {
+  width: 100%;
+  height: 25px;
+  margin-top: 15px;
+  border-radius: 5px;
+  border: none;
+}
+
+.card-campanha progress::-webkit-progress-bar {
+  background-color: #ffffff;
+  border-radius: 5px;
+}
+
+.card-campanha progress::-webkit-progress-value {
+  background-color: #a30000;
+  border-radius: 5px;
+}
+
+.card-campanha progress::-moz-progress-bar {
+  background-color: #a30000;
+  border-radius: 5px;
+}
+
+/* ==================== BOTÃO DE EDIÇÃO ==================== */
+
+.btn-editar {
+  background-color: #ffffff;
+  color: #a30000;
+  padding: 12px 25px;
+  border: 2px solid #a30000;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+}
+
+.btn-editar:hover {
+  background-color: #a30000;
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(163, 0, 0, 0.4);
+}
+
+.btn-editar:active {
+  transform: scale(0.98);
+}
+
+/* ==================== MODAL DE EDIÇÃO ==================== */
+
+/* Fundo escuro do modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(3px);
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Conteúdo do modal */
+.modal-conteudo {
+  background-color: #fefefe;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Botão de fechar (X) */
+.fechar {
+  color: #aaa;
+  float: right;
+  font-size: 32px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  line-height: 20px;
+}
+
+.fechar:hover,
+.fechar:focus {
+  color: #a30000;
+  text-decoration: none;
+}
+
+/* Título do modal */
+.modal-conteudo h2 {
+  margin-top: 0;
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #a30000;
+  padding-bottom: 10px;
+}
+
+/* Formulário dentro do modal */
+#form-edicao-campanha {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#form-edicao-campanha label {
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 5px;
+  display: block;
+}
+
+#form-edicao-campanha input[type="text"],
+#form-edicao-campanha input[type="date"],
+#form-edicao-campanha input[type="number"],
+#form-edicao-campanha select,
+#form-edicao-campanha textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+#form-edicao-campanha input:focus,
+#form-edicao-campanha select:focus,
+#form-edicao-campanha textarea:focus {
+  outline: none;
+  border-color: #a30000;
+  box-shadow: 0 0 5px rgba(163, 0, 0, 0.3);
+}
+
+#form-edicao-campanha textarea {
+  resize: vertical;
+  min-height: 80px;
+  font-family: inherit;
+}
+
+/* Checkboxes */
+#form-edicao-campanha label input[type="checkbox"] {
+  width: auto;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+/* Botões de ação */
+.btn-salvar,
+.btn-cancelar {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.btn-salvar {
+  background-color: #a30000;
+  color: white;
+}
+
+.btn-salvar:hover {
+  background-color: #d60000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(163, 0, 0, 0.3);
+}
+
+.btn-cancelar {
+  background-color: #666;
+  color: white;
+  margin-left: 10px;
+}
+
+.btn-cancelar:hover {
+  background-color: #444;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btn-salvar:active,
+.btn-cancelar:active {
+  transform: translateY(0);
+}
+
+/* Scrollbar personalizada para o modal */
+.modal-conteudo::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-conteudo::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.modal-conteudo::-webkit-scrollbar-thumb {
+  background: #a30000;
+  border-radius: 10px;
+}
+
+.modal-conteudo::-webkit-scrollbar-thumb:hover {
+  background: #d60000;
+}
+
+/* ==================== FOOTER ==================== */
+
+footer {
+  background-color: darkred;
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+  margin-top: auto;
+  margin-bottom: 0;
+}
+
+/* ==================== RESPONSIVIDADE - DESKTOP GRANDE (1025px+) ==================== */
+
+@media (min-width: 1025px) {
+  footer {
+    margin-bottom: 0;
+  }
+}
+
+/* ==================== RESPONSIVIDADE - TABLET (769px a 1024px) ==================== */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .menu a {
+    padding: 15px 18px;
+    font-size: 16px;
+  }
+
+  .banner-campanha h1 {
+    font-size: 2.5em;
+  }
+}
+
+/* ==================== RESPONSIVIDADE - MOBILE (até 768px) ==================== */
+
+@media (max-width: 768px) {
+  /* Menu em Coluna */
+  .menu {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .menu ul {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .menu li {
+    width: 100%;
+  }
+
+  .menu a {
+    padding: 12px 20px;
+    text-align: center;
+    border-bottom: 1px solid #d60000;
+  }
+
+  .menu li:last-child a {
+    border-bottom: none;
+  }
+
+  /* Conteúdo */
+  .banner-campanha {
+    padding: 30px 10px;
+  }
+
+  .banner-campanha h1 {
+    font-size: 2.2em;
+  }
+
+  .slogan {
+    font-size: 1em;
+  }
+
+  .info-grid {
+    flex-direction: column;
+    gap: 15px;
+    padding: 0 10px;
+  }
+
+  .card-info {
+    min-width: 100%;
+    padding: 15px;
+  }
+
+  .botao-doar {
+    font-size: 1.2em;
+    padding: 12px 25px;
+  }
+
+  footer {
+    padding: 15px 0;
+    margin-bottom: 0;
+  }
+
+  /* Campanhas Cadastradas */
+  .campanhas-cadastradas {
+    padding: 30px 10px;
+  }
+
+  .campanhas-cadastradas h2 {
+    font-size: 1.8em;
+    margin-bottom: 30px;
+  }
+
+  .card-campanha {
+    padding: 15px;
+    padding-bottom: 80px;
+  }
+
+  .card-campanha h3 {
+    font-size: 1.3em;
+  }
+
+  .card-campanha .btn-editar {
+    position: static;
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  /* Modal */
+  .modal-conteudo {
+    width: 95%;
+    padding: 20px;
+    max-height: 85vh;
+  }
+
+  .btn-salvar,
+  .btn-cancelar {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 10px;
+  }
+}

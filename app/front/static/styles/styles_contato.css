@@ -1,0 +1,427 @@
+/* Box-sizing universal para evitar overflow causado por padding/border */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(228, 228, 228);
+  margin: 0;
+  font-family: Verdana, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden; /* Previne scroll horizontal inesperado */
+}
+
+/* ==================== MENU DE NAVEGAÇÃO ==================== */
+
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: darkred;
+  color: white;
+  font-size: 18px;
+  padding: 0 15px;
+}
+
+.menu ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu li {
+  margin: 0;
+}
+
+.menu a {
+  text-decoration: none;
+  color: white;
+  padding: 15px 25px;
+  transition: background 0.3s;
+  display: block;
+}
+
+.menu a:hover,
+.menu a.active {
+  background-color: #d60000;
+}
+
+.contato {
+  background-color: red;
+}
+
+/* ==================== SEÇÃO DE INFORMAÇÕES DE CONTATO ==================== */
+
+.cor_primaria {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 15px;
+  background-color: darkred;
+  margin: 0;
+  width: 100%;
+  padding: 20px 0;
+  text-align: center;
+  color: white;
+  flex-wrap: wrap;
+}
+
+.telefone,
+.email,
+.localizacao {
+  text-align: center;
+  color: white;
+  padding: 20px;
+  flex: 1;
+  min-width: 200px;
+}
+
+/* ==================== SEÇÃO PRINCIPAL ==================== */
+
+.cor_secundaria {
+  display: flex;
+  background-color: rgb(228, 228, 228);
+  margin: 0;
+  width: 100%;
+  min-height: 400px;
+  padding: 40px 5%;
+  gap: 20px;
+  align-items: center;
+  justify-content: center; /* Centraliza os blocos horizontalmente */
+  flex-wrap: wrap; /* Garante quebras em telas menores */
+}
+
+.informativo {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 450px;
+  min-width: 300px; /* Garante tamanho mínimo para desktop */
+}
+
+.forms {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 450px;
+  min-width: 300px; /* Garante tamanho mínimo para desktop */
+}
+
+.cor_secundaria p {
+  color: darkred;
+  text-align: center;
+  margin: 10px 0;
+  font-size: 17px;
+}
+
+.informativo h1 {
+  padding-top: 0;
+  color: darkred;
+  text-align: center;
+  margin: 0 10%;
+}
+
+/* ==================== FORMULÁRIO ==================== */
+
+.forms {
+  color: darkred;
+  font-size: 20px;
+  margin: 0;
+}
+
+.forms form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 400px;
+  margin-top: 20px;
+}
+
+.forms label {
+  color: darkred;
+  font-weight: bold;
+}
+
+.forms input {
+  width: 100%;
+  height: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+#mensagem {
+  height: 80px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 5px;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+/* ==================== BOTÕES ==================== */
+
+.btn_ler {
+  padding: 10px 40px;
+  background-color: darkred;
+  font-size: 15px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 15px;
+}
+
+.btn_ler:hover {
+  background-color: red;
+}
+
+.cor_secundaria a {
+  background-color: darkred;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background 0.3s;
+  display: inline-block;
+  margin-top: 15px;
+}
+
+/* ==================== FOOTER ==================== */
+
+footer {
+  background-color: darkred;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin-top: auto;
+}
+
+/* ==================== RESPONSIVIDADE - TABLET (até 1024px) ==================== */
+
+@media (max-width: 1024px) {
+  .menu {
+    font-size: 16px;
+  }
+
+  .menu a {
+    padding: 12px 20px;
+  }
+
+  .cor_primaria {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px 0;
+  }
+
+  .telefone,
+  .email,
+  .localizacao {
+    padding: 15px;
+    width: 100%;
+  }
+
+  .cor_secundaria {
+    flex-direction: column;
+    min-height: auto;
+    padding: 30px 5%;
+    gap: 30px;
+  }
+
+  .informativo h1 {
+    padding-top: 0;
+    font-size: 1.5em;
+  }
+
+  .forms {
+    margin: 0;
+    width: 100%;
+  }
+
+  .forms form {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+
+/* ==================== RESPONSIVIDADE - MOBILE (até 768px) ==================== */
+
+@media (max-width: 768px) {
+  /* Menu em Coluna */
+  .menu ul {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .menu li {
+    width: 100%;
+  }
+
+  .menu a {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #d60000;
+  }
+
+  .menu li:last-child a {
+    border-bottom: none;
+  }
+
+  /* Conteúdo */
+  .cor_secundaria {
+    padding: 20px 5%;
+    gap: 20px;
+  }
+
+  .informativo {
+    padding: 15px 0;
+    min-width: auto;
+    max-width: 100%;
+  }
+
+  .informativo h1 {
+    font-size: 1.3em;
+    margin: 0 5%;
+  }
+
+  .forms {
+    font-size: 18px;
+    margin: 0;
+    min-width: auto;
+    max-width: 100%;
+  }
+
+  .forms form {
+    gap: 12px;
+    max-width: 90%;
+  }
+
+  .btn_ler {
+    padding: 8px 30px;
+    font-size: 14px;
+  }
+
+  .cor_secundaria a {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+/* ==================== RESPONSIVIDADE - MOBILE PEQUENO (até 600px) ==================== */
+
+@media (max-width: 600px) {
+  .menu {
+    font-size: 14px;
+    padding: 0 10px;
+  }
+
+  .cor_primaria {
+    font-size: 13px;
+    padding: 10px 0;
+  }
+
+  .telefone,
+  .email,
+  .localizacao {
+    padding: 10px 5px;
+  }
+
+  .cor_secundaria p {
+    font-size: 15px;
+    margin: 8px 0;
+  }
+
+  .informativo h1 {
+    font-size: 1.2em;
+    padding-top: 0;
+  }
+
+  .forms {
+    font-size: 16px;
+  }
+
+  .forms input {
+    height: 18px;
+  }
+
+  #mensagem {
+    height: 70px;
+  }
+
+  .btn_ler {
+    padding: 8px 25px;
+    font-size: 13px;
+  }
+
+  .cor_secundaria a {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+/* ==================== RESPONSIVIDADE - MOBILE EXTRA PEQUENO (até 480px) ==================== */
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  .menu {
+    font-size: 12px;
+  }
+
+  .menu a {
+    padding: 12px 8px;
+  }
+
+  .cor_primaria {
+    font-size: 12px;
+  }
+
+  .cor_secundaria {
+    padding: 15px 5%;
+  }
+
+  .cor_secundaria p {
+    font-size: 14px;
+  }
+
+  .informativo h1 {
+    font-size: 1.1em;
+    padding-top: 0;
+  }
+
+  .forms {
+    font-size: 14px;
+  }
+
+  .forms form {
+    max-width: 95%;
+  }
+
+  .btn_ler {
+    padding: 6px 20px;
+    font-size: 12px;
+  }
+
+  .cor_secundaria a {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}

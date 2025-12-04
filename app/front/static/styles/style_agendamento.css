@@ -1,0 +1,102 @@
+.formulario-agendamento {
+    max-width: 650px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.formulario-agendamento h1 {
+    color: #a30000;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.formulario-agendamento p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.formulario-agendamento label {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #a30000;
+    font-size: 1em;
+}
+
+.formulario-agendamento input[type="datetime-local"],
+.formulario-agendamento select,
+.formulario-agendamento textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Garante que padding e border não aumentem a largura total */
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+.formulario-agendamento input:focus,
+.formulario-agendamento select:focus,
+.formulario-agendamento textarea:focus {
+    border-color: #d60000; /* Realça o campo focado */
+    outline: none;
+}
+
+/* Botão de Submissão (Confirmar) */
+.btn-submit {
+    background-color: #4CAF50; /* Verde para ação de sucesso */
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    display: block;
+    width: 100%;
+    margin-top: 30px;
+    transition: background 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: #45a049;
+}
+
+/* Botão Voltar */
+.btn-voltar-agendamento {
+    display: inline-block;
+    background-color: #a30000; /* Mantém a cor do tema principal */
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    transition: background 0.3s;
+}
+
+.btn-voltar-agendamento:hover {
+    background-color: #d60000;
+}
+
+/* Responsividade (Ajuste para telas menores) */
+@media (max-width: 768px) {
+    .formulario-agendamento {
+        margin: 20px 5%;
+        padding: 20px;
+    }
+    .formulario-agendamento input[type="datetime-local"],
+    .formulario-agendamento select,
+    .formulario-agendamento textarea {
+        padding: 10px;
+    }
+    .btn-submit {
+        padding: 12px 15px;
+        font-size: 1em;
+    }
+}

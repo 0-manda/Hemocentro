@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Entre em contato com o Hemocentro."/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="../static/styles/imagens/icon_pagina.png"/>
+    <link rel="stylesheet" href="../static/styles/styles_contato.css" />
+    <title>Hemocentro - Contato</title>
+  </head>
+  <body>
+    <header>
+      <nav class="menu">
+        <ul>
+          <li><a class="home" href="/">HOME</a> </li>
+          <li><a class="hemocentro" href="/hemocentros">HEMOCENTRO</a></li>
+          <li><a class="contato" href="/contato">CONTATO</a></li>
+          <li><a class="sobre" href="/historia">SOBRE </a></li>
+          <li><a class="noticias" href="/noticias">NOTICIAS</a></li>
+          <li><a class="campanha" href="/campanha">CAMPANHA</a></li>
+          <li><a class="perfil" href="/perfil">USUARIO</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section class="cor_primaria">
+        <article class="localizacao">
+          <img src="../static/styles/imagens/marker (1).png" alt="ícone de localizacao" width="135" height="135"/>
+          <h2>Localização:</h2>
+          <p><a>https://maps.app.goo.gl/vatMGbyJrjRY9AyMA</a></p>
+        </article>
+      
+        <article class="telefone">
+          <img src="../static/styles/imagens/phone-call.png" alt="ícone de telefone" width="135" height="135"/>
+          <h2>Contato Telefônico</h2>
+            <p><b>Suporte:</b> (19) 3922-4563</p>
+            <p><b> Whatszap</b> (19) 3922-4563</p>
+        </article>
+
+        <article class="email">
+          <img src="../static/styles/imagens/envelope.png" alt="ícone de envelope" width="135" height="135"/>
+          <h2>E-mail</h2>
+          <p><b>hemocentro@camp.com</b></p>
+        </article>
+      </section>
+
+      <section class="cor_secundaria">
+        <header class="informativo">
+          <h1>ENTRE EM CONTATO CONOSCO</h1>
+          <p>
+            Tem alguma coisa sujestão para site ou algum mal funcionamento?<br />Conte
+            para nós!
+          </p>
+        </header>
+        <section class="forms">
+          <form>
+            <label for="nome">Seu nome:</label>
+            <input type="text" id="nome" name="nome_contato" required/>
+ 
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email_contato" required/>
+
+            <label for="mensagem" id="label_msg">Mensagem:</label>
+            <textarea type="text" id="mensagem" name="mensagem_contato" required/></textarea>
+
+            <button class="btn_ler" id="enviar"> ENVIAR </button>
+          </form>
+        </section>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 - Todos os direitos reservados | HemoCamp</p>
+    </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const btnEnviar = document.getElementById("enviar");
+
+        btnEnviar.addEventListener("click", (e) => {
+          e.preventDefault(); // impede envio do formulário
+          alert("Estamos trabalhando nesse campo ainda! Nos contate a partir das informações acima.");
+        });
+      });
+    </script>
+  </body>
+</html>
