@@ -1,0 +1,315 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  line-height: 1.5;
+  font-family: verdana, arial;
+  overflow-x: hidden;
+}
+
+.header_topo {
+  margin: 0;
+}
+
+header {
+  margin: 0;
+  display: flex;
+}
+
+nav[aria-label="Navegação Principal"] {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0;
+}
+
+.voltar {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background 0.3s;
+  margin: 0;
+  z-index: 100;
+}
+
+.voltar:hover {
+  background-color: darkred;
+}
+
+main {
+  background-color: white;
+  flex-grow: 1;
+  display: flex;
+}
+
+.container {
+  display: flex;
+  min-height: 100%;
+  margin: 0;
+  background-color: white;
+  flex-grow: 1;
+}
+
+.bloco {
+  background-color: red;
+  width: 50vw;
+  margin: 0;
+  min-height: 100%;
+}
+
+#a1 {
+  background-color: #d60000;
+  margin: 0;
+}
+
+#a2 {
+  background-color: white;
+  margin: 0;
+}
+
+.login {
+  width: 50vw;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  margin: 0;
+  padding: 20px;
+  background-color: white;
+  flex-grow: 1;
+}
+
+.login-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  max-width: 400px;
+  margin: 0;
+  background-color: white;
+}
+
+.titulo_login {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 50px;
+}
+
+.login form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.login input[type="email"],
+.login input[type="password"],
+.login input[type="submit"] {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.login input[type="submit"] {
+  background-color: darkred;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.login input[type="submit"]:hover {
+  background-color: red;
+}
+
+.colab {
+  background-color: darkred;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  width: 95%;
+  text-align: center;
+  max-width: 400px;
+  margin: 0;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.colab:hover {
+  background-color: red;
+}
+
+.extras {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  width: 100%;
+}
+
+.iten_1 {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.iten_2 {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.logoslinks {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10%;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+
+footer {
+  background-color: red;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin-top: auto;
+}
+
+footer p {
+  margin: 0 0 15px 0;
+  font-weight: bold;
+}
+
+footer nav ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 20px;
+}
+
+footer nav a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+footer nav a:hover {
+  color: #ffcccb;
+  text-decoration: underline;
+}
+
+/* responsividade*/
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .bloco {
+    width: 100vw;
+    height: 150px;
+  }
+
+  .login {
+    width: 100vw;
+    padding: 40px 20px;
+    flex-grow: 0;
+  }
+
+  .login-content {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .titulo_login {
+    font-size: 40px;
+  }
+
+  .colab {
+    width: 100%;
+  }
+
+  .logoslinks {
+    margin-top: 5%;
+  }
+
+  footer {
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  .voltar {
+    padding: 8px 15px;
+    font-size: 14px;
+    top: 10px;
+    right: 10px;
+  }
+
+  .bloco {
+    height: 100px;
+  }
+
+  .titulo_login {
+    font-size: 30px;
+  }
+
+  .extras {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .logoslinks {
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .logoslinks a {
+    width: 40px;
+    height: 40px;
+  }
+
+  .logoslinks img {
+    width: 35px;
+    height: 35px;
+  }
+
+  footer {
+    padding: 15px;
+  }
+
+  footer p {
+    margin-bottom: 10px;
+  }
+
+  footer nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

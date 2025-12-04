@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Localização e disponibilidade dos Hemocentros."/>
+    <title>Hemocentros Disponíveis</title>
+    <link rel="icon" type="image/png" href="../static/styles/imagens/icon_pagina.png"/>
+    <link rel="stylesheet" href="../static/styles/style_hemocentros.css" />
+  </head>
+
+  <body>
+
+    <header>
+
+      <section>
+        <nav class="menu">
+          <ul>
+            <li><a class="home" href="/">HOME</a> </li>
+            <li><a class="hemocentro" href="/hemocentros" id="pagina_atual">HEMOCENTRO</a></li>
+            <li><a class="contato" href="/contato">CONTATO</a></li>
+            <li><a class="sobre" href="/historia">SOBRE </a></li>
+            <li><a class="noticias" href="/noticias">NOTICIAS</a></li>
+            <li><a class="campanha" href="/campanha">CAMPANHA</a></li>
+            <li><a class="perfil" href="/perfil">USUARIO</a></li>
+          </ul>
+        </nav>
+      </section>
+    </header>
+    
+    <main>
+      <h1>Hemocentros disponíveis</h1>
+      <section id="lista-view" class="lista-view">
+        <p style="text-align: center; padding: 40px; color: #666;">Carregando hemocentros...</p>
+      </section>
+      <section id="detalhe-view" class="tela-detalhe">
+        <section class="coluna-mapa">
+          <section class="mapa-container" id="mapa-container-js">
+            <iframe id="detalhe_mapa" title="Mapa de localização do hemocentro" aria-label="Mapa interativo"></iframe>
+            <button id="btn-voltar" aria-label="Voltar para a lista de hemocentros">Voltar</button>
+          </section>
+          <section class="detalhes-hemocentro">
+            <h3 id="detalhe-nome"></h3>
+            <address>
+              <p>Localização:</p>
+              <p><strong id="detalhe-localizacao"></strong></p>
+            </address>
+          </section>
+        </section>
+
+        <aside class="coluna-estoque">
+          <h3>Estoque por Tipo Sanguíneo</h3>
+          <div id="estoque-grid" class="estoque-grid"></div>
+        </aside>
+      </section>
+      
+    </main>
+    
+    <footer>
+      <p>&copy; 2025 - Todos os direitos reservados | HemoCamp</p>
+    </footer>
+    
+    <script src="../static/scripts/hemocentro.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Página de cadastro de Hemocentros."/>
+    <link rel="icon" type="image/png" href="../static/styles/imagens/icon_pagina.png"/>
+    <link rel="stylesheet" href="../static/styles/styles_cadastro.css" />
+    <title>Hemocentro - Cadastro de Hemocentro</title>
+  </head>
+
+  <body>
+
+    <header>
+      <nav>
+        <a href="/" class="voltar">VOLTAR</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="bloco"></section>
+      <section class="cadastro">
+        <section class="cadastro-content">
+          <h1 class="titulo_cadastro">CADASTRO DE HEMOCENTRO</h1>
+          <form id="cadastro-hemocentro">
+            <label for="nome">Nome do Hemocentro:</label>
+            <input
+              type="text"
+              id="nome"
+              name="nome_hemocentro"
+              placeholder="Nome fantasia ou razão social" required/>
+
+            <label for="cnpj">CNPJ:</label>
+            <input
+              type="text"
+              id="cnpj"
+              name="cnpj"
+              placeholder="Apenas números (14 dígitos)"
+              maxlength="14" required/>
+
+            <label for="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email_hemocentro"
+              placeholder="contato@hemocentro.com" required/>
+
+            <label for="telefone">Telefone:</label>
+            <input
+              type="tel"
+              id="telefone"
+              name="telefone_hemocentro"
+              placeholder="(xx) xxxxx-xxxx" required/>
+
+            <label for="endereco">Endereço:</label>
+            <input
+              type="text"
+              id="endereco"
+              name="endereco"
+              placeholder="Rua, número e bairro" required/>
+
+            <label for="cidade">Cidade:</label>
+            <input
+              type="text"
+              id="cidade"
+              name="cidade"
+              placeholder="Campinas (Padrão, mas editável)"
+              value="Campinas" required/>
+
+            <label for="estado">Estado (UF):</label>
+            <input
+              type="text"
+              id="estado"
+              name="estado"
+              placeholder="SP (2 letras)"
+              maxlength="2"
+              value="SP" required/>
+            
+            <label for="cep">CEP:</label>
+            <input
+              type="text"
+              id="cep"
+              name="cep"
+              placeholder="Apenas números (XXXXXXXX)"
+              maxlength="8" required/>
+
+            <label for="site">Site (Opcional):</label>
+            <input
+              type="url"
+              id="site"
+              name="site"
+              placeholder="https://www.seusite.com.br"/>
+
+            <nav class="termos" style="margin-top: 20px;">
+              <input type="checkbox" id="termos" name="aceite_termos" required />
+              <label for="termos">Declaro que as informações são verdadeiras.</label>
+              <small id="hintTermos" class="hint"></small>
+            </nav>
+
+            <br />
+
+            <input type="submit" id="btnEnviar" value="CADASTRAR HEMOCENTRO" />
+
+          </form>
+
+          <section class="iten_1">
+            <label>--------- ou ---------</label>
+          </section>
+
+          <section class="iten_2" style="margin-top: 5px; margin-bottom: 50px;">
+            <label>
+              Já tem um cadastro de colaborador?
+              <a href="/login">Faça login</a>
+            </label>
+
+          </section>
+
+        </section>
+
+      </section>
+
+    </main>
+
+    <footer role="contentinfo">
+      <p>&copy;2025 - Todos os direitos reservados | HemoCamp</p>
+      <nav aria-label="Links institucionais">
+        <ul>
+          <li><a href="/">Política de Privacidade</a></li>
+          <li><a href="/">Termos de Uso</a></li>
+          <li><a href="/contato">Contato</a></li>
+        </ul>
+      </nav>
+    </footer>
+
+    <script>
+      document.getElementById('cadastro-hemocentro').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const btnEnviar = document.getElementById('btnEnviar');
+        btnEnviar.disabled = true;
+        btnEnviar.value = 'CADASTRANDO...';
+        const dados = {
+          nome: document.getElementById('nome').value,
+          cnpj: document.getElementById('cnpj').value,
+          email: document.getElementById('email').value,
+          telefone: document.getElementById('telefone').value,
+          endereco: document.getElementById('endereco').value,
+          cidade: document.getElementById('cidade').value,
+          estado: document.getElementById('estado').value,
+          cep: document.getElementById('cep').value,
+          site: document.getElementById('site').value || null
+        };
+        try {
+          const response = await fetch('/api/cadastrar-hemocentro', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dados)
+          });
+          const resultado = await response.json();
+          if (resultado.success) {
+            alert(resultado.message);
+            window.location.href = '/login';
+          } else {
+            alert('Erro: ' + resultado.message);
+            btnEnviar.disabled = false;
+            btnEnviar.value = 'CADASTRAR HEMOCENTRO';
+          }
+        } catch (error) {
+          console.error('Erro:', error);
+          alert('Erro ao cadastrar hemocentro. Tente novamente.');
+          btnEnviar.disabled = false;
+          btnEnviar.value = 'CADASTRAR HEMOCENTRO';
+        }
+      });
+    </script>
+
+  </body>
+  
+</html>

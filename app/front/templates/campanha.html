@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Participe da campanha de doação de sangue 'Gota de Esperança' do Hemocentro. Veja datas, locais e como doar."
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="../static/styles/imagens/icon_pagina.png"
+    />
+    <link rel="stylesheet" href="../static/styles/styles_campanha.css" />
+    <title>Hemocentro - Campanha Gota de Esperança</title>
+  </head>
+
+  <body>
+
+    <header>
+      
+      <nav class="menu">
+        <ul>
+          <li><a class="home" href="/">HOME</a></li>
+          <li>
+            <a class="hemocentro" href="/hemocentros" id="pagina_atual"
+              >HEMOCENTRO</a
+            >
+          </li>
+          <li><a class="contato" href="/contato">CONTATO</a></li>
+          <li><a class="sobre" href="/historia">SOBRE </a></li>
+          <li><a class="noticias" href="/noticias">NOTICIAS</a></li>
+          <li><a class="campanha" href="/campanha">CAMPANHA</a></li>
+          <li><a class="perfil" href="/perfil">USUARIO</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="banner-campanha">
+      <h1><strong>Campanhas Cadastradas</strong></h1>
+      <p class="slogan">
+        Sua doação vale mais que mil palavras. Doe sangue, doe vida!
+      </p>
+    </section>
+
+    <main>
+      <section class="campanhas-cadastradas" aria-labelledby="titulo-campanhas">
+        <section id="lista-campanhas" class="container-campanhas">
+          <p>Carregando campanhas...</p>
+        </section>
+      </section>
+
+      <section class="chamada-acao" aria-labelledby="titulo-como-doar">
+        <h2 id="titulo-como-doar">💉 Como Participar?</h2>
+        <p>
+          Basta comparecer ao Hemocentro mais próximo dentro do período da
+          campanha e seguir as orientações abaixo:
+        </p>
+
+        <ul class="lista-requisitos">
+          <li>Ter entre 16 e 69 anos (menores de 18 com consentimento).</li>
+          <li>Estar em boas condições de saúde e pesar mais de 50kg.</li>
+          <li>Estar descansado e alimentado (evitar jejum prolongado).</li>
+          <li>Apresentar documento oficial com foto.</li>
+        </ul>
+
+        <a href="/hemocentros" class="botao-doar">QUERO DOAR AGORA!</a>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 - Todos os direitos reservados | HemoCamp</p>
+    </footer>
+    
+    <script src="../static/scripts/campanha.js"></script>
+  </body>
+</html>

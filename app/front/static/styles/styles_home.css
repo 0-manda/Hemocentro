@@ -1,0 +1,344 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --cor-principal: darkred;
+  --cor-fonte-main-page: white;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(228, 228, 228);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  line-height: 1.5;
+  font-family: verdana, arial;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('https://img.freepik.com/fotos-premium/papel-de-parede-vermelho-minimalista-com-padrao-de-respingo-sutil-8k-de-alta-qualidade_899449-47056.jpg');
+}
+
+main {
+  flex-grow: 1;
+}
+
+h1 {
+  font-size: 45px;
+  -webkit-text-stroke: 5px solid black;
+  color: white;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  text-align: center;
+}
+
+.menu {
+  background-color: darkred;
+  padding: 0;
+}
+
+.menu ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: stretch;
+  height: 70px;
+}
+
+.botao_menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.menu ul li.menu-item-esquerda {
+  margin-left: 2%;
+  height: 100%;
+}
+
+.menu ul li:first-child a {
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+}
+
+.menu ul li:first-child a:hover {
+  background-color: red;
+  color: white;
+}
+
+.menu ul li.menu-item-direita {
+  margin-left: auto;
+  margin-right: 1px;
+  height: 100%;
+}
+
+.menu ul li.menu-item-direita a {
+  padding: 0 20px;
+  background-color: darkred;
+  display: flex;
+  align-items: center;
+}
+
+.menu ul li.menu-item-direita a:hover {
+  background-color: red;
+  color: white;
+}
+
+#imagem_login {
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+}
+
+#imagem_hemocentro {
+  width: 40px;
+  height: 40px;
+  margin-right: 0;
+  padding: 0;
+}
+
+.imagem {
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  color: white;
+  text-align: center;
+}
+
+.opcoes {
+  justify-content: center;
+  display: grid;
+  grid-template-columns: 18% 18% 18% 18% 18%;
+  border: none;
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.banner_home {
+  font-size: 12px;
+  color: white;
+  text-align: center;
+  background-color: var(--cor-principal);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  height: 100%;
+  padding: 10px;
+}
+
+.banner_home:hover {
+  transform: scale(1.1);
+}
+
+.banner_home a {
+  color: var(--cor-fonte-main-page);
+  text-decoration: none;
+  border: none;
+  display: block;
+  height: 100%;
+}
+
+.banner_home p {
+  font-size: 15px;
+}
+
+figcaption {
+  margin-bottom: 10%;
+  margin-top: 25%;
+}
+
+.banner_home img {
+  width: 60%;
+  height: 50%;
+  margin-top: 30px;
+  border: none;
+}
+
+.banner-campanha {
+  background-color: #fce4e4;
+  color: #a30000;
+  text-align: center;
+  padding: 60px 20px;
+  margin-bottom: 30px;
+}
+
+.banner-campanha h1 {
+  font-size: 3em;
+  margin-bottom: 10px;
+}
+
+.slogan {
+  font-size: 1.2em;
+  font-style: italic;
+}
+
+.detalhes-campanha {
+  padding: 0 5%;
+}
+
+.info-grid {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.card-info {
+  flex: 1;
+  min-width: 250px;
+  border: 1px solid white;
+  padding: 20px;
+  color: white;
+  background-color: red;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-info a {
+  color: white;
+  border-radius: 13px;
+  padding: 10px;
+  background-color: darkred;
+  text-decoration: none;
+}
+
+.chamada-acao {
+  text-align: center;
+  padding: 40px 5%;
+  background-color: #ffeaea;
+  margin-top: 30px;
+}
+
+.botao-doar {
+  display: inline-block;
+  background-color: #a30000;
+  color: white;
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 15px 30px;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-top: 25px;
+  transition: background-color 0.3s;
+}
+
+.botao-doar:hover {
+  background-color: #d10000;
+}
+
+.imagem_fundo {
+  background-image: url('../static/styles/imagens/campanha.png');
+}
+
+footer {
+  background-color: darkred;
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+  margin-bottom: 0;
+}
+
+/* responsividade*/ 
+
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 30px;
+    -webkit-text-stroke: 3px solid black;
+    margin-top: 10%;
+    margin-bottom: 10%;
+  }
+
+  .menu ul {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .menu ul li {
+    width: 100%;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    height: auto;
+  }
+
+  .menu ul li a {
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .menu ul li.menu-item-esquerda a,
+  .menu ul li.menu-item-direita a {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #d60000;
+  }
+
+  .menu ul li.menu-item-direita a {
+    border-bottom: none;
+  }
+
+  .opcoes {
+    grid-template-columns: 45% 45%;
+    gap: 15px;
+    padding: 0 5%;
+  }
+
+  .banner_home {
+    font-size: 10px;
+    padding: 15px;
+  }
+
+  .banner_home p {
+    font-size: 12px;
+  }
+
+  .banner_home img {
+    width: 80%;
+    height: auto;
+  }
+
+  .info-grid {
+    flex-direction: column;
+  }
+
+  .card-info {
+    min-width: unset;
+    margin-bottom: 20px;
+  }
+
+  .banner-campanha h1 {
+    font-size: 2em;
+  }
+
+  .botao-doar {
+    font-size: 1.2em;
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .opcoes {
+    grid-template-columns: 90%;
+    padding: 0 5%;
+  }
+}

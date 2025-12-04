@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Formulário de Agendamento para Doação de Sangue."
+    />
+    <title>Agendar Doação</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="../static/styles/imagens/icon_pagina.png"
+    />
+    <link rel="stylesheet" href="../static/styles/style_hemocentros.css" />
+    <link rel="stylesheet" href="../static/styles/style_agendamento.css" />
+  </head>
+
+  <body>
+
+    <header>
+      <section>
+        <nav class="menu">
+          <ul>
+            <li><a class="home" href="/">HOME</a></li>
+            <li>
+              <a
+                class="hemocentro"
+                href="/hemocentros"
+                id="pagina_agendamento_hemocentro"
+                >HEMOCENTRO</a
+              >
+            </li>
+            <li><a class="contato" href="/contato">CONTATO</a></li>
+            <li><a class="sobre" href="/historia">SOBRE </a></li>
+            <li><a class="noticias" href="/noticias">NOTICIAS</a></li>
+            <li><a class="campanha" href="/campanha">CAMPANHA</a></li>
+            <li><a class="perfil" href="/perfil">USUARIO</a></li>
+          </ul>
+        </nav>
+      </section>
+    </header>
+
+    <main>
+      <h1>Agendar sua Doação</h1>
+
+      <div class="formulario-agendamento">
+
+        <a href="/hemocentros" class="btn btn-voltar-agendamento"
+          >← Voltar para Hemocentros</a>
+        <form action="/processar-agendamento" method="POST" id="agendamento">
+
+          <input
+            type="hidden"
+            id="id_hemocentro"
+            name="id_hemocentro"
+            value=""
+          />
+          <input
+            type="hidden"
+            id="id_usuario"
+            name="id_usuario"
+            value="[ID DO USUÁRIO LOGADO]"
+          />
+
+          <p>
+            Agendando para:
+            <strong id="nome_hemocentro_detalhe"
+              >Carregando nome do Hemocentro...</strong
+            >
+          </p>
+
+          <label for="data_hora"
+            >Data e Horário (Dia/Mês/Ano - Hora:Minuto):</label
+          >
+          <input
+            type="datetime-local"
+            id="data_hora"
+            name="data_hora"
+            required
+          />
+          <label for="tipo_doacao">Motivo da Doação:</label>
+
+          <select id="tipo_doacao" name="tipo_doacao" required>
+
+            <option value="" disabled selected>
+              Selecione o tipo de agendamento
+            </option>
+
+            <option value="espontanea">Doação Espontânea (Rotina)</option>
+            <option value="campanha">Participação em Campanha</option>
+            <option value="primeira_vez">Primeira Vez</option>
+
+          </select>
+
+          <label for="tipo_sangue_doado">O que você pretende doar?</label>
+          <select id="tipo_sangue_doado" name="tipo_sangue_doado" required>
+            <option value="sangue_total" selected>Sangue Total</option>
+            <option value="plaquetas">Plaquetas</option>
+            <option value="plasma">Plasma</option>
+            <option value="aferese">Aférese (Componente específico)</option>
+
+          </select>
+
+          <label for="observacoes"
+            >Observações (Se houver restrições de horário ou informações
+            relevantes):</label
+          >
+          <textarea
+            id="observacoes"
+            name="observacoes"
+            rows="4"
+            placeholder="Ex: Preciso sair até 11:00h, ou sou doador tipo A+"
+          ></textarea>
+
+          <button type="submit" class="btn btn-submit">
+            Confirmar Agendamento
+          </button>
+
+        </form>
+
+      </div>
+
+    </main>
+
+    <footer>
+      <p>&copy; 2025 - Todos os direitos reservados | HemoCamp</p>
+    </footer>
+    
+    <script src="../static/scripts/agendamento.js"></script>
+  </body>
+</html>

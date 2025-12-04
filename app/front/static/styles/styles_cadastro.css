@@ -1,0 +1,273 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    line-height: 1.5;
+    font-family: verdana, arial;
+    overflow-x: hidden;
+}
+
+.container {
+    display: flex;
+    flex-grow: 1;
+    min-height: 100%;
+}
+
+.bloco {
+    background-color: red;
+    width: 50vw;
+    margin: 0;
+    min-height: 100%;
+}
+
+.cadastro {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; 
+    align-items: flex-start;
+    padding-top: 40px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.cadastro-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    max-width: 400px;
+}
+
+.cadastro form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.cadastro label {
+    display: block; 
+    margin-bottom: 5px;  
+}
+
+#secao-doador,
+#secao-colaborador,
+#secao-tipo-sangue {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.cadastro input[type="email"],
+.cadastro input[type="text"],
+.cadastro input[type="password"],
+.cadastro input[type="tel"],
+.cadastro input[type="date"],
+.cadastro input[type="submit"],
+#tipoUser,
+#tipoSangue,
+#sexo,
+#cpf_doc,
+#tipo_documento_colaborador,
+#documento_colaborador { 
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    display: block; 
+    width: 100%; 
+    box-sizing: border-box; 
+}
+
+.cadastro input[type="submit"] {
+    padding: 10px; 
+    font-size: 16px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: darkred;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.cadastro input[type="submit"]:hover {
+    background-color: red;
+}
+
+.extras {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    width: 100%;
+}
+
+.iten_1 {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.logoslinks {
+    text-align: center;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.titulo_cadastro {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 50px;
+}
+
+.voltar {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.voltar:hover {
+    background-color: darkred;
+}
+
+footer {
+    background-color: red;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: auto;
+}
+
+footer p {
+    margin: 0 0 15px 0;
+    font-weight: bold;
+}
+
+footer nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 20px;
+}
+
+footer nav a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+footer nav a:hover {
+    color: #ffcccb;
+    text-decoration: underline;
+}
+
+.termos {
+    display: flex;
+    gap: 7px;
+}
+/* responsividade mobile (até 768px) */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+    }
+    .bloco {
+        width: 100vw;
+        height: 150px;
+    }
+    .cadastro {
+        width: 100vw;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+    .cadastro-content {
+        width: 100%;
+        max-width: 400px;
+        padding: 0 20px;
+    }
+    .titulo_cadastro {
+        font-size: 40px;
+        margin-top: 0;
+    }
+    .extras {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+
+    .voltar {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+
+    .bloco {
+        height: 60px;
+    }
+
+    .cadastro-content {
+        padding: 12px;
+    }
+
+    .titulo_cadastro {
+        font-size: 1.6em;
+        margin-bottom: 15px;
+    }
+
+    .cadastro section {
+        margin-bottom: 12px;
+    }
+
+    .termos {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .logoslinks {
+        gap: 12px;
+    }
+
+    .logoslinks a {
+        width: 40px;
+        height: 40px;
+    }
+
+    .logoslinks img {
+        width: 35px;
+        height: 35px;
+    }
+
+    footer {
+        padding: 15px;
+    }
+
+    footer p {
+        margin-bottom: 10px;
+    }
+}
