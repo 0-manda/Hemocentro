@@ -347,6 +347,113 @@ async function atualizarEstoqueNaTela(hemocentro) {
   console.log("Estoque atualizado!");
 }
 
+async function adicionarBotoesGerenciamento(hemocentro) {
+  // Remove botão antigo se existir
+  const btnAntigo = document.querySelector(".btn-gerenciar");
+  if (btnAntigo) btnAntigo.remove();
+
+  // Verifica se o usuário é colaborador deste hemocentro
+  const eColaborador = await verificarColaborador(hemocentro.id);
+  
+  if (eColaborador) {
+    const botoesAcao = document.querySelector(".botoes-acao");
+    if (botoesAcao) {
+      const btnGerenciar = document.createElement("button");
+      btnGerenciar.className = "btn btn-gerenciar";
+      btnGerenciar.textContent = "Gerenciar Estoque";
+      btnGerenciar.addEventListener("click", () => {
+        abrirModalGerenciamento(hemocentro);
+      });
+      botoesAcao.appendChild(btnGerenciar);
+    }
+  }
+}
+
+// Gerenciamento de estoque
+async function adicionarBotoesGerenciamento(hemocentro) {
+  const ehColaborador = await verificarColaborador(hemocentro.id);
+  if (!ehColaborador) return;
+  console.log(
+    `Usuário é colaborador do ${hemocentro.nome}. Adicionando botões de gerenciamento...`
+  );
+  const botoesAcao = document.querySelector(".botoes-acao");
+  if (botoesAcao) {
+    // Verifica se o botão já existe para evitar duplicação
+    const btnExistente = document.querySelector(".btn-gerenciar");
+    if (btnExistente) return;
+    const btnGerenciar = document.createElement("button");
+    btnGerenciar.className = "btn-detalhe btn-gerenciar";
+    btnGerenciar.textContent = "⚙️ Gerenciar Estoque";
+    btnGerenciar.setAttribute("aria-label", "Gerenciar estoque do hemocentro");
+    btnGerenciar.addEventListener("click", () =>
+      abrirModalGerenciamento(hemocentro)
+    );
+    botoesAcao.insertBefore(btnGerenciar, botoesAcao.firstChild);
+  }
+}
+function abrirModalGerenciamento(hemocentro) {
+  console.log("Abrindo modal de gerenciamento para:", hemocentro.nome);
+  const modalAntigo = document.getElementById("modal-gerenciamento");
+  if (modalAntigo) modalAntigo.remove();
+  const modal = document.createElement("section");
+  modal.id = "modal-gerenciamento";
+  modal.className = "modal-overlay";
+  modal.innerHTML = `
+    <article class="modal-content">
+      <header class="modal-header">
+        <h3>⚙️ Gerenciar Estoque - ${hemocentro.nome}</h3>
+        <button class="btn-fechar" aria-label="Fechar modal">&times;</button>
+      </header>
+      
+      <form id="form-gerenciar-estoque" class="modal-body">
+        <label for="tipo-sangue-gerenciar">
+          <strong>Tipo Sanguíneo:</strong>
+        </label>
+        <select id="tipo-sangue-gerenciar" required>
+          <option value="">Selecione o tipo</option>
+          <option value="O+">O+</option>
+          <option value="O-">O-</option>
+          <option value="A+">A+</option>
+          <option value="A-">A-</option>
+          <option value="B+">B+</option>
+          <option value="B-">B-</option>
+          <option value="AB+">AB+</option>
+          <option value="AB-">AB-</option>
+        </select>
+        <label for="quantidade-gerenciar">
+          <strong>Quantidade (litros):</strong>
+        </label>
+        <input
+          type="number"
+          id="quantidade-gerenciar"
+          min="1"
+          max="1000"
+          required
+          placeholder="Ex: 10"
+        />
+        <p class="modal-aviso" id="modal-aviso"></p>
+      </form>
+    </article>
+  `;
+  document.body.appendChild(modal);
+  modal
+    .querySelector(".btn-fechar")
+    .addEventListener("click", () => modal.remove());
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) modal.remove();
+  });
+  document
+    .getElementById("btn-adicionar-estoque")
+    .addEventListener("click", () => {
+      gerenciarEstoque(hemocentro, "adicionar");
+    });
+  document
+    .getElementById("btn-remover-estoque")
+    .addEventListener("click", () => {
+      gerenciarEstoque(hemocentro, "remover");
+    });
+}
+
 // navegação entre views
 async function mostrarDetalhes(index) {
   console.log("=== MOSTRANDO DETALHES ===");
